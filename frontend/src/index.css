@@ -1,16 +1,38 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #f0c14b;
-  --color-primary-hover: #f3d078;
-  --color-secondary: #131921;
-  --color-accent: #37475a;
-  --color-bg-light: #eaeded;
+  --color-gold: #e2a750;
+  --color-gold-hover: #c99344;
+  --color-black: #000000;
+  --color-black-soft: #121212;
+  --color-bg-luxury: #F4F4F4;
 }
 
 @layer base {
+  :root {
+    --card-bg: #ffffff;
+    --card-text: #111827;
+    --card-sub: #6b7280;
+    --card-border: #f3f4f6;
+  }
+
+  .dark {
+    --card-bg: #121212;
+    --card-text: #e2a750;
+    --card-sub: #9ca3af;
+    --card-border: rgba(226, 167, 80, 0.2);
+  }
+
   body {
-    @apply bg-gray-50 text-gray-900;
+    @apply bg-gray-50 text-gray-900 transition-colors duration-300;
+  }
+
+  .product-img-blend {
+    mix-blend-mode: multiply;
+  }
+
+  .dark .product-img-blend {
+    mix-blend-mode: lighten;
   }
 }
 
@@ -18,9 +40,9 @@
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
 }
-

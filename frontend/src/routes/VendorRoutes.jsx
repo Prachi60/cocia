@@ -11,6 +11,7 @@ import Bag from '../pages/vendor/Bag';
 import Profile from '../pages/vendor/Profile';
 import Wallet from '../pages/vendor/Wallet';
 import Menu from '../pages/vendor/Menu';
+import CategoryProducts from '../pages/vendor/CategoryProducts';
 
 const VendorRoutes = () => {
   return (
@@ -29,6 +30,7 @@ const VendorRoutes = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/wallet" element={<Wallet />} />
         <Route path="/menu" element={<Menu />} />
+        <Route path="/category-products" element={<CategoryProducts />} />
       </Route>
 
       {/* Redirects */}
