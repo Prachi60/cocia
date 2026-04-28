@@ -25,7 +25,7 @@ const VendorLayout = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
 
-  const isImmersivePage = location.pathname.includes('category-products') || location.pathname.includes('product-detail');
+  const isImmersivePage = location.pathname.includes('category-products') || location.pathname.includes('product-detail') || location.pathname.includes('all-offers');
 
   return (
     <div className={`min-h-screen flex flex-col transition-colors duration-300 ${isDarkMode ? 'dark bg-black text-white' : 'bg-gray-50 text-slate-900'}`}>
@@ -40,11 +40,11 @@ const VendorLayout = () => {
           <div className="flex items-center gap-3">
             <Link to="/vendor/home" className="flex items-center">
               <img
-                src="https://pngimg.com/uploads/amazon/amazon_PNG11.png"
-                alt="Amazon"
-                className={`h-4.5 object-contain ${isDarkMode ? 'brightness-0 invert' : ''}`}
+                src="/Logo (4).png"
+                alt="Cocia"
+                className="h-16 w-36 object-contain scale-[2] origin-left -ml-6"
+                style={isDarkMode ? { filter: 'brightness(0) saturate(100%) invert(73%) sepia(34%) saturate(1112%) hue-rotate(348deg) brightness(92%) contrast(90%)', dropShadow: '0 0 8px rgba(226,167,80,0.3)' } : {}}
               />
-              <span className={`text-[9px] font-bold mt-1.5 ml-0.5 ${isDarkMode ? 'text-[var(--color-gold)]' : 'text-slate-800'}`}>.in</span>
             </Link>
           </div>
 
@@ -76,7 +76,7 @@ const VendorLayout = () => {
             <Search size={16} className={isDarkMode ? 'text-[var(--color-gold)]' : 'text-gray-400'} />
             <input
               type="text"
-              placeholder="Search Amazon.in"
+              placeholder="Search Cocia..."
               className={`flex-1 bg-transparent outline-none text-[13px] px-2 placeholder:text-gray-500 ${isDarkMode ? 'text-white' : 'text-gray-800'}`}
             />
             <div className="flex items-center gap-2.5 text-gray-400">
@@ -94,7 +94,7 @@ const VendorLayout = () => {
             <ChevronDown size={10} className={isDarkMode ? 'text-[var(--color-gold)]' : 'text-slate-800'} />
           </div>
           <button className={`text-[9px] font-black px-3 py-1.5 rounded-md shadow-sm whitespace-nowrap active:scale-95 transition-all ${isDarkMode ? 'bg-[var(--color-gold)] text-black' : 'bg-[#007185] text-white'}`}>
-            Join Prime
+            Cocia Plus
           </button>
         </div>
       </header>

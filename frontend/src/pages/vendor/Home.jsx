@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   CreditCard,
   ShoppingBag,
@@ -56,6 +56,7 @@ import CookwareHero from '../../assets/Cards/cookware_hero.png';
 import FashionHero from '../../assets/Cards/fashion_hero.png';
 import ElectronicsHero from '../../assets/Cards/electronics_deal.png';
 import MakeupHero from '../../assets/Cards/makeup_picks.png';
+import CategoryProductsSection from '../../components/vendor/CategoryProductsSection';
 
 const Shimmer = ({ className }) => (
   <div className={`animate-pulse bg-gray-200 rounded ${className}`}></div>
@@ -71,6 +72,21 @@ const InfoIcon = () => (
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  const handleCategoryClick = (label) => {
+    setSelectedCategory(label === selectedCategory ? null : label);
+    if (label !== selectedCategory) {
+      setTimeout(() => {
+        const section = document.getElementById('category-products-section');
+        if (section) {
+          const y = section.getBoundingClientRect().top + window.scrollY - 80;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      }, 150);
+    }
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1500);
@@ -226,27 +242,43 @@ const Home = () => {
         </div>
         <div className="grid grid-rows-2 grid-flow-col gap-x-3 gap-y-4 px-4 overflow-x-auto no-scrollbar">
           {categories.map((cat, i) => (
-            <Link to="/vendor/products" key={i} className="flex flex-col items-center gap-1 w-[70px] active:scale-95 transition-transform">
-              <div className={`w-[70px] h-[70px] ${cat.bg} rounded-2xl overflow-hidden shadow-sm flex items-center justify-center border border-gray-100/50`}>
+            <div 
+              key={i} 
+              onClick={() => handleCategoryClick(cat.label)}
+              className="flex flex-col items-center gap-1 w-[70px] active:scale-95 transition-transform cursor-pointer group"
+            >
+              <div className={`w-[70px] h-[70px] ${cat.bg} rounded-2xl overflow-hidden flex items-center justify-center border-2 transition-all duration-300 ${selectedCategory === cat.label ? 'border-[var(--color-gold)] shadow-[0_0_15px_rgba(226,167,80,0.4)] scale-105' : 'border-gray-100/50 shadow-sm group-hover:border-[var(--color-gold)]/50'}`}>
                 <img src={cat.img} alt={cat.label} className="w-full h-full object-cover" />
               </div>
-              <span className="text-[11px] font-black text-[var(--card-text)] tracking-tight text-center">{cat.label}</span>
-            </Link>
+              <span className={`text-[11px] font-black tracking-tight text-center transition-colors ${selectedCategory === cat.label ? 'text-[var(--color-gold)]' : 'text-[var(--card-text)]'}`}>{cat.label}</span>
+            </div>
           ))}
         </div>
+        
+        {/* Dynamic Category Products Section */}
+        <CategoryProductsSection selectedCategory={selectedCategory} />
       </div>
 
       {/* 🔶 BIG SAVINGS SECTION (2x2 GRID) */}
       <div className="py-4 bg-[var(--card-bg)]">
-        <h2 className="text-xl font-bold px-4 mb-3 text-[var(--card-text)] leading-tight">Big savings for you</h2>
+        <div className="flex justify-between items-center px-4 mb-3">
+          <h2 className="text-xl font-bold text-[var(--card-text)] leading-tight">Big savings for you</h2>
+          <Link to="/vendor/all-offers" className="w-8 h-8 rounded-full bg-[var(--card-border)]/30 flex items-center justify-center text-[var(--card-text)] hover:bg-[var(--color-gold)] hover:text-black transition-colors shadow-sm">
+            <ChevronRight size={20} />
+          </Link>
+        </div>
         <div className="grid grid-cols-2 gap-3 px-4 mb-3">
           {[
-            { img: FlipFlops, off: '73% off', label: 'Limited time deal' },
-            { img: Tshirt, off: '67% off', label: 'Limited time deal' },
-            { img: Suitcase, off: '58% off', label: 'Limited time deal' },
-            { img: Balloons, off: '45% off', label: 'Limited time deal' }
+            { img: FlipFlops, off: '73% off', label: 'Limited time deal', name: 'Floral Casual Flip Flops', brand: 'WALKWAY', price: '299', oldPrice: '1,107' },
+            { img: Tshirt, off: '67% off', label: 'Limited time deal', name: 'Graphic Printed T-Shirt', brand: 'CAMPUS', price: '499', oldPrice: '1,512' },
+            { img: Suitcase, off: '58% off', label: 'Limited time deal', name: 'Premium Hard Trolley', brand: 'SAFARI', price: '3,499', oldPrice: '8,330' },
+            { img: Balloons, off: '45% off', label: 'Limited time deal', name: 'Gold Star Foil Balloons', brand: 'PARTY PROPZ', price: '199', oldPrice: '361' }
           ].map((item, i) => (
-            <div key={i} className="flex flex-col">
+            <div 
+              key={i} 
+              className="flex flex-col cursor-pointer group"
+              onClick={() => navigate('/vendor/product-detail', { state: { product: { ...item, image: item.img, rating: '4.5', reviews: '1,200', delivery: 'Tomorrow' } } })}
+            >
               <div className="rounded-xl p-1 mb-2 border border-[var(--card-border)] overflow-hidden bg-[var(--card-bg)] shadow-sm">
                 <img src={item.img} alt={item.label} className="w-full h-auto product-img-blend transition-transform group-hover:scale-105 duration-500" />
               </div>
@@ -258,9 +290,6 @@ const Home = () => {
               </div>
             </div>
           ))}
-        </div>
-        <div className="px-4 pb-2">
-          <Link to="/vendor/products" className="text-[14px] font-black text-[var(--color-gold)] hover:underline uppercase tracking-tight">See more deals</Link>
         </div>
       </div>
 

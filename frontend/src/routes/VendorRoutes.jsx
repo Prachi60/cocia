@@ -12,6 +12,8 @@ import Profile from '../pages/vendor/Profile';
 import Wallet from '../pages/vendor/Wallet';
 import Menu from '../pages/vendor/Menu';
 import CategoryProducts from '../pages/vendor/CategoryProducts';
+import Checkout from '../pages/vendor/Checkout';
+import AllOffers from '../pages/vendor/AllOffers';
 
 const VendorRoutes = () => {
   return (
@@ -19,6 +21,7 @@ const VendorRoutes = () => {
       {/* Auth routes without layout */}
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/checkout" element={<Checkout />} />
 
       {/* Pages with layout */}
       <Route element={<VendorLayout />}>
@@ -31,6 +34,7 @@ const VendorRoutes = () => {
         <Route path="/wallet" element={<Wallet />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/category-products" element={<CategoryProducts />} />
+        <Route path="/all-offers" element={<AllOffers />} />
       </Route>
 
       {/* Redirects */}

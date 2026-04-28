@@ -151,6 +151,54 @@ const CategoryProducts = () => {
         reviews: '12,120',
         delivery: '30th Apr',
         image: EarbudsDeal,
+      },
+      {
+        id: 103,
+        brand: 'APPLE',
+        name: 'AirPods Pro (2nd Gen)',
+        price: '24,900',
+        oldPrice: '26,900',
+        off: '7% off',
+        rating: '4.8',
+        reviews: '45,210',
+        delivery: '1st May',
+        image: 'https://images.unsplash.com/photo-1603351154351-5e2d0600bb77?auto=format&fit=crop&w=600&q=80',
+      },
+      {
+        id: 104,
+        brand: 'SONY',
+        name: 'WH-1000XM5 Headphones',
+        price: '29,990',
+        oldPrice: '34,990',
+        off: '14% off',
+        rating: '4.7',
+        reviews: '8,920',
+        delivery: '2nd May',
+        image: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&w=600&q=80',
+      },
+      {
+        id: 105,
+        brand: 'BOAT',
+        name: 'Airdopes 141',
+        price: '1,499',
+        oldPrice: '4,490',
+        off: '66% off',
+        rating: '4.1',
+        reviews: '150k+',
+        delivery: '30th Apr',
+        image: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80',
+      },
+      {
+        id: 106,
+        brand: 'SAMSUNG',
+        name: 'Galaxy Watch 6 Classic',
+        price: '36,999',
+        oldPrice: '42,999',
+        off: '13% off',
+        rating: '4.5',
+        reviews: '12,500',
+        delivery: '3rd May',
+        image: 'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&w=600&q=80',
       }
     ],
     'Beauty': [
@@ -166,6 +214,66 @@ const CategoryProducts = () => {
         delivery: '28th Apr',
         image: MakeupHero,
         bestseller: true
+      },
+      {
+        id: 202,
+        brand: 'MAYBELLINE',
+        name: 'SuperStay Matte Ink Liquid Lipstick',
+        price: '549',
+        oldPrice: '699',
+        off: '21% off',
+        rating: '4.5',
+        reviews: '89,120',
+        delivery: '29th Apr',
+        image: 'https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=600&q=80',
+      },
+      {
+        id: 203,
+        brand: 'LOREAL',
+        name: 'Revitalift Hyaluronic Acid Serum',
+        price: '899',
+        oldPrice: '999',
+        off: '10% off',
+        rating: '4.6',
+        reviews: '34,500',
+        delivery: '30th Apr',
+        image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=600&q=80',
+      },
+      {
+        id: 204,
+        brand: 'MAC',
+        name: 'Studio Fix Fluid Foundation',
+        price: '3,200',
+        oldPrice: '3,500',
+        off: '8% off',
+        rating: '4.7',
+        reviews: '12,300',
+        delivery: '1st May',
+        image: 'https://images.unsplash.com/photo-1599305090598-fe179d501227?auto=format&fit=crop&w=600&q=80',
+      },
+      {
+        id: 205,
+        brand: 'CLINIQUE',
+        name: 'Moisture Surge 100H',
+        price: '1,950',
+        oldPrice: '2,500',
+        off: '22% off',
+        rating: '4.9',
+        reviews: '5,600',
+        delivery: '2nd May',
+        image: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=600&q=80',
+      },
+      {
+        id: 206,
+        brand: 'HUDA BEAUTY',
+        name: 'Nude Obsessions Eyeshadow Palette',
+        price: '2,650',
+        oldPrice: '2,990',
+        off: '11% off',
+        rating: '4.8',
+        reviews: '18,900',
+        delivery: '3rd May',
+        image: 'https://images.unsplash.com/photo-1512496115841-a4a6e5b410fb?auto=format&fit=crop&w=600&q=80',
       }
     ]
   };
@@ -181,6 +289,29 @@ const CategoryProducts = () => {
     if (activeSort === 'Customer Rating') return parseFloat(b.rating) - parseFloat(a.rating);
     return 0; // Popularity (Default)
   });
+
+  const trendingData = {
+    'Jewellery': [
+      { id: 501, name: 'Chic Choker', price: '1,299', off: '60% off', image: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&w=300&q=80' },
+      { id: 502, name: 'Golden Hoops', price: '899', off: '45% off', image: 'https://images.unsplash.com/photo-1598560917505-59a3ad559071?auto=format&fit=crop&w=300&q=80' },
+      { id: 503, name: 'Celestial Ring', price: '1,499', off: '30% off', image: 'https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=300&q=80' },
+      { id: 504, name: 'Urban Cuff', price: '2,100', off: '20% off', image: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=300&q=80' }
+    ],
+    'Electronics': [
+      { id: 601, name: 'Smart Watch', price: '3,499', off: '40% off', image: 'https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=300&q=80' },
+      { id: 602, name: 'Wireless Headphones', price: '4,999', off: '50% off', image: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&w=300&q=80' },
+      { id: 603, name: 'Power Bank', price: '1,299', off: '35% off', image: 'https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?auto=format&fit=crop&w=300&q=80' },
+      { id: 604, name: 'Bluetooth Speaker', price: '2,100', off: '25% off', image: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=300&q=80' }
+    ],
+    'Beauty': [
+      { id: 701, name: 'Face Wash', price: '299', off: '10% off', image: 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=300&q=80' },
+      { id: 702, name: 'Body Lotion', price: '499', off: '15% off', image: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=300&q=80' },
+      { id: 703, name: 'Lip Balm', price: '199', off: '5% off', image: 'https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=300&q=80' },
+      { id: 704, name: 'Hair Serum', price: '699', off: '20% off', image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=300&q=80' }
+    ]
+  };
+
+  const trendingItems = trendingData[category] || trendingData['Jewellery'];
 
   return (
     <div className="bg-[var(--card-bg)] min-h-screen text-[var(--card-text)] transition-colors duration-300 pb-10">
@@ -322,12 +453,7 @@ const CategoryProducts = () => {
           <h2 className="text-[13px] font-black text-[var(--card-text)] uppercase tracking-tight">Hot and latest for you</h2>
         </div>
         <div className="flex overflow-x-auto gap-4 px-4 no-scrollbar pb-2">
-          {[
-            { id: 501, name: 'Chic Choker', price: '1,299', off: '60% off', image: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&w=300&q=80' },
-            { id: 502, name: 'Golden Hoops', price: '899', off: '45% off', image: 'https://images.unsplash.com/photo-1598560917505-59a3ad559071?auto=format&fit=crop&w=300&q=80' },
-            { id: 503, name: 'Celestial Ring', price: '1,499', off: '30% off', image: 'https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=300&q=80' },
-            { id: 504, name: 'Urban Cuff', price: '2,100', off: '20% off', image: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=300&q=80' }
-          ].map((item) => (
+          {trendingItems.map((item) => (
             <Link to="/vendor/product-detail" state={{ product: item }} key={item.id} className="block w-[140px] flex-shrink-0 bg-[var(--card-bg)] rounded-xl overflow-hidden border border-[var(--card-border)] p-2 group active:scale-95 transition-all shadow-sm">
               <div className="aspect-square rounded-lg overflow-hidden mb-2">
                 <img src={item.image} alt={item.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 product-img-blend" />
