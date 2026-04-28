@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Search, Camera, Mic, Scan, Star, Heart, Plus, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
-import { useAccountStore } from '../../store/useAccountStore';
+import useAccountStore from '../../store/useAccountStore';
 
 const DealsPage = () => {
   const location = useLocation();
