@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { 
   Heart, 
@@ -24,6 +24,22 @@ const CategoryProducts = () => {
   const [activeSort, setActiveSort] = useState('Popularity');
   const [showSortModal, setShowSortModal] = useState(false);
   const [showFilterModal, setShowFilterModal] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
+
+  useEffect(() => {
+    const updateCartCount = () => {
+      const cart = JSON.parse(localStorage.getItem('userCart') || '[]');
+      const totalCount = cart.reduce((acc, item) => acc + (item.quantity || item.qty || 1), 0);
+      setCartCount(totalCount);
+    };
+
+    updateCartCount();
+    window.addEventListener('cartUpdated', updateCartCount);
+    
+    return () => {
+      window.removeEventListener('cartUpdated', updateCartCount);
+    };
+  }, []);
 
   // Multi-category product data
   const categoryData = {
@@ -337,7 +353,7 @@ const CategoryProducts = () => {
             
             <div className="relative cursor-pointer group">
               <ShoppingCart size={24} className="text-[var(--card-text)] group-hover:text-[var(--color-gold)] transition-colors" />
-              <span className="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[9px] font-black w-4.5 h-4.5 rounded-full flex items-center justify-center border-2 border-[var(--card-bg)]">0</span>
+              <span className="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[9px] font-black w-4.5 h-4.5 rounded-full flex items-center justify-center border-2 border-[var(--card-bg)]">{cartCount}</span>
             </div>
           </div>
         </div>

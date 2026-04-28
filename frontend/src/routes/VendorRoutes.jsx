@@ -14,6 +14,20 @@ import Menu from '../pages/vendor/Menu';
 import CategoryProducts from '../pages/vendor/CategoryProducts';
 import Checkout from '../pages/vendor/Checkout';
 import AllOffers from '../pages/vendor/AllOffers';
+import DealsPage from '../pages/vendor/DealsPage';
+import Search from '../pages/vendor/Search';
+
+// Profile Sub-pages
+import EditProfile from '../pages/vendor/profile/EditProfile';
+import MyOrders from '../pages/vendor/profile/MyOrders';
+import Wishlist from '../pages/vendor/profile/Wishlist';
+import Coupons from '../pages/vendor/profile/Coupons';
+import HelpCenter from '../pages/vendor/profile/HelpCenter';
+import SavedAddresses from '../pages/vendor/profile/SavedAddresses';
+import SavedCards from '../pages/vendor/profile/SavedCards';
+import NotificationSettings from '../pages/vendor/profile/NotificationSettings';
+import MyReviews from '../pages/vendor/profile/MyReviews';
+import QuestionsAnswers from '../pages/vendor/profile/QuestionsAnswers';
 
 const VendorRoutes = () => {
   return (
@@ -31,8 +45,23 @@ const VendorRoutes = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/bag" element={<Bag />} />
         <Route path="/profile" element={<Profile />} />
+        
+        {/* Profile Sub-routes */}
+        <Route path="/profile/edit" element={<EditProfile />} />
+        <Route path="/profile/orders" element={<MyOrders />} />
+        <Route path="/profile/wishlist" element={<Wishlist />} />
+        <Route path="/profile/coupons" element={<Coupons />} />
+        <Route path="/profile/help-center" element={<HelpCenter />} />
+        <Route path="/profile/addresses" element={<SavedAddresses />} />
+        <Route path="/profile/cards" element={<SavedCards />} />
+        <Route path="/profile/notifications" element={<NotificationSettings />} />
+        <Route path="/profile/reviews" element={<MyReviews />} />
+        <Route path="/profile/questions" element={<QuestionsAnswers />} />
+
         <Route path="/wallet" element={<Wallet />} />
         <Route path="/menu" element={<Menu />} />
+        <Route path="/deals" element={<DealsPage />} />
+        <Route path="/search" element={<Search />} />
         <Route path="/category-products" element={<CategoryProducts />} />
         <Route path="/all-offers" element={<AllOffers />} />
       </Route>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Search, Camera, ShoppingCart, Home, PlayCircle, Grid as GridIcon, User } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -14,7 +14,22 @@ import FashionHero from '../../assets/Cards/fashion_hero.png';
 
 const AllOffers = () => {
   const navigate = useNavigate();
-  const [cartItems] = useState(() => JSON.parse(localStorage.getItem('userCart') || '[]'));
+  const [cartCount, setCartCount] = useState(0);
+
+  useEffect(() => {
+    const updateCartCount = () => {
+      const cart = JSON.parse(localStorage.getItem('userCart') || '[]');
+      const totalCount = cart.reduce((acc, item) => acc + (item.quantity || item.qty || 1), 0);
+      setCartCount(totalCount);
+    };
+
+    updateCartCount();
+    window.addEventListener('cartUpdated', updateCartCount);
+    
+    return () => {
+      window.removeEventListener('cartUpdated', updateCartCount);
+    };
+  }, []);
 
   const offers = [
     { img: FlipFlops, title: 'Women Casual Shoes', desc: 'New Collection', isBestSelling: false },
@@ -42,11 +57,9 @@ const AllOffers = () => {
           <Camera size={20} className="cursor-pointer hover:opacity-70 transition-opacity" />
           <Link to="/vendor/cart" className="relative cursor-pointer hover:opacity-70 transition-opacity">
             <ShoppingCart size={20} />
-            {cartItems.length > 0 && (
-              <span className="absolute -top-1.5 -right-1.5 bg-black text-[var(--color-gold)] text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center">
-                {cartItems.length}
-              </span>
-            )}
+            <span className="absolute -top-1.5 -right-1.5 bg-black text-[var(--color-gold)] text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center">
+              {cartCount}
+            </span>
           </Link>
         </div>
       </div>
@@ -92,11 +105,9 @@ const AllOffers = () => {
         <Link to="/vendor/cart" className="flex flex-col items-center gap-1 group relative">
           <div className="relative">
              <ShoppingCart size={22} className="text-[var(--card-sub)] group-hover:text-[var(--color-gold)] transition-colors" />
-             {cartItems.length > 0 && (
-                <span className="absolute -top-1.5 -right-1.5 bg-[var(--color-gold)] text-black text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center">
-                  {cartItems.length}
-                </span>
-             )}
+             <span className="absolute -top-1.5 -right-1.5 bg-[var(--color-gold)] text-black text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center">
+               {cartCount}
+             </span>
           </div>
           <span className="text-[10px] font-black text-[var(--card-sub)] group-hover:text-[var(--color-gold)] transition-colors uppercase">Cart</span>
         </Link>

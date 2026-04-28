@@ -19,6 +19,7 @@ const Cart = () => {
     const updated = cartItems.filter(item => item.cartId !== cartId);
     setCartItems(updated);
     localStorage.setItem('userCart', JSON.stringify(updated));
+    window.dispatchEvent(new Event('cartUpdated'));
   };
 
   const updateQuantity = (cartId, delta) => {
@@ -31,6 +32,7 @@ const Cart = () => {
     });
     setCartItems(updated);
     localStorage.setItem('userCart', JSON.stringify(updated));
+    window.dispatchEvent(new Event('cartUpdated'));
   };
 
   const totalPrice = cartItems.reduce((acc, item) => {
@@ -52,7 +54,9 @@ const Cart = () => {
         </div>
         <div className="relative">
           <ShoppingCart size={20} className="text-[var(--card-text)]" />
-          <span className="absolute -top-1.5 -right-1.5 bg-[var(--color-gold)] text-black text-[9px] font-black w-4.5 h-4.5 rounded-full flex items-center justify-center">{cartItems.length}</span>
+          <span className="absolute -top-1.5 -right-1.5 bg-[var(--color-gold)] text-black text-[9px] font-black w-4.5 h-4.5 rounded-full flex items-center justify-center">
+            {cartItems.reduce((acc, item) => acc + (item.qty || item.quantity || 1), 0)}
+          </span>
         </div>
       </div>
 
@@ -74,7 +78,7 @@ const Cart = () => {
             <div className="lg:w-[60%] space-y-4">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs font-black text-[var(--card-sub)] uppercase tracking-widest">{cartItems.length} Items Selected</span>
-                <button onClick={() => { setCartItems([]); localStorage.setItem('userCart', '[]'); }} className="text-red-400 hover:text-red-500 text-xs font-black uppercase tracking-widest flex items-center gap-1 transition-colors">
+                <button onClick={() => { setCartItems([]); localStorage.setItem('userCart', '[]'); window.dispatchEvent(new Event('cartUpdated')); }} className="text-red-400 hover:text-red-500 text-xs font-black uppercase tracking-widest flex items-center gap-1 transition-colors">
                   <Trash2 size={14}/> Clear Cart
                 </button>
               </div>

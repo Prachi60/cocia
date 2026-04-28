@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronRight, Star, ShieldCheck, MapPin, Share2, Heart, Info, ChevronDown, Check, Truck, Home, Store, RotateCcw, IndianRupee, X, Search, LocateFixed, Plus, MoreHorizontal, Trash2, Edit2, Loader2, ArrowLeft } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
@@ -23,6 +23,8 @@ const ProductDetail = () => {
   const [pincode, setPincode] = useState('452012');
   const [showAddressModal, setShowAddressModal] = useState(false);
   const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+  const [isWishlisted, setIsWishlisted] = useState(false);
   
   const [addresses, setAddresses] = useState([
     {
@@ -110,6 +112,8 @@ const ProductDetail = () => {
         qty: 1
       };
       localStorage.setItem('userCart', JSON.stringify([...existingCart, newItem]));
+      window.dispatchEvent(new Event('cartUpdated'));
+      setToastMessage('Item added to cart');
       setShowToast(true);
       setTimeout(() => setShowToast(false), 3000);
     } catch (e) {
@@ -132,6 +136,34 @@ const ProductDetail = () => {
     delivery: '28th Apr',
     image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80',
     bestseller: true
+  };
+
+  useEffect(() => {
+    const wishlist = JSON.parse(localStorage.getItem('userWishlist') || '[]');
+    const existing = wishlist.find(item => item.id === product.id || item.name === product.name);
+    setIsWishlisted(!!existing);
+  }, [product]);
+
+  const handleToggleWishlist = (e) => {
+    e.stopPropagation();
+    let wishlist = JSON.parse(localStorage.getItem('userWishlist') || '[]');
+    const existingIndex = wishlist.findIndex(item => item.id === product.id || item.name === product.name);
+    
+    if (existingIndex >= 0) {
+      wishlist.splice(existingIndex, 1);
+      setIsWishlisted(false);
+      setToastMessage('Removed from wishlist');
+    } else {
+      wishlist.push({ ...product, id: product.id || Date.now() });
+      setIsWishlisted(true);
+      setToastMessage('Added to wishlist');
+    }
+    
+    localStorage.setItem('userWishlist', JSON.stringify(wishlist));
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
   };
 
   const getRelatedProducts = (productName) => {
@@ -234,8 +266,11 @@ const ProductDetail = () => {
 
                 {/* Heart & Share */}
                 <div className="absolute top-4 right-4 flex flex-col gap-3">
-                  <div className="w-10 h-10 bg-[var(--card-bg)]/60 backdrop-blur-md border border-[var(--card-border)] rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:bg-[var(--color-gold)] hover:text-black transition-all">
-                    <Heart size={18} />
+                  <div 
+                    onClick={handleToggleWishlist}
+                    className={`w-10 h-10 bg-[var(--card-bg)]/60 backdrop-blur-md border border-[var(--card-border)] rounded-full flex items-center justify-center shadow-lg cursor-pointer transition-all ${isWishlisted ? 'text-red-500 border-red-500/50 hover:bg-red-500/10' : 'hover:bg-[var(--color-gold)] hover:text-black'}`}
+                  >
+                    <Heart size={18} fill={isWishlisted ? "currentColor" : "none"} />
                   </div>
                   <div className="w-10 h-10 bg-[var(--card-bg)]/60 backdrop-blur-md border border-[var(--card-border)] rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:bg-[var(--color-gold)] hover:text-black transition-all">
                     <Share2 size={18} />
@@ -404,7 +439,7 @@ const ProductDetail = () => {
       {/* Toast Notification */}
       {showToast && (
         <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-[300] bg-black border border-[var(--color-gold)] text-[var(--color-gold)] px-6 py-3 rounded-full font-black text-xs uppercase tracking-widest shadow-[0_0_20px_rgba(226,167,80,0.3)] flex items-center gap-2 animate-in slide-in-from-top-4 fade-in duration-300">
-          <Check size={16} /> Item added to cart
+          <Check size={16} /> {toastMessage || 'Item added to cart'}
         </div>
       )}
 

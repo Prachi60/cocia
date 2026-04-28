@@ -19,6 +19,7 @@ const CategoryProductsSection = ({ selectedCategory }) => {
       cart.push({ ...product, quantity: 1, image: product.image, price: product.price });
     }
     localStorage.setItem('userCart', JSON.stringify(cart));
+    window.dispatchEvent(new Event('cartUpdated'));
     setToastMessage('Item added to cart');
     setTimeout(() => setToastMessage(''), 3000);
   };

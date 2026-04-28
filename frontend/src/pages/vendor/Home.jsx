@@ -300,11 +300,13 @@ const Home = () => {
         </div>
         <div className="flex overflow-x-auto gap-4 px-4 no-scrollbar pb-4">
 
-          {/* Big Card 1: Deals for you */}
-          <div className="w-[280px] flex-shrink-0 bg-[var(--card-bg)] rounded-2xl border border-[var(--card-border)] shadow-sm overflow-hidden p-2.5">
+          <div 
+            onClick={() => navigate('/vendor/deals', { state: { title: 'Deals for you' } })}
+            className="w-[280px] flex-shrink-0 bg-[var(--card-bg)] rounded-2xl border border-[var(--card-border)] shadow-sm overflow-hidden p-2.5 cursor-pointer hover:border-[var(--color-gold)]/40 transition-all active:scale-[0.98]"
+          >
             <div className="flex justify-between items-center mb-2">
               <h3 className="text-[14px] font-black text-[var(--card-text)] leading-tight">Deals for you</h3>
-              <ChevronRight size={16} className="text-gray-400" />
+              <ChevronRight size={16} className="text-[var(--color-gold)]" />
             </div>
             <div className="grid grid-cols-2 gap-2">
               {[
@@ -326,11 +328,13 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Big Card 2: Shoes & Handbags */}
-          <div className="w-[280px] flex-shrink-0 bg-[var(--card-bg)] rounded-2xl border border-[var(--card-border)] shadow-sm overflow-hidden p-2.5">
+          <div 
+            onClick={() => navigate('/vendor/deals', { state: { title: 'Shoes & Handbags' } })}
+            className="w-[280px] flex-shrink-0 bg-[var(--card-bg)] rounded-2xl border border-[var(--card-border)] shadow-sm overflow-hidden p-2.5 cursor-pointer hover:border-[var(--color-gold)]/40 transition-all active:scale-[0.98]"
+          >
             <div className="flex justify-between items-center mb-2">
               <h3 className="text-[14px] font-black text-[var(--card-text)] leading-tight">Shoes & Handbags</h3>
-              <ChevronRight size={16} className="text-gray-400" />
+              <ChevronRight size={16} className="text-[var(--color-gold)]" />
             </div>
             <div className="grid grid-cols-2 gap-2">
               {[
@@ -352,11 +356,13 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Big Card 3: Tech Deals */}
-          <div className="w-[280px] flex-shrink-0 bg-[var(--card-bg)] rounded-2xl border border-[var(--card-border)] shadow-sm overflow-hidden p-2.5">
+          <div 
+            onClick={() => navigate('/vendor/deals', { state: { title: 'Recommended' } })}
+            className="w-[280px] flex-shrink-0 bg-[var(--card-bg)] rounded-2xl border border-[var(--card-border)] shadow-sm overflow-hidden p-2.5 cursor-pointer hover:border-[var(--color-gold)]/40 transition-all active:scale-[0.98]"
+          >
             <div className="flex justify-between items-center mb-2">
               <h3 className="text-[14px] font-black text-[var(--card-text)] leading-tight">Related to your searches</h3>
-              <ChevronRight size={16} className="text-gray-400" />
+              <ChevronRight size={16} className="text-[var(--color-gold)]" />
             </div>
             <div className="grid grid-cols-2 gap-2">
               {[
@@ -384,21 +390,43 @@ const Home = () => {
       <div className="py-4 bg-[var(--card-bg)]">
         <div className="flex justify-between items-center px-4 mb-3">
           <h2 className="text-lg font-bold text-[var(--card-text)] leading-tight">Must-haves | Top picks for you</h2>
-          <span className="text-[10px] font-black text-[var(--color-gold)] uppercase">View All</span>
+          <button 
+            onClick={() => navigate('/vendor/deals', { state: { title: 'Must-haves' } })}
+            className="text-[10px] font-black text-[var(--color-gold)] uppercase hover:underline active:scale-95 transition-all"
+          >
+            View All
+          </button>
         </div>
         <div className="grid grid-cols-3 gap-2 px-4 mb-4">
           {[
-            { img: SamsungS24, label: 'Samsung S24' },
-            { img: AsusLaptop, label: 'Asus Laptop' },
-            { img: Tshirt, label: 'Designer Tee' },
-            { img: JewelleryImg, label: 'Gold Pendant' },
-            { img: PlumShampoo, label: 'Plum Shampoo' },
-            { img: LorealShampoo, label: 'Hair Oil' },
-            { img: EarbudsDeal, label: 'Noise Buds' },
-            { img: Suitcase, label: 'Travel Case' },
-            { img: SplitAC, label: 'Samsung AC' }
+            { id: 401, img: SamsungS24, label: 'Samsung S24', price: '69,999', brand: 'SAMSUNG', rating: '4.7' },
+            { id: 402, img: AsusLaptop, label: 'Asus Laptop', price: '45,990', brand: 'ASUS', rating: '4.5' },
+            { id: 403, img: Tshirt, label: 'Designer Tee', price: '1,299', brand: 'CAMPUS', rating: '4.4' },
+            { id: 404, img: JewelleryImg, label: 'Gold Pendant', price: '3,499', brand: 'COCIA', rating: '4.9' },
+            { id: 405, img: PlumShampoo, label: 'Plum Shampoo', price: '450', brand: 'PLUM', rating: '4.6' },
+            { id: 406, img: LorealShampoo, label: 'Hair Oil', price: '320', brand: 'LOREAL', rating: '4.5' },
+            { id: 407, img: EarbudsDeal, label: 'Noise Buds', price: '1,999', brand: 'NOISE', rating: '4.4' },
+            { id: 408, img: Suitcase, label: 'Travel Case', price: '4,499', brand: 'SAFARI', rating: '4.7' },
+            { id: 409, img: SplitAC, label: 'Samsung AC', price: '34,990', brand: 'SAMSUNG', rating: '4.6' }
           ].map((item, i) => (
-            <div key={i} className="flex flex-col gap-1 items-center group cursor-pointer">
+            <div 
+              key={i} 
+              onClick={() => navigate('/vendor/product-detail', { 
+                state: { 
+                  product: { 
+                    id: item.id,
+                    name: item.label,
+                    price: item.price,
+                    brand: item.brand,
+                    image: item.img,
+                    rating: item.rating,
+                    reviews: '1.2k',
+                    delivery: 'Tomorrow'
+                  } 
+                } 
+              })}
+              className="flex flex-col gap-1 items-center group cursor-pointer active:scale-95 transition-transform"
+            >
               <div className="aspect-square bg-[var(--card-bg)] rounded-lg overflow-hidden flex items-center justify-center p-1.5 border border-[var(--card-border)] w-full group-hover:border-[var(--color-gold)]/40 transition-colors">
                 <img src={item.img} alt={item.label} className="w-full h-full object-contain product-img-blend group-hover:scale-110 transition-transform duration-300" />
               </div>
