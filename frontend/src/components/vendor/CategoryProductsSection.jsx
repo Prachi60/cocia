@@ -49,73 +49,69 @@ const CategoryProductsSection = ({ selectedCategory }) => {
   if (!selectedCategory) return null;
 
   return (
-    <div id="category-products-section" className="py-6 px-4 bg-[var(--card-bg)] mt-2 transition-all duration-500 relative">
+    <div id="category-products-section" className="py-2 px-3 bg-white mt-4 transition-all duration-500 relative">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-20 left-1/2 -translate-x-1/2 z-[100] bg-black border border-[var(--color-gold)] text-[var(--color-gold)] px-6 py-3 rounded-full shadow-[0_0_20px_rgba(226,167,80,0.3)] flex items-center gap-3 animate-in slide-in-from-top duration-300">
+        <div className="fixed top-20 left-1/2 -translate-x-1/2 z-[100] bg-black text-white px-6 py-3 rounded-full shadow-xl flex items-center gap-3 animate-in slide-in-from-top duration-300">
           <CheckCircle size={20} className="text-green-400" />
           <span className="font-bold text-sm tracking-wide whitespace-nowrap">{toastMessage}</span>
         </div>
       )}
 
-      <div className="flex justify-between items-center mb-4">
-        <div className="flex items-center gap-2">
-          <div className="w-1.5 h-6 bg-[var(--color-gold)] rounded-full"></div>
-          <h2 className="text-xl font-black text-[var(--card-text)]">Explore {selectedCategory}</h2>
-        </div>
-        <button className="text-[12px] font-bold text-[var(--color-gold)] flex items-center hover:underline">
-          View All <ChevronRight size={14} />
+      <div className="flex justify-between items-center mb-5 px-1">
+        <h2 className="text-xl font-black text-slate-900" style={{ fontFamily: "'Nunito', sans-serif" }}>
+          {selectedCategory}
+        </h2>
+        <button className="text-[12px] font-black text-[#2874f0] uppercase tracking-tight hover:underline">
+          View All
         </button>
       </div>
 
       {products.length === 0 ? (
-        <div className="py-10 text-center text-gray-500 font-medium">
-          No products found for {selectedCategory}.
+        <div className="py-10 text-center text-gray-400 font-bold italic">
+          More products coming soon...
         </div>
       ) : (
-        <div className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 transition-all duration-700 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+        <div className={`grid grid-cols-2 gap-x-3 gap-y-6 transition-all duration-700 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
           {products.map((product) => (
-            <div key={product.id} className="bg-[var(--card-bg)] rounded-xl border border-[var(--card-border)] overflow-hidden shadow-sm hover:shadow-lg hover:border-[var(--color-gold)]/50 transition-all duration-300 group flex flex-col cursor-pointer" onClick={() => handleProductClick(product)}>
-              <div className="relative h-40 bg-white flex items-center justify-center p-2 overflow-hidden">
-                <img src={product.image} alt={product.name} className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-500" />
-                <button className="absolute top-2 right-2 p-1.5 bg-white/80 backdrop-blur rounded-full text-gray-400 hover:text-red-500 hover:bg-white transition-colors shadow-sm z-10">
-                  <Heart size={16} />
-                </button>
-                {product.discount && (
-                  <span className="absolute top-2 left-2 bg-[#cc0c39] text-white text-[9px] font-black px-1.5 py-0.5 rounded shadow-sm z-10">
-                    {product.discount}
+            <div 
+              key={product.id} 
+              className="flex flex-col cursor-pointer group" 
+              onClick={() => handleProductClick(product)}
+            >
+              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-gray-50 border border-gray-100">
+                <img 
+                  src={product.image} 
+                  alt={product.name} 
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                />
+                
+                {/* Image Overlay Tag */}
+                <div className="absolute bottom-3 left-3">
+                  <span className="bg-orange-500/90 backdrop-blur-sm text-white text-[10px] font-black px-2 py-1 rounded-lg shadow-lg">
+                    #{product.tag || 'Trending'}
                   </span>
-                )}
+                </div>
+
+                <button 
+                  onClick={(e) => { e.stopPropagation(); /* Wishlist logic */ }}
+                  className="absolute top-3 right-3 p-2 bg-white/90 backdrop-blur-md rounded-full text-gray-400 hover:text-red-500 transition-all shadow-md z-10 active:scale-90"
+                >
+                  <Heart size={16} strokeWidth={2.5} />
+                </button>
               </div>
               
-              <div className="p-3 flex flex-col flex-1">
-                <h3 className="text-[12px] font-bold text-[var(--card-text)] line-clamp-1 mb-1">{product.name}</h3>
-                <p className="text-[10px] text-gray-400 mb-2 line-clamp-1">{product.shortDescription}</p>
+              <div className="pt-3 px-1">
+                <h3 className="text-[13px] font-bold text-slate-800 line-clamp-1 leading-tight">
+                  <span className="font-black">{product.brand || 'COCIA'}</span> {product.name}
+                </h3>
                 
-                <div className="flex items-center gap-1 mb-2">
-                  <div className="flex text-[var(--color-gold)]">
-                    <Star size={10} fill="currentColor" />
-                    <Star size={10} fill="currentColor" />
-                    <Star size={10} fill="currentColor" />
-                    <Star size={10} fill="currentColor" />
-                    <Star size={10} fill="currentColor" className="opacity-50" />
+                <div className="mt-1 flex flex-col gap-0.5">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[12px] text-gray-400 line-through font-bold">{product.oldPrice || '₹999'}</span>
+                    <span className="text-[15px] font-black text-slate-900">₹{product.price}</span>
                   </div>
-                  <span className="text-[9px] font-medium text-gray-400">({product.rating})</span>
-                </div>
-                
-                <div className="mt-auto">
-                  <div className="flex items-end gap-1.5 mb-2">
-                    <span className="text-[14px] font-black text-[var(--card-text)]">₹{product.price}</span>
-                    {product.oldPrice && (
-                      <span className="text-[10px] text-gray-500 line-through mb-0.5">₹{product.oldPrice}</span>
-                    )}
-                  </div>
-                  <button 
-                    onClick={(e) => handleAddToCart(product, e)}
-                    className="w-full bg-[var(--color-gold)] text-black text-[11px] font-black py-2 rounded-lg hover:bg-[#c99547] transition-colors flex items-center justify-center gap-2 shadow-sm active:scale-95"
-                  >
-                    <ShoppingCart size={14} /> Add to Cart
-                  </button>
+                  <p className="text-[11px] font-bold text-[#2874f0]">₹{Math.round(product.price * 0.95)} with UPI offer + more</p>
                 </div>
               </div>
             </div>

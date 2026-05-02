@@ -10,7 +10,8 @@ import {
   ArrowLeft,
   LayoutGrid,
   Menu,
-  MapPin
+  MapPin,
+  Bell
 } from 'lucide-react';
 
 import JewelleryImg from '../../assets/products/jewellery.png';
@@ -332,27 +333,25 @@ const CategoryProducts = () => {
   return (
     <div className="bg-[var(--card-bg)] min-h-screen text-[var(--card-text)] transition-colors duration-300 pb-10">
       {/* 🔶 Enhanced Multi-row Header */}
-      <div className="sticky top-0 z-[100] bg-[var(--card-bg)]/90 backdrop-blur-md border-b border-[var(--card-border)] shadow-sm">
+      <div className="sticky top-0 z-[100] bg-[var(--card-bg)]/90 backdrop-blur-md border-b border-[var(--card-border)] shadow-sm" style={{ fontFamily: "'Nunito', sans-serif" }}>
         {/* Row 1: Nav & Cart */}
         <div className="px-5 pt-4 pb-2 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Link to="/vendor/home" className="text-[var(--card-text)] transition-colors hover:text-[var(--color-gold)]">
-              <ArrowLeft size={24} />
+              <ArrowLeft size={24} strokeWidth={1.5} />
             </Link>
             <h1 className="text-lg font-black tracking-tight uppercase">{category.name}</h1>
           </div>
           
           <div className="flex items-center gap-4">
-            {/* Theme Toggle Placeholder (matches image) */}
-            <div className="hidden sm:flex items-center bg-[var(--card-border)] rounded-full p-1 px-2 gap-2 cursor-pointer border border-[var(--card-border)]">
-              <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center shadow-sm">
-                 <svg className="w-4 h-4 text-orange-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4.243 3.05a1 1 0 010 1.414l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM14.243 16.95a1 1 0 01-1.414 0l-.707-.707a1 1 0 111.414-1.414l.707.707a1 1 0 010 1.414zM10 18a1 1 0 01-1-1v-1a1 1 0 112 0v1a1 1 0 01-1 1zM5.757 16.95a1 1 0 010-1.414l.707-.707a1 1 0 011.414 1.414l-.707.707a1 1 0 01-1.414 0zM4 10a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zM5.757 5.05a1 1 0 011.414 0l.707.707a1 1 0 01-1.414 1.414l-.707-.707a1 1 0 010-1.414zM10 7a3 3 0 100 6 3 3 0 000-6z" /></svg>
-              </div>
-              <svg className="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" /></svg>
-            </div>
-            
+            <Link to="/vendor/notifications" className="text-[var(--card-text)]">
+              <Bell size={24} strokeWidth={1.5} />
+            </Link>
+            <Link to="/vendor/wishlist" className="text-[var(--card-text)]">
+              <Heart size={24} strokeWidth={1.5} />
+            </Link>
             <div className="relative cursor-pointer group">
-              <ShoppingCart size={24} className="text-[var(--card-text)] group-hover:text-[var(--color-gold)] transition-colors" />
+              <ShoppingCart size={24} strokeWidth={1.5} className="text-[var(--card-text)] group-hover:text-[var(--color-gold)] transition-colors" />
               <span className="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[9px] font-black w-4.5 h-4.5 rounded-full flex items-center justify-center border-2 border-[var(--card-bg)]">{cartCount}</span>
             </div>
           </div>
@@ -366,7 +365,7 @@ const CategoryProducts = () => {
               placeholder={`Search ${category.name}...`} 
               className="w-full bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl py-3 px-12 text-sm focus:outline-none focus:border-[var(--color-gold)]/50 text-[var(--card-text)] transition-all shadow-inner"
             />
-            <Search size={20} className="absolute left-4 top-3.5 text-[var(--card-sub)]" />
+            <Search size={20} strokeWidth={1.5} className="absolute left-4 top-3.5 text-[var(--card-sub)]" />
             <div className="absolute right-4 top-3.5 flex items-center gap-3 text-[var(--card-sub)]">
               <svg className="w-5 h-5 cursor-pointer hover:text-[var(--color-gold)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
               <svg className="w-5 h-5 cursor-pointer hover:text-[var(--color-gold)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" /></svg>
@@ -375,11 +374,11 @@ const CategoryProducts = () => {
         </div>
 
         {/* Row 3: Location Bar */}
-        <div className="bg-[#eefcfd] dark:bg-[#1a2b2c] px-5 py-2.5 flex items-center justify-between border-t border-[var(--card-border)]/50">
+        <div className="bg-[#eefcfd] px-5 py-2.5 flex items-center justify-between border-t border-[var(--card-border)]/50">
           <div className="flex items-center gap-2 text-xs font-medium text-[var(--card-text)]">
-            <MapPin size={14} className="text-[var(--card-sub)]" />
+            <MapPin size={14} strokeWidth={1.5} className="text-[var(--card-sub)]" />
             <span>Deliver to <span className="font-black">Prachi - Indore 452012</span></span>
-            <ChevronDown size={14} className="text-[var(--card-sub)]" />
+            <ChevronDown size={14} strokeWidth={1.5} className="text-[var(--card-sub)]" />
           </div>
           <button className="text-[10px] font-black text-teal-700 dark:text-teal-400 uppercase tracking-wider">Join Prime</button>
         </div>
@@ -400,7 +399,7 @@ const CategoryProducts = () => {
       <div className="sticky top-[58px] z-[90] bg-[var(--card-bg)] border-y border-[var(--card-border)] px-4 py-3 flex items-center gap-4">
         <button 
           onClick={() => setShowSortModal(true)}
-          className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-[var(--card-bg)] rounded-md border border-[var(--card-border)] text-[12px] font-black text-[var(--card-text)] uppercase active:bg-gray-100 dark:active:bg-gray-800 transition-colors shadow-sm"
+          className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-[var(--card-bg)] rounded-md border border-[var(--card-border)] text-[12px] font-black text-[var(--card-text)] uppercase active:bg-gray-100 transition-colors shadow-sm"
         >
           Sort <ChevronDown size={14} className={showSortModal ? 'rotate-180 transition-transform' : 'transition-transform'} />
         </button>
@@ -421,7 +420,7 @@ const CategoryProducts = () => {
                 <img 
                   src={product.image} 
                   alt={product.name} 
-                  className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 ${document.documentElement.classList.contains('dark') ? 'opacity-80' : 'opacity-100'} group-hover:opacity-100 product-img-blend`} 
+                  className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-100 product-img-blend`} 
                 />
               
               {/* Heart Icon */}
@@ -495,7 +494,7 @@ const CategoryProducts = () => {
                 <img 
                   src={product.image} 
                   alt={product.name} 
-                  className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 ${document.documentElement.classList.contains('dark') ? 'opacity-80' : 'opacity-100'} group-hover:opacity-100 product-img-blend`} 
+                  className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-100 product-img-blend`} 
                 />
               
               {/* Heart Icon */}

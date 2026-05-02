@@ -325,7 +325,7 @@ const Checkout = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-black w-full overflow-x-hidden">
+    <div className="min-h-screen bg-gray-50 w-full overflow-x-hidden">
       {/* Header */}
       <div className="bg-[var(--card-bg)] px-4 py-3 flex items-center justify-between sticky top-0 z-50 border-b border-[var(--card-border)]">
         <div className="flex items-center gap-4">
@@ -342,7 +342,7 @@ const Checkout = () => {
 
       {renderStepper()}
 
-      <div className="bg-gray-50 dark:bg-black">
+      <div className="bg-gray-50">
         {currentStep === 2 ? renderOrderSummary() : renderPayment()}
       </div>
 

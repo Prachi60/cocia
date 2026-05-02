@@ -68,7 +68,7 @@ const DealsPage = () => {
     <motion.div 
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
-      className={`min-h-screen pb-20 transition-colors duration-500 ${isDarkMode ? 'bg-black text-white' : 'bg-[#f8f9fa] text-slate-900'}`}
+      className="min-h-screen pb-20 transition-colors duration-500 bg-[#f8f9fa] text-slate-900"
     >
       {/* Premium Adaptive Header */}
       <div className={`sticky top-0 z-50 backdrop-blur-md border-b p-3 transition-all ${isDarkMode ? 'bg-black/90 border-[var(--color-gold)]/20' : 'bg-white/90 border-gray-200 shadow-sm'}`}>

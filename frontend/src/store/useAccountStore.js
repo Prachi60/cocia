@@ -52,11 +52,11 @@ const useAccountStore = create((set) => ({
     { id: 1, title: 'Order Shipped', desc: 'Your order #OD12345 is on the way!', time: '2h ago' }
   ],
   selectedAddressId: 1,
-  isDarkMode: true,
+  isDarkMode: false,
 
   // Actions
   setSelectedAddress: (id) => set({ selectedAddressId: id }),
-  toggleDarkMode: () => set((state) => ({ isDarkMode: !state.isDarkMode })),
+  toggleDarkMode: () => set({ isDarkMode: false }),
 
   updateProfile: (newData) => set((state) => ({
     userProfile: { ...state.userProfile, ...newData }

@@ -243,9 +243,9 @@ const ProductDetail = () => {
   return (
     <div className="bg-[var(--card-bg)] min-h-screen text-[var(--card-text)] transition-colors duration-300">
       {/* Header */}
-      <div className="sticky top-0 z-[100] bg-[var(--card-bg)]/90 backdrop-blur-md border-b border-[var(--card-border)] px-4 py-4 flex items-center">
+      <div className="sticky top-0 z-[100] bg-[var(--card-bg)]/90 backdrop-blur-md border-b border-[var(--card-border)] px-4 py-4 flex items-center" style={{ fontFamily: "'Nunito', sans-serif" }}>
         <button onClick={() => navigate(-1)} className="text-[var(--card-text)] hover:text-[var(--color-gold)] transition-colors">
-          <ArrowLeft size={24} />
+          <ArrowLeft size={24} strokeWidth={1.5} />
         </button>
       </div>
 

@@ -16,23 +16,13 @@
     --card-border: #f3f4f6;
   }
 
-  .dark {
-    --card-bg: #121212;
-    --card-text: #e2a750;
-    --card-sub: #9ca3af;
-    --card-border: rgba(226, 167, 80, 0.2);
-  }
-
   body {
     @apply bg-gray-50 text-gray-900 transition-colors duration-300;
+    font-family: 'Inter', 'Roboto', sans-serif;
   }
 
   .product-img-blend {
     mix-blend-mode: multiply;
-  }
-
-  .dark .product-img-blend {
-    mix-blend-mode: lighten;
   }
 }
 
