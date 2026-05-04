@@ -106,9 +106,9 @@ const VendorLayout = () => {
           <div className="flex justify-between items-center gap-2 mb-2.5">
             <Link 
               to="/vendor/profile/addresses" 
-              className="flex-1 flex items-center gap-2 bg-[#1c5cbd] px-2 py-1.5 rounded-xl border border-white/10 overflow-hidden"
+              className="flex-1 flex items-center gap-2 bg-white/10 px-2 py-1.5 rounded-none border border-white/10 overflow-hidden"
             >
-              <div className="bg-white p-1 rounded-lg">
+              <div className="bg-white p-1 rounded-none">
                 <HomeIcon size={12} strokeWidth={2.5} className="text-[#2874f0]" />
               </div>
               <div className="flex flex-col min-w-0">
@@ -122,7 +122,7 @@ const VendorLayout = () => {
               </div>
             </Link>
 
-            <div className="flex items-center bg-[#1c5cbd] px-2.5 py-1.5 rounded-xl border border-white/10 gap-1.5">
+            <div className="flex items-center bg-white/10 px-2.5 py-1.5 rounded-none border border-white/10 gap-1.5">
               <div className="w-5 h-5 bg-yellow-400 rounded-full flex items-center justify-center shadow-inner">
                 <span className="text-[9px] font-black text-blue-800">⚡</span>
               </div>
@@ -132,7 +132,7 @@ const VendorLayout = () => {
 
           {/* Row 3: Search Bar & Scan Icon */}
           <div className="flex items-center gap-3 mb-2.5">
-            <div className="flex-1 flex items-center bg-white rounded-lg px-3 py-2 shadow-sm border border-transparent focus-within:border-white/50 transition-all">
+            <div className="flex-1 flex items-center bg-white rounded-none px-3 py-2 shadow-sm border border-transparent focus-within:border-white/50 transition-all">
               <Search size={18} strokeWidth={1.5} className="text-gray-400" />
               <input
                 type="text"
@@ -148,7 +148,7 @@ const VendorLayout = () => {
               />
               <Camera size={18} strokeWidth={1.5} className="text-gray-400 cursor-pointer" />
             </div>
-            <div className="bg-white/10 p-2 rounded-lg border border-white/20 cursor-pointer active:scale-95 transition-transform">
+            <div className="bg-white/10 p-2 rounded-none border border-white/20 cursor-pointer active:scale-95 transition-transform">
               <Scan size={18} strokeWidth={1.5} className="text-white" />
             </div>
           </div>
@@ -193,10 +193,10 @@ const VendorLayout = () => {
       {/* SaleBanner is now rendered inside Home.jsx or specifically based on visibility store */}
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex">
           <div className="container mx-auto flex h-full">
-            <main className="flex-1 min-w-0 overflow-y-auto pb-16">
+            <main className="flex-1 min-w-0 pb-16">
               <Outlet />
             </main>
           </div>

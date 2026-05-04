@@ -56,9 +56,9 @@ const SaleBanner = () => {
           animate={{ height: isVisible ? 'auto' : 0, opacity: isVisible ? 1 : 0 }}
           exit={{ height: 0, opacity: 0 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
-          className="bg-[#2874f0] shadow-sm overflow-hidden z-40 sticky top-[184px]"
+          className="bg-[#2874f0] rounded-xl mx-3 my-2 shadow-sm overflow-hidden z-40 sticky top-[184px]"
         >
-          <div className="mx-2 bg-[#2874f0] border-b border-white/10 overflow-hidden relative min-h-[140px] flex items-center justify-between px-2" style={{ fontFamily: "'Nunito', sans-serif" }}>
+          <div className="mx-2 bg-transparent border-b border-white/10 overflow-hidden relative min-h-[140px] flex items-center justify-between px-2" style={{ fontFamily: "'Nunito', sans-serif" }}>
             
             {/* Left Section: Lottie Animation */}
             <div className="w-1/3 flex items-center justify-center -ml-2">

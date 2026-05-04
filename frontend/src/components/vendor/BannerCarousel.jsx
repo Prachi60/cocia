@@ -18,7 +18,7 @@ const BannerCarousel = ({ banners = [] }) => {
 
   return (
     <div className="relative w-full overflow-hidden px-3 py-2">
-      <div className="relative aspect-[21/9] w-full overflow-hidden rounded-2xl shadow-lg border border-gray-100">
+      <div className="relative aspect-[21/9] w-full overflow-hidden rounded-xl shadow-lg border border-gray-100">
         <AnimatePresence mode="wait">
           <motion.div
             key={banners[currentIndex]?.id || currentIndex}
@@ -44,13 +44,13 @@ const BannerCarousel = ({ banners = [] }) => {
         {banners.map((_, idx) => (
           <div
             key={idx}
-            className={`h-1.5 rounded-full transition-all duration-300 ${
-              idx === currentIndex ? 'w-4 bg-[#2874f0]' : 'w-1.5 bg-gray-300'
-            }`}
+            className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentIndex ? 'w-4 bg-[#2874f0]' : 'w-1.5 bg-gray-300'
+              }`}
           />
         ))}
       </div>
     </div>
+
   );
 };
 

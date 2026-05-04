@@ -19,6 +19,9 @@
   body {
     @apply bg-gray-50 text-gray-900 transition-colors duration-300;
     font-family: 'Inter', 'Roboto', sans-serif;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   .product-img-blend {
