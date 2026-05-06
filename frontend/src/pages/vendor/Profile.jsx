@@ -1,21 +1,19 @@
 import React from 'react';
 import { 
-  User, 
-  Building2, 
-  CreditCard, 
   ShoppingBag, 
-  Star, 
+  Heart, 
   Zap, 
   HelpCircle, 
-  LogOut, 
-  Edit2,
-  ArrowLeft,
-  Bell,
-  MessageSquare,
-  ChevronRight,
-  Settings,
-  Mail,
-  ShieldCheck
+  Mail, 
+  ChevronRight, 
+  Smartphone, 
+  CreditCard, 
+  Wallet, 
+  Store, 
+  ArrowRight,
+  Star,
+  Globe,
+  Bell
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -25,121 +23,209 @@ const VendorProfile = () => {
   const navigate = useNavigate();
   const { userProfile } = useAccountStore();
 
-  const menuSections = [
-    {
-      title: 'Account Settings',
-      items: [
-        { icon: User, title: 'Edit Profile', path: '/vendor/profile/edit', color: 'text-blue-500' },
-        { icon: Building2, title: 'Saved Addresses', path: '/vendor/profile/addresses', color: 'text-emerald-500' },
-        { icon: CreditCard, title: 'Payment Methods', path: '/vendor/profile/cards', color: 'text-purple-500' },
-        { icon: Bell, title: 'Notifications', path: '/vendor/profile/notifications', color: 'text-orange-500' }
-      ]
-    },
-    {
-      title: 'My Activity',
-      items: [
-        { icon: ShoppingBag, title: 'Order History', path: '/vendor/profile/orders', color: 'text-indigo-500' },
-        { icon: Star, title: 'Wishlist', path: '/vendor/profile/wishlist', color: 'text-red-500' },
-        { icon: MessageSquare, title: 'My Reviews', path: '/vendor/profile/reviews', color: 'text-cyan-500' },
-        { icon: MessageSquare, title: 'Q&A', path: '/vendor/profile/questions', color: 'text-amber-500' }
-      ]
-    },
-    {
-      title: 'Support',
-      items: [
-        { icon: HelpCircle, title: 'Help Center', path: '/vendor/profile/help-center', color: 'text-slate-500' },
-        { icon: ShieldCheck, title: 'Privacy Policy', path: '/vendor/profile/privacy', color: 'text-slate-500' }
-      ]
-    }
+  const quickActions = [
+    { label: 'Orders', icon: <ShoppingBag size={20} className="text-blue-600" />, path: '/vendor/profile/orders' },
+    { label: 'Wishlist', icon: <Heart size={20} className="text-blue-600" />, path: '/vendor/profile/wishlist' },
+    { label: 'Coupons', icon: <Zap size={20} className="text-blue-600" />, path: '/vendor/profile/coupons' },
+    { label: 'Help Center', icon: <HelpCircle size={20} className="text-blue-600" />, path: '/vendor/profile/help-center' }
+  ];
+
+  const financeOptions = [
+    { title: 'Cocia Personal Loan', sub: 'Instant Cash upto ₹10,00,000', icon: <Smartphone size={20} className="text-blue-600" /> },
+    { title: 'Cocia EMI', sub: 'No Cost EMI* | Unlock ₹1 lakh', icon: <CreditCard size={20} className="text-blue-600" /> },
+    { title: 'Apply Now for Cocia SBI Credit Card', sub: 'ZERO JOINING FEE | 5% Cashback', icon: <Wallet size={20} className="text-blue-600" /> }
+  ];
+
+  const recentlyViewed = [
+    { name: "Women's T-sh...", img: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=200' },
+    { name: "Mouse", img: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=200' },
+    { name: "Kids' Camisole...", img: 'https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?w=200' },
+    { name: "Pendant", img: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=200' }
   ];
 
   return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="bg-white min-h-screen pb-32 font-sans"
-    >
-      {/* Premium Profile Header */}
-      <div className="bg-[#2874f0] pt-6 pb-20 rounded-b-[40px] relative overflow-hidden">
-        {/* Abstract Background Shapes */}
-        <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-3xl" />
-        <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-white/10 rounded-full blur-3xl" />
-        
-        <div className="px-6 flex items-center justify-between mb-8">
-           <button onClick={() => navigate(-1)} className="text-white active:scale-90 transition-transform">
-              <ArrowLeft size={28} />
-           </button>
-           <h1 className="text-white text-[20px] font-black uppercase tracking-widest">Profile</h1>
-           <button onClick={() => navigate('/vendor/settings')} className="text-white">
-              <Settings size={24} />
-           </button>
-        </div>
-
-        <div className="flex flex-col items-center px-6">
-           <div className="relative">
-              <div className="w-24 h-24 bg-white rounded-full p-1 shadow-2xl">
-                 <div className="w-full h-full rounded-full bg-gray-100 flex items-center justify-center overflow-hidden border-2 border-gray-50">
-                    {userProfile.avatar ? (
-                      <img src={userProfile.avatar} alt="Profile" className="w-full h-full object-cover" />
-                    ) : (
-                      <span className="text-3xl font-black text-[#2874f0]">{userProfile.name.charAt(0)}</span>
-                    )}
-                 </div>
+    <div className="bg-[#f1f3f6] min-h-screen pb-24 font-sans text-slate-900">
+      {/* Top Header Card */}
+      <div className="px-3 pt-4">
+        <div className="bg-gradient-to-br from-[#f0f5ff] to-white rounded-xl p-5 border border-blue-50 shadow-sm relative overflow-hidden">
+           <div className="flex justify-between items-start mb-4">
+              <div>
+                 <h1 className="text-[20px] font-black text-slate-900">{userProfile.name}</h1>
+                 <p className="text-[12px] font-bold text-slate-500 mt-2 leading-relaxed max-w-[200px]">
+                   Get Early Access to sale on 8th May,<br/>
+                   15% discount with bank offers and more.
+                 </p>
               </div>
-              <button 
-                onClick={() => navigate('/vendor/profile/edit')}
-                className="absolute bottom-0 right-0 w-8 h-8 bg-[#f39c12] text-white rounded-full flex items-center justify-center border-4 border-[#2874f0] shadow-lg active:scale-90 transition-transform"
-              >
-                 <Edit2 size={12} />
-              </button>
+              <div className="flex items-center gap-1.5 bg-white px-2 py-1.5 rounded-full border border-yellow-100 shadow-sm">
+                 <div className="w-5 h-5 bg-yellow-400 rounded-full flex items-center justify-center text-blue-900 font-black text-[12px]">P</div>
+                 <span className="text-[14px] font-black">0</span>
+              </div>
            </div>
-           <h2 className="text-white text-[24px] font-black mt-4 tracking-tight">{userProfile.name}</h2>
-           <p className="text-white/80 text-[13px] font-medium flex items-center gap-1.5 mt-1">
-              <Mail size={12} /> {userProfile.email}
-           </p>
+           <button className="bg-black text-white px-6 py-2.5 rounded-lg text-[12px] font-black uppercase tracking-widest shadow-lg">
+              Explore <span className="text-blue-400">BLACK</span>
+           </button>
         </div>
       </div>
 
-      {/* Profile Menu Items */}
-      <div className="px-5 -mt-10 space-y-8">
-        {menuSections.map((section, sIdx) => (
-          <div key={sIdx} className="space-y-4">
-             <h3 className="text-[11px] font-black text-gray-400 uppercase tracking-[3px] px-2">{section.title}</h3>
-             <div className="bg-[#cccccc]/10 rounded-[32px] overflow-hidden border border-gray-100 shadow-sm p-2">
-                {section.items.map((item, iIdx) => (
-                  <div 
-                    key={iIdx}
-                    onClick={() => navigate(item.path)}
-                    className="flex items-center gap-4 px-4 py-4 active:bg-gray-50 transition-all cursor-pointer group"
-                  >
-                    <div className={`p-2.5 rounded-2xl bg-white shadow-sm transition-transform group-active:scale-90`}>
-                       <item.icon size={20} className={item.color} />
-                    </div>
-                    <span className="text-[15px] font-black text-[#1c2331] flex-1">{item.title}</span>
-                    <ChevronRight size={18} className="text-gray-300 group-hover:translate-x-1 transition-transform" />
+      {/* Quick Action Grid */}
+      <div className="px-3 pt-4">
+         <div className="grid grid-cols-2 gap-2">
+            {quickActions.map((action, idx) => (
+               <div 
+                key={idx}
+                onClick={() => navigate(action.path)}
+                className="bg-white rounded-lg p-4 flex items-center gap-4 border border-gray-100 shadow-sm active:scale-[0.98] transition-transform cursor-pointer"
+               >
+                  <div className="p-2 bg-gray-50 rounded-full">{action.icon}</div>
+                  <span className="text-[14px] font-black text-slate-700">{action.label}</span>
+               </div>
+            ))}
+         </div>
+      </div>
+
+      {/* Email Update Banner */}
+      <div className="px-3 pt-4">
+         <div className="bg-white rounded-lg p-4 flex items-center justify-between border border-gray-100 shadow-sm">
+            <div className="flex items-center gap-4">
+               <div className="relative">
+                  <Mail size={32} className="text-yellow-500 opacity-20" />
+                  <Mail size={24} className="text-yellow-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+               </div>
+               <div>
+                  <h3 className="text-[14px] font-black text-slate-800 flex items-center gap-2">
+                    Add/Verify your Email <div className="w-1.5 h-1.5 bg-pink-600 rounded-full" />
+                  </h3>
+                  <p className="text-[11px] text-gray-500 font-bold mt-1">Get latest updates of your orders</p>
+               </div>
+            </div>
+            <button className="bg-blue-600 text-white px-5 py-2 rounded-lg text-[13px] font-black shadow-lg shadow-blue-100">
+               Update
+            </button>
+         </div>
+      </div>
+
+      {/* Finance Options Section */}
+      <div className="bg-white mt-4 border-t border-b border-gray-100">
+         <div className="px-4 py-4 border-b border-gray-50">
+            <h2 className="text-[16px] font-black text-slate-900">Finance Options</h2>
+         </div>
+         <div className="divide-y divide-gray-50">
+            {financeOptions.map((opt, idx) => (
+               <div key={idx} className="px-4 py-4 flex items-center justify-between active:bg-gray-50 cursor-pointer">
+                  <div className="flex items-center gap-4">
+                     <div className="w-10 h-10 bg-gray-50 rounded-lg flex items-center justify-center text-blue-600">
+                        {opt.icon}
+                     </div>
+                     <div>
+                        <h4 className="text-[14px] font-black text-slate-800">{opt.title}</h4>
+                        <p className="text-[11px] text-gray-400 font-bold mt-0.5">{opt.sub}</p>
+                     </div>
                   </div>
-                ))}
-             </div>
-          </div>
-        ))}
-
-        {/* Sign Out Card */}
-        <div className="pt-4">
-           <div 
-             onClick={() => navigate('/vendor/login')}
-             className="bg-red-50 rounded-[32px] p-2 border border-red-100 active:scale-95 transition-transform cursor-pointer"
-           >
-              <div className="flex items-center gap-4 px-4 py-4">
-                 <div className="p-2.5 rounded-2xl bg-white shadow-sm text-red-500">
-                    <LogOut size={20} />
-                 </div>
-                 <span className="text-[15px] font-black text-red-600 flex-1">Sign Out</span>
-                 <ChevronRight size={18} className="text-red-200" />
-              </div>
-           </div>
-        </div>
+                  <ChevronRight size={18} className="text-gray-300" />
+               </div>
+            ))}
+         </div>
       </div>
-    </motion.div>
+
+      {/* Finance On UPI */}
+      <div className="bg-white mt-3 border-t border-b border-gray-100">
+         <div className="px-4 py-4 flex items-center justify-between active:bg-gray-50 cursor-pointer">
+            <div className="flex items-center gap-4">
+               <div className="w-10 h-10 bg-gray-50 rounded-lg flex items-center justify-center text-blue-600">
+                  <Smartphone size={20} />
+               </div>
+               <div>
+                  <h4 className="text-[15px] font-black text-slate-800">Finance On UPI</h4>
+                  <div className="flex items-center gap-2 mt-1">
+                     <span className="text-[12px] font-bold text-gray-500">superCard | Buy Now Pay later in 3</span>
+                  </div>
+                  <p className="text-[11px] text-gray-400 font-bold mt-1 italic">Enjoy 3% cashback | Activate Fk UPI and pay in 3 months</p>
+               </div>
+            </div>
+            <ChevronRight size={18} className="text-gray-300" />
+         </div>
+      </div>
+
+      {/* Recently Viewed Stores */}
+      <div className="bg-white mt-3 py-4 border-t border-b border-gray-100">
+         <h2 className="text-[16px] font-black text-slate-900 px-4 mb-4">Recently Viewed Stores</h2>
+         <div className="flex gap-3 overflow-x-auto no-scrollbar px-4 pb-2">
+            {recentlyViewed.map((store, idx) => (
+               <div key={idx} className="flex-shrink-0 w-32 bg-white rounded-xl border border-gray-100 overflow-hidden shadow-sm">
+                  <div className="aspect-square bg-gray-50 p-2">
+                     <img src={store.img} className="w-full h-full object-contain rounded-lg" alt={store.name} />
+                  </div>
+                  <div className="p-2">
+                     <p className="text-[11px] font-bold text-slate-700 text-center truncate">{store.name}</p>
+                  </div>
+               </div>
+            ))}
+         </div>
+      </div>
+
+      {/* Help India Make Good Choices (Rating Card) */}
+      <div className="bg-white mt-3 py-4 border-t border-b border-gray-100">
+         <div className="flex items-center justify-between px-4 mb-4">
+            <h2 className="text-[16px] font-black text-slate-900">Help India make good choices</h2>
+            <button className="w-8 h-8 bg-black rounded-full flex items-center justify-center text-white">
+               <ArrowRight size={18} />
+            </button>
+         </div>
+         <div className="px-4">
+            <div className="bg-gray-50 rounded-2xl p-4 flex gap-4 border border-gray-100 relative overflow-hidden">
+               <div className="w-16 h-16 bg-white rounded-xl p-2 flex-shrink-0 shadow-sm">
+                  <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=100" className="w-full h-full object-contain" alt="product" />
+               </div>
+               <div className="flex-1">
+                  <h4 className="text-[14px] font-black text-slate-800">WALKAROO Men Casual</h4>
+                  <p className="text-[11px] text-gray-400 font-bold mt-1">Delivered on May 05, 2026</p>
+                  <div className="flex items-center gap-3 mt-3">
+                     <span className="text-[12px] font-bold text-gray-500">Rate this product</span>
+                     <div className="flex gap-1.5">
+                        {[1, 2, 3, 4, 5].map(s => <Star key={s} size={18} className="text-gray-300" />)}
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      {/* Language Selector */}
+      <div className="bg-white mt-3 py-6 px-4 border-t border-b border-gray-100">
+         <h2 className="text-[16px] font-black text-slate-900 mb-4">Try Cocia in your language</h2>
+         <div className="flex gap-3 overflow-x-auto no-scrollbar">
+            {['हिंदी', 'தமிழ்', 'తెలుగు', 'ಕನ್ನಡ'].map((lang, idx) => (
+               <button key={idx} className="px-6 py-2 rounded-full border border-gray-200 text-[13px] font-bold text-slate-700 active:bg-blue-50 active:border-blue-200 transition-colors">
+                  {lang}
+               </button>
+            ))}
+            <button className="text-blue-600 font-black text-[13px] whitespace-nowrap ml-2">+8 more</button>
+         </div>
+      </div>
+
+      {/* Account Settings List */}
+      <div className="bg-white mt-3 border-t border-b border-gray-100 mb-10">
+         <div className="px-4 py-4 border-b border-gray-50">
+            <h2 className="text-[16px] font-black text-slate-900">Account Settings</h2>
+         </div>
+         <div className="divide-y divide-gray-50">
+            {[
+               { title: 'Cocia Plus', icon: <Zap size={18} className="text-blue-600" /> },
+               { title: 'Edit Profile', icon: <Mail size={18} className="text-blue-600" /> },
+               { title: 'Saved Addresses', icon: <Store size={18} className="text-blue-600" /> },
+               { title: 'Notification Settings', icon: <Bell size={18} className="text-blue-600" /> }
+            ].map((setting, idx) => (
+               <div key={idx} className="px-4 py-4 flex items-center justify-between active:bg-gray-50 cursor-pointer">
+                  <div className="flex items-center gap-4">
+                     {setting.icon}
+                     <span className="text-[14px] font-bold text-slate-700">{setting.title}</span>
+                  </div>
+                  <ChevronRight size={18} className="text-gray-300" />
+               </div>
+            ))}
+         </div>
+      </div>
+    </div>
   );
 };
 
