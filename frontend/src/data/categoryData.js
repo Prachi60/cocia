@@ -100,16 +100,6 @@ export const allCategoryProducts = {
     { id: 's7', name: 'Watercolor Paint Set', category: 'Stationery', price: 899, oldPrice: 1599, discount: '43% OFF', rating: 4.8, image: StationeryImg, shortDescription: '24 vivid tubes & brushes' },
     { id: 's8', name: 'Scientific Calculator', category: 'Stationery', price: 1299, oldPrice: 1999, discount: '35% OFF', rating: 4.8, image: StationeryImg, shortDescription: 'Advanced functions' }
   ],
-  Printing: [
-    { id: 'p1', name: 'Wireless Inkjet Printer', category: 'Printing', price: 4999, oldPrice: 8999, discount: '44% OFF', rating: 4.7, image: PrintingImg, shortDescription: 'Print, scan & copy' },
-    { id: 'p2', name: 'A4 Copier Paper', category: 'Printing', price: 399, oldPrice: 599, discount: '33% OFF', rating: 4.8, image: PrintingImg, shortDescription: '500 sheets, 75 GSM' },
-    { id: 'p3', name: 'Ink Cartridge Set', category: 'Printing', price: 1499, oldPrice: 2499, discount: '40% OFF', rating: 4.5, image: PrintingImg, shortDescription: 'Tri-color high yield' },
-    { id: 'p4', name: 'Thermal Label Printer', category: 'Printing', price: 3499, oldPrice: 5999, discount: '41% OFF', rating: 4.6, image: PrintingImg, shortDescription: 'Barcode & shipping labels' },
-    { id: 'p5', name: 'Photo Glossy Paper', category: 'Printing', price: 599, oldPrice: 999, discount: '40% OFF', rating: 4.7, image: PrintingImg, shortDescription: '4x6 inches, 100 sheets' },
-    { id: 'p6', name: 'Laminating Machine', category: 'Printing', price: 2499, oldPrice: 4499, discount: '44% OFF', rating: 4.5, image: PrintingImg, shortDescription: 'A4 size hot & cold' },
-    { id: 'p7', name: 'Spiral Binding Machine', category: 'Printing', price: 3999, oldPrice: 6999, discount: '42% OFF', rating: 4.4, image: PrintingImg, shortDescription: 'Heavy duty office use' },
-    { id: 'p8', name: '3D Printer Filament', category: 'Printing', price: 1299, oldPrice: 1999, discount: '35% OFF', rating: 4.8, image: PrintingImg, shortDescription: 'PLA 1.75mm White' }
-  ],
   Fashion: [
     { id: 'f1', name: 'Men\'s Denim Jacket', category: 'Fashion', price: 1499, oldPrice: 2999, discount: '50% OFF', rating: 4.8, image: FashionHero, shortDescription: 'Classic blue wash' },
     { id: 'f2', name: 'Women\'s Maxi Dress', category: 'Fashion', price: 1299, oldPrice: 2499, discount: '48% OFF', rating: 4.7, image: FashionHero, shortDescription: 'Floral summer wear' },

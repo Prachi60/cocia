@@ -11,7 +11,9 @@ import Bag from '../pages/vendor/Bag';
 import Profile from '../pages/vendor/Profile';
 import Wallet from '../pages/vendor/Wallet';
 import Menu from '../pages/vendor/Menu';
+import Categories from '../pages/vendor/Categories';
 import CategoryProducts from '../pages/vendor/CategoryProducts';
+import ToysLanding from '../pages/vendor/ToysLanding';
 import Checkout from '../pages/vendor/Checkout';
 import AllOffers from '../pages/vendor/AllOffers';
 import DealsPage from '../pages/vendor/DealsPage';
@@ -66,6 +68,8 @@ const VendorRoutes = () => {
         <Route path="/deals" element={<DealsPage />} />
         <Route path="/search" element={<Search />} />
         <Route path="/category-products" element={<CategoryProducts />} />
+        <Route path="/categories" element={<Categories />} />
+        <Route path="/toys" element={<ToysLanding />} />
         <Route path="/continue-shopping/:productId" element={<ContinueShopping />} />
         <Route path="/all-offers" element={<AllOffers />} />
 

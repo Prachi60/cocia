@@ -3,7 +3,7 @@ import {
   ArrowLeft, Search, ShoppingCart, Star, Heart, Send,
   Share2, ChevronRight, X, MapPin, Truck, RotateCcw, IndianRupee
 } from 'lucide-react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import useAccountStore from '../../store/useAccountStore';
 
 // Import Assets
@@ -11,6 +11,12 @@ import PlumShampoo from '../../assets/Cards/plum_shampoo.png';
 import FashionHero from '../../assets/Cards/fashion_hero.png';
 import LorealShampoo from '../../assets/Cards/loreal_shampoo.png';
 import EarbudsDeal from '../../assets/Cards/earbuds_deal.png';
+import Tshirt from '../../assets/products/tshirt.png';
+import FlipFlops from '../../assets/products/flip_flops.png';
+import Suitcase from '../../assets/products/suitcase.png';
+import Balloons from '../../assets/products/balloons.png';
+import SplitAC from '../../assets/products/split_ac.png';
+import TowerFan from '../../assets/products/tower_fan.png';
 
 const ProductDetail = () => {
   const location = useLocation();
@@ -32,6 +38,8 @@ const ProductDetail = () => {
   const [activeDetailTab, setActiveDetailTab] = useState('Specifications');
   const [activePaymentTab, setActivePaymentTab] = useState('COD');
   const [touchStart, setTouchStart] = useState(0);
+  const [cartCount, setCartCount] = useState(0);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const handleTouchStart = (e) => setTouchStart(e.targetTouches[0].clientY);
   const handleTouchMove = (e, setExpanded, isExpanded) => {
@@ -82,6 +90,16 @@ const ProductDetail = () => {
     window.scrollTo(0, 0);
     // Check if product is in wishlist using global store
     setIsWishlisted(wishlist.some(item => item.id === product.id));
+
+    // Update cart count
+    const updateCount = () => {
+      const cart = JSON.parse(localStorage.getItem('userCart') || '[]');
+      const total = cart.reduce((acc, item) => acc + (item.qty || 1), 0);
+      setCartCount(total);
+    };
+    updateCount();
+    window.addEventListener('cartUpdated', updateCount);
+    return () => window.removeEventListener('cartUpdated', updateCount);
   }, [product, wishlist]);
 
   const handleScroll = (e) => {
@@ -105,13 +123,17 @@ const ProductDetail = () => {
 
   const handleAddToCart = useCallback(() => {
     const cart = JSON.parse(localStorage.getItem('userCart') || '[]');
-    cart.push({ ...product, cartId: Date.now() });
+    cart.push({ ...product, cartId: Date.now(), qty: 1 });
     localStorage.setItem('userCart', JSON.stringify(cart));
     window.dispatchEvent(new Event('cartUpdated'));
     setToastMessage('Added to cart');
     setShowToast(true);
     setTimeout(() => setShowToast(false), 2000);
   }, [product]);
+
+  const handleBuyNow = useCallback(() => {
+    navigate('/vendor/checkout', { state: { product } });
+  }, [product, navigate]);
 
   return (
     <div className="bg-white min-h-screen pb-20 font-sans text-slate-900">
@@ -126,13 +148,25 @@ const ProductDetail = () => {
             type="text" 
             placeholder="Search for products" 
             className="bg-transparent outline-none text-[13px] w-full placeholder:text-gray-400 font-medium"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && searchQuery.trim()) {
+                navigate(`/vendor/search?q=${encodeURIComponent(searchQuery)}`);
+              }
+            }}
           />
         </div>
-        <div className="relative p-1">
+        <div 
+          onClick={() => navigate('/vendor/cart')} 
+          className="relative p-1 active:scale-95 transition-transform cursor-pointer"
+        >
           <ShoppingCart size={22} className="text-slate-800" />
-          <span className="absolute -top-0.5 -right-0.5 bg-[#cc0c39] text-white text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center border border-white leading-none">
-            9
-          </span>
+          {cartCount > 0 && (
+            <span className="absolute -top-0.5 -right-0.5 bg-[#cc0c39] text-white text-[9px] font-black w-4.5 h-4.5 rounded-full flex items-center justify-center border border-white leading-none">
+              {cartCount}
+            </span>
+          )}
         </div>
       </div>
 
@@ -335,9 +369,9 @@ const ProductDetail = () => {
         </div>
         <div className="flex gap-6 px-3 overflow-x-auto no-scrollbar pb-4">
           {[
-            { img: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&q=80&w=400', name: 'Checked Cotton Shirt', brand: 'Fashion Hub', price: 899, oldPrice: 1999 },
-            { img: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&q=80&w=400', name: 'Oversized Linen Shirt', brand: 'Drasert', price: 1299, oldPrice: 2499 },
-            { img: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&q=80&w=400', name: 'Premium Oxford Shirt', brand: 'Lounge Dreams', price: 1599, oldPrice: 2999 }
+            { img: Tshirt, name: 'Checked Cotton Shirt', brand: 'Fashion Hub', price: 899, oldPrice: 1999 },
+            { img: FlipFlops, name: 'Casual Flip Flops', brand: 'Drasert', price: 1299, oldPrice: 2499 },
+            { img: Suitcase, name: 'Premium Suitcase', brand: 'Lounge Dreams', price: 1599, oldPrice: 2999 }
           ].map((item, idx) => (
             <div 
               key={idx} 
@@ -483,17 +517,18 @@ const ProductDetail = () => {
       <div className="py-6 mb-12">
         <div className="flex justify-between items-center px-3 mb-5">
           <h3 className="text-[18px] font-bold text-slate-900">Bought Together</h3>
-          <button className="w-8 h-8 bg-slate-900 rounded-full flex items-center justify-center text-white">
+          <button 
+            onClick={() => navigate('/vendor/all-offers')}
+            className="w-8 h-8 bg-slate-900 rounded-full flex items-center justify-center text-white active:scale-90 transition-transform"
+          >
             <ChevronRight size={20} />
           </button>
         </div>
         <div className="flex gap-6 px-3 overflow-x-auto no-scrollbar pb-6">
           {[
-            { img: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&q=80&w=400', name: 'Cotton Summer Top', brand: 'Fashion Hub', price: '499', oldPrice: '1299' },
-            { img: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&q=80&w=400', name: 'Classic Black Tee', brand: 'Drasert', price: '399', oldPrice: '999' },
-            { img: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&q=80&w=400', name: 'Premium White Tee', brand: 'Lounge Dreams', price: '449', oldPrice: '1199' },
-            { img: 'https://images.unsplash.com/photo-1581655353564-df123a1eb820?auto=format&fit=crop&q=80&w=400', name: 'Heather Grey Tee', brand: 'Fashion Hub', price: '349', oldPrice: '899' },
-            { img: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&q=80&w=400', name: 'Graphic Urban Tee', brand: 'Drasert', price: '599', oldPrice: '1499' }
+            { img: Balloons, name: 'Party Pack', price: 299, oldPrice: 599 },
+            { img: SplitAC, name: 'Samsung AC', price: 34999, oldPrice: 45999 },
+            { img: TowerFan, name: 'Tower Fan', price: 2499, oldPrice: 4999 }
           ].map((item, i) => (
             <div 
               key={i} 
@@ -844,9 +879,25 @@ const ProductDetail = () => {
         </div>
       )}
 
+      {/* Sticky Bottom Action Bar */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-3 py-3 flex gap-3 z-50 shadow-[0_-10px_20px_rgba(0,0,0,0.05)]">
+        <button 
+          onClick={handleAddToCart}
+          className="flex-1 bg-white border border-gray-200 text-slate-800 font-bold py-3.5 rounded-sm active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+        >
+          Add to cart
+        </button>
+        <button 
+          onClick={handleBuyNow}
+          className="flex-1 bg-[#ffc107] text-slate-900 font-black py-3.5 rounded-sm active:scale-[0.98] transition-all flex items-center justify-center"
+        >
+          Buy at ₹{product.price}
+        </button>
+      </div>
+
       {/* Toast Notification */}
       {showToast && (
-        <div className="fixed bottom-20 left-1/2 -translate-x-1/2 z-[200] bg-slate-900 text-white px-6 py-2.5 rounded-none text-[13px] font-bold shadow-2xl">
+        <div className="fixed bottom-24 left-1/2 -translate-x-1/2 z-[2000] bg-slate-900 text-white px-6 py-3 rounded-sm text-[14px] font-bold shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-300">
           {toastMessage}
         </div>
       )}

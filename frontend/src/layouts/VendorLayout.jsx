@@ -27,7 +27,8 @@ import {
   Gem,
   Coins,
   Pencil,
-  Shirt
+  Shirt,
+  LayoutGrid
 } from 'lucide-react';
 
 import MainSidebar from '../components/common/MainSidebar';
@@ -64,7 +65,10 @@ const VendorLayout = () => {
     };
   }, []);
 
-  const isImmersivePage = location.pathname.includes('category-products') || location.pathname.includes('product-detail') || location.pathname.includes('continue-shopping') || location.pathname.includes('all-offers') || location.pathname.includes('cart') || location.pathname.includes('/vendor/profile') || location.pathname.includes('/vendor/deals') || location.pathname.includes('/vendor/search') || location.pathname.includes('wishlist');
+  const isImmersivePage = location.pathname.includes('categories') || location.pathname.includes('category-products') || location.pathname.includes('product-detail') || location.pathname.includes('continue-shopping') || location.pathname.includes('all-offers') || location.pathname.includes('cart') || location.pathname.includes('/vendor/profile') || location.pathname.includes('/vendor/deals') || location.pathname.includes('/vendor/search') || location.pathname.includes('wishlist');
+
+  const hideHeader = isImmersivePage;
+  const hideFooter = isImmersivePage && !location.pathname.includes('all-offers');
 
 
   return (
@@ -73,7 +77,7 @@ const VendorLayout = () => {
       <MainSidebar isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} />
 
       {/* Flipkart-Style Sticky Header */}
-      {!isImmersivePage && (
+      {!hideHeader && (
         <header className="sticky top-0 z-50 bg-[#2874f0] shadow-md px-3 pt-2 pb-0" style={{ fontFamily: "'Nunito', sans-serif" }}>
           {/* Row 1: Logo & Icons */}
           <div className="flex justify-between items-center mb-1.5">
@@ -205,20 +209,20 @@ const VendorLayout = () => {
       </div>
 
       {/* Mobile-First Bottom Navbar (Fixed) */}
-      {!isImmersivePage && (
+      {!hideFooter && (
         <nav className={`md:hidden fixed bottom-0 left-0 right-0 border-t px-6 py-2 flex justify-between items-center z-50 transition-colors duration-300 ${isDarkMode ? 'bg-black border-[var(--color-gold)]/20 text-[var(--color-gold)] shadow-[0_-2px_20px_rgba(212,175,55,0.1)]' : 'bg-white border-gray-200 text-slate-900 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]'}`}>
         <Link to="/vendor/home" className={`flex flex-col items-center transition-transform active:scale-90`}>
           <HomeIcon size={22} strokeWidth={1.5} />
           <span className={`text-[10px] ${location.pathname === '/vendor/home' ? 'font-black' : 'font-medium'}`}>Home</span>
           {location.pathname === '/vendor/home' && <div className="w-1 h-1 bg-current rounded-full mt-0.5 animate-pulse" />}
         </Link>
-        <button 
-          onClick={() => setIsDrawerOpen(true)}
-          className="flex flex-col items-center transition-transform active:scale-90"
+        <Link 
+          to="/vendor/categories"
+          className={`flex flex-col items-center transition-transform active:scale-90 ${location.pathname === '/vendor/categories' ? 'text-[#2874f0]' : ''}`}
         >
-          <Menu size={22} strokeWidth={1.5} />
-          <span className="text-[10px] font-medium">Menu</span>
-        </button>
+          <LayoutGrid size={22} strokeWidth={1.5} />
+          <span className={`text-[10px] ${location.pathname === '/vendor/categories' ? 'font-black' : 'font-medium'}`}>Categories</span>
+        </Link>
         <Link to="/vendor/cart" className={`flex flex-col items-center transition-transform active:scale-90`}>
           <div className="relative">
             <ShoppingCart size={22} strokeWidth={1.5} />

@@ -30,7 +30,10 @@ const TopSelection = ({ items }) => {
           <h2 className="text-[18px] font-black text-white" style={{ fontFamily: "'Nunito', sans-serif" }}>
             Top Selection
           </h2>
-          <button className="bg-white text-black p-1.5 rounded-none shadow-md active:scale-90 transition-all flex items-center justify-center">
+          <button 
+            onClick={() => navigate('/vendor/all-offers')}
+            className="bg-white text-black p-1.5 rounded-none shadow-md active:scale-90 transition-all flex items-center justify-center"
+          >
             <ChevronRight size={16} strokeWidth={4} />
           </button>
         </div>

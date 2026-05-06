@@ -34,6 +34,9 @@ import StationeryTab from '../../assets/products/stationaryFinal.png';
 import ClothesImg from '../../assets/Carousel/clths-removebg-preview.png';
 import LipstickDeal from '../../assets/Cards/lipstick_deal.png';
 import Suitcase from '../../assets/products/suitcase.png';
+import BannerImg from '../../assets/Banner.jpeg';
+import CardImg from '../../assets/products/card.png';
+import FashionTabImg from '../../assets/fashion_tab_img.png';
 
 import useVendorStore from '../../store/useVendorStore';
 
@@ -44,37 +47,34 @@ const Home = () => {
 
   const categoryBanners = useMemo(() => ({
     'Home': [
-      { id: 1, image: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&q=80&w=1000', title: 'Summer Sale' },
-      { id: 2, image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1000', title: 'New Arrivals' },
-      { id: 3, image: 'https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&q=80&w=1000', title: 'Electronics Deal' },
-      { id: 4, image: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&q=80&w=1000', title: 'Grocery Offers' }
+      { id: 1, image: BannerImg, title: 'Summer Sale' },
+      { id: 2, image: FashionTabImg, title: 'New Arrivals' },
+      { id: 3, image: CardImg, title: 'Electronics Deal' },
+      { id: 4, image: BannerImg, title: 'Grocery Offers' }
     ],
     'Toys': [
-      { id: 1, image: 'https://images.unsplash.com/photo-1532330384785-f72436894000?auto=format&fit=crop&q=80&w=1000', title: 'Toy World' },
-      { id: 2, image: 'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&q=80&w=1000', title: 'LEGO Sale' },
-      { id: 3, image: 'https://images.unsplash.com/photo-1566576661366-747895316999?auto=format&fit=crop&q=80&w=1000', title: 'Action Figures' }
+      { id: 1, image: BannerImg, title: 'Toy World' },
+      { id: 2, image: FashionTabImg, title: 'LEGO Sale' }
     ],
     'Beauty': [
-      { id: 1, image: 'https://images.unsplash.com/photo-1596462502278-27bfdc4033c8?auto=format&fit=crop&q=80&w=1000', title: 'Skin Care' },
-      { id: 2, image: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&q=80&w=1000', title: 'Makeup Kits' },
-      { id: 3, image: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&q=80&w=1000', title: 'Perfume' }
+      { id: 1, image: BannerImg, title: 'Skin Care' },
+      { id: 2, image: FashionTabImg, title: 'Makeup Kits' }
     ],
     'Art. Jewellery': [
-      { id: 1, image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=1000', title: 'Designer Sets' },
-      { id: 2, image: 'https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&q=80&w=1000', title: 'Modern Jewellery' }
+      { id: 1, image: FashionTabImg, title: 'Designer Sets' },
+      { id: 2, image: BannerImg, title: 'Modern Jewellery' }
     ],
     '1g Gold': [
-      { id: 1, image: 'https://images.unsplash.com/photo-1610992015732-2449b0c26670?auto=format&fit=crop&q=80&w=1000', title: '1g Gold Coins' },
-      { id: 2, image: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&q=80&w=1000', title: 'Gold Chains' }
+      { id: 1, image: BannerImg, title: '1g Gold Coins' },
+      { id: 2, image: FashionTabImg, title: 'Gold Chains' }
     ],
     'Cosmetics': [
-      { id: 1, image: 'https://images.unsplash.com/photo-1527799822394-4d1005f9630c?auto=format&fit=crop&q=80&w=1000', title: 'Premium Cosmetics' },
-      { id: 2, image: 'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&q=80&w=1000', title: 'Glow Up Sale' }
+      { id: 1, image: FashionTabImg, title: 'Premium Cosmetics' },
+      { id: 2, image: BannerImg, title: 'Glow Up Sale' }
     ],
     'Fashion': [
-      { id: 1, image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=1000', title: 'Premium Fashion' },
-      { id: 2, image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=1000', title: 'Summer Collection' },
-      { id: 3, image: 'https://images.unsplash.com/photo-1539109132381-31a193636533?auto=format&fit=crop&q=80&w=1000', title: 'Kids Wear' }
+      { id: 1, image: BannerImg, title: 'Premium Fashion' },
+      { id: 2, image: FashionTabImg, title: 'Summer Collection' }
     ]
   }), []);
 
@@ -94,16 +94,16 @@ const Home = () => {
     brandsSpotlight: [
       { title: 'Flat 73% off', sub: 'Limited time deal', img: EarbudsDeal },
       { title: 'Shop now', sub: 'Blend easily', img: MakeupHero },
-      { title: 'Coming to India', sub: 'CMF Watch 3 Pro', img: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=200&h=200' },
-      { title: 'Just ₹599', sub: 'Lowest price ever', img: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=200&h=200' },
-      { title: 'From ₹1,099', sub: 'Track your health', img: 'https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?auto=format&fit=crop&q=80&w=200&h=200' },
-      { title: 'Spl.price ₹899', sub: 'Sale price live', img: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&q=80&w=200&h=200' }
+      { title: 'Coming to India', sub: 'CMF Watch 3 Pro', img: EarbudsDeal },
+      { title: 'Just ₹599', sub: 'Lowest price ever', img: PlumShampoo },
+      { title: 'From ₹1,099', sub: 'Track your health', img: LorealShampoo },
+      { title: 'Spl.price ₹899', sub: 'Sale price live', img: LipGloss }
     ],
     bestQuality: [
       { name: "GUTI Women's Jeans", tag: 'Grab Or Gone', img: FashionHero },
       { name: "Mandarin Women's Shirts", tag: 'Popular', img: ClothesImg },
       { name: 'Royatto Necklaces', tag: 'Popular', img: JewelleryImg },
-      { name: "Sqew Women's Trousers", tag: 'In Focus Now', img: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&q=80&w=300&h=400' }
+      { name: "Sqew Women's Trousers", tag: 'In Focus Now', img: FashionHero }
     ],
     keepShopping: [
       { label: 'Suitcases', img: Suitcase },
@@ -125,8 +125,12 @@ const Home = () => {
   }), []);
 
   const handleTabClick = useCallback((label) => {
-    setActiveTab(label);
-  }, []);
+    if (label === 'Toys') {
+      navigate('/vendor/toys');
+    } else {
+      setActiveTab(label);
+    }
+  }, [navigate]);
 
   return (
     <div 

@@ -30,7 +30,10 @@ const BestQuality = ({ items }) => {
           <h2 className="text-[19px] font-black text-white" style={{ fontFamily: "'Nunito', sans-serif" }}>
             Best quality
           </h2>
-          <button className="bg-white text-black p-2 rounded-none shadow-lg active:scale-90 transition-all">
+          <button 
+            onClick={() => navigate('/vendor/all-offers')}
+            className="bg-white text-black p-2 rounded-none shadow-lg active:scale-90 transition-all"
+          >
             <ChevronRight size={20} strokeWidth={3} />
           </button>
         </div>

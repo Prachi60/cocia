@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { ShoppingCart, ChevronRight, CheckCircle, Info, Trash2, ArrowLeft, ShieldCheck } from 'lucide-react';
+import { 
+  ShoppingCart, ChevronRight, CheckCircle, Info, Trash2, 
+  ArrowLeft, ShieldCheck, MapPin, Truck, Star, Heart, Zap, X
+} from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Cart = () => {
@@ -35,129 +38,221 @@ const Cart = () => {
     window.dispatchEvent(new Event('cartUpdated'));
   };
 
+  const handleSetQuantity = (cartId, qty) => {
+    const updated = cartItems.map(item => {
+      if (item.cartId === cartId) {
+        return { ...item, qty: parseInt(qty) };
+      }
+      return item;
+    });
+    setCartItems(updated);
+    localStorage.setItem('userCart', JSON.stringify(updated));
+    window.dispatchEvent(new Event('cartUpdated'));
+  };
+
   const totalPrice = cartItems.reduce((acc, item) => {
     const priceStr = String(item.price || '0').replace(/,/g, '');
     return acc + (Number(priceStr) || 0) * (item.qty || 1);
   }, 0);
 
-  const formattedTotal = totalPrice.toLocaleString('en-IN');
+  const totalOldPrice = cartItems.reduce((acc, item) => {
+    const priceStr = String(item.oldPrice || '0').replace(/,/g, '');
+    return acc + (Number(priceStr) || 0) * (item.qty || 1);
+  }, 0);
+
+  const savings = totalOldPrice - totalPrice;
 
   return (
-    <div className="bg-[var(--card-bg)] min-h-screen text-[var(--card-text)] transition-colors duration-300 pb-24">
-      {/* Header */}
-      <div className="sticky top-0 z-[100] bg-[var(--card-bg)]/90 backdrop-blur-md border-b border-[var(--card-border)] px-4 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <button onClick={() => navigate(-1)} className="text-[var(--card-text)] hover:text-[var(--color-gold)] transition-colors">
-            <ArrowLeft size={24} />
-          </button>
-          <h1 className="text-lg font-black tracking-widest uppercase text-[var(--color-gold)]">Shopping Cart</h1>
-        </div>
-        <div className="relative">
-          <ShoppingCart size={20} className="text-[var(--card-text)]" />
-          <span className="absolute -top-1.5 -right-1.5 bg-[var(--color-gold)] text-black text-[9px] font-black w-4.5 h-4.5 rounded-full flex items-center justify-center">
-            {cartItems.reduce((acc, item) => acc + (item.qty || item.quantity || 1), 0)}
-          </span>
-        </div>
+    <div className="bg-gray-100 min-h-screen pb-32 font-sans">
+      {/* Top Header */}
+      <div className="sticky top-0 z-[100] bg-[#2874f0] text-white px-4 py-3.5 flex items-center gap-4 shadow-md">
+        <button onClick={() => navigate(-1)} className="active:scale-95 transition-transform">
+          <ArrowLeft size={24} />
+        </button>
+        <h1 className="text-[18px] font-medium">My Cart</h1>
       </div>
 
-      <div className="container mx-auto px-4 pt-6">
+      {/* Delivery Address Section */}
+      <div className="bg-white px-4 py-3 flex items-start justify-between border-b border-gray-100 shadow-sm">
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 mb-0.5">
+            <span className="text-[13px] text-gray-800">Deliver to: <span className="font-bold">Mukesh Jino... , 450116</span></span>
+            <span className="text-[9px] bg-gray-100 text-gray-500 px-1.5 py-0.5 font-bold uppercase tracking-wider rounded-sm">Home</span>
+          </div>
+          <p className="text-[12px] text-gray-500 truncate">83 kishan pura mataji mandir, sector no. 5 new ...</p>
+        </div>
+        <button className="text-[#2874f0] text-[13px] font-bold border border-gray-200 px-4 py-1.5 rounded-sm active:bg-gray-50">
+          Change
+        </button>
+      </div>
+
+      {/* Cart Items */}
+      <div className="mt-2 space-y-2">
         {cartItems.length === 0 ? (
-          <div className="text-center py-20 flex flex-col items-center justify-center">
-            <div className="w-24 h-24 bg-[var(--card-border)]/30 rounded-full flex items-center justify-center mb-6 border border-[var(--card-border)]">
-              <ShoppingCart size={40} className="text-[var(--color-gold)] opacity-50" />
+          <div className="bg-white text-center py-20 px-6">
+            <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
+              <ShoppingCart size={32} className="text-gray-300" />
             </div>
-            <h2 className="text-xl font-black uppercase tracking-widest mb-2">Your Cart is Empty</h2>
-            <p className="text-sm text-[var(--card-sub)] mb-8">Looks like you haven't added anything yet.</p>
-            <Link to="/vendor/home" className="bg-[var(--color-gold)] text-black px-8 py-3 rounded-xl font-black uppercase tracking-widest text-xs hover:brightness-110 transition-all shadow-[0_0_20px_rgba(226,167,80,0.2)]">
-              Start Shopping
+            <h2 className="text-[16px] font-bold text-slate-800 mb-1">Your cart is empty!</h2>
+            <p className="text-[13px] text-gray-500 mb-6">Add items to it now.</p>
+            <Link to="/vendor/home" className="bg-[#2874f0] text-white px-8 py-2.5 rounded-sm font-bold text-[14px]">
+              Shop now
             </Link>
           </div>
         ) : (
-          <div className="lg:flex gap-8 items-start">
-            {/* Cart Items List */}
-            <div className="lg:w-[60%] space-y-4">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-black text-[var(--card-sub)] uppercase tracking-widest">{cartItems.length} Items Selected</span>
-                <button onClick={() => { setCartItems([]); localStorage.setItem('userCart', '[]'); window.dispatchEvent(new Event('cartUpdated')); }} className="text-red-400 hover:text-red-500 text-xs font-black uppercase tracking-widest flex items-center gap-1 transition-colors">
-                  <Trash2 size={14}/> Clear Cart
-                </button>
-              </div>
-
-              {cartItems.map((item) => (
-                <div key={item.cartId} className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl p-4 flex gap-4 relative overflow-hidden group shadow-sm hover:border-[var(--color-gold)]/30 transition-colors">
-                  <div className="w-28 h-28 bg-[var(--card-border)]/30 rounded-xl p-2 flex-shrink-0 border border-[var(--card-border)]">
-                      <img src={item.image} alt={item.name} className="w-full h-full object-cover rounded-lg group-hover:scale-105 transition-transform duration-500 product-img-blend" />
+          <>
+            {cartItems.map((item) => (
+              <div key={item.cartId} className="bg-white shadow-sm">
+                {/* Product Info */}
+                <div className="p-4 flex gap-4">
+                  <div className="flex flex-col items-center gap-3">
+                    <div className="w-20 h-20 border border-gray-100 rounded-sm p-1 flex items-center justify-center bg-white">
+                      <img src={item.image} alt={item.name} className="w-full h-full object-contain mix-blend-multiply" />
+                    </div>
+                    {/* Qty Dropdown */}
+                    <div className="relative">
+                      <select 
+                        value={item.qty || 1}
+                        onChange={(e) => handleSetQuantity(item.cartId, e.target.value)}
+                        className="appearance-none border border-gray-200 rounded-sm pl-2 pr-6 py-1 text-[12px] font-bold bg-white focus:outline-none cursor-pointer"
+                      >
+                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => (
+                          <option key={n} value={n}>Qty: {n}</option>
+                        ))}
+                      </select>
+                      <ChevronRight size={14} className="absolute right-1.5 top-1/2 -translate-y-1/2 rotate-90 text-gray-400 pointer-events-none" />
+                    </div>
                   </div>
-                  <div className="flex-1 flex flex-col justify-between">
-                      <div>
-                        <div className="flex justify-between items-start gap-2">
-                          <h3 className="text-sm font-bold line-clamp-2 text-[var(--card-text)] leading-tight">{item.name}</h3>
-                          <button onClick={() => handleRemove(item.cartId)} className="text-red-400 p-1.5 hover:bg-red-500/10 rounded-lg transition-colors flex-shrink-0">
-                            <Trash2 size={16}/>
-                          </button>
-                        </div>
-                        <span className="text-[10px] font-black text-[var(--color-gold)] uppercase tracking-widest mt-1 block">{item.brand || 'PREMIUM'}</span>
+                  
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-[14px] text-slate-800 font-medium line-clamp-1 mb-0.5">{item.name}</h3>
+                    <p className="text-[11px] text-gray-400 mb-2 uppercase">{item.brand || 'Premium Quality'}</p>
+                    
+                    {/* Rating */}
+                    <div className="flex items-center gap-1.5 mb-2">
+                      <div className="flex items-center bg-green-700 text-white px-1 py-0.5 rounded-sm text-[10px] font-bold">
+                        <span>4.5</span>
+                        <Star size={8} fill="white" className="ml-0.5" />
                       </div>
-                      
-                      <div className="flex items-end justify-between mt-3">
-                        <div className="flex flex-col">
-                          <span className="text-xs text-[var(--card-sub)] line-through italic">₹{item.oldPrice || '0'}</span>
-                          <span className="text-lg font-black text-[var(--card-text)] tracking-tight">₹{item.price}</span>
-                        </div>
-                        
-                        <div className="border border-[var(--card-border)] rounded-lg flex items-center bg-[var(--card-bg)] overflow-hidden shadow-inner">
-                          <button onClick={() => updateQuantity(item.cartId, -1)} className="px-3 py-1.5 text-[var(--card-sub)] hover:text-[var(--color-gold)] hover:bg-[var(--card-border)] transition-colors">-</button>
-                          <span className="px-3 py-1.5 text-xs font-black border-x border-[var(--card-border)]">{item.qty || 1}</span>
-                          <button onClick={() => updateQuantity(item.cartId, 1)} className="px-3 py-1.5 text-[var(--card-sub)] hover:text-[var(--color-gold)] hover:bg-[var(--card-border)] transition-colors">+</button>
-                        </div>
+                      <span className="text-[11px] text-gray-400 font-medium">(5,960)</span>
+                      <img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/fa_62673a.png" alt="assured" className="h-3.5 ml-1" />
+                    </div>
+
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <span className="text-[14px] font-bold text-green-700">↓ 52%</span>
+                      <span className="text-[13px] text-gray-400 line-through">₹{item.oldPrice || '1,299'}</span>
+                      <span className="text-[16px] font-bold text-slate-900">₹{item.price}</span>
+                    </div>
+
+                    <div className="flex flex-col gap-1">
+                      <div className="flex items-center gap-1">
+                        <span className="text-[#2874f0] italic font-black text-[12px]">WOW!</span>
+                        <span className="text-[12px] text-[#2874f0] font-bold">Buy at ₹{Math.floor(item.price * 0.92)}</span>
                       </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Checkout Summary */}
-            <div className="lg:w-[40%] mt-8 lg:mt-0 lg:sticky lg:top-[80px]">
-              <div className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl p-6 shadow-sm">
-                <h2 className="text-sm font-black text-[var(--color-gold)] uppercase tracking-widest mb-6">Order Summary</h2>
-                
-                <div className="space-y-4 text-sm mb-6 pb-6 border-b border-[var(--card-border)]">
-                  <div className="flex justify-between">
-                    <span className="text-[var(--card-sub)]">Subtotal ({cartItems.length} items)</span>
-                    <span className="font-bold text-[var(--card-text)]">₹{formattedTotal}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-[var(--card-sub)]">Shipping Fee</span>
-                    <span className="font-bold text-green-500">FREE</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-[var(--card-sub)]">Platform Fee</span>
-                    <span className="font-bold text-[var(--card-text)]">₹10</span>
+                      <p className="text-[11px] text-gray-500 font-medium">+ ₹19 Protect Promise Fee <Info size={10} className="inline ml-0.5" /></p>
+                      <div className="flex items-center gap-1 mt-0.5">
+                        <span className="text-[11px] text-gray-800">Or Pay ₹{Math.floor(item.price * 0.85)} +</span>
+                        <div className="flex items-center bg-yellow-400 rounded-full px-1 py-0.5">
+                          <Zap size={8} fill="white" className="text-white" />
+                        </div>
+                        <span className="text-[11px] font-bold text-slate-800">23</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <div className="flex justify-between items-end mb-8">
-                  <span className="text-sm font-bold text-[var(--card-text)] uppercase tracking-wider">Total</span>
-                  <div className="text-right">
-                    <span className="text-[10px] text-[var(--card-sub)] block mb-1">Including GST</span>
-                    <span className="text-2xl font-black text-[var(--color-gold)] tracking-tight">₹{(totalPrice + 10).toLocaleString('en-IN')}</span>
+                <div className="px-4 pb-4">
+                   <div className="flex items-center gap-2 py-3 border-t border-gray-50">
+                    <Truck size={16} className="text-gray-400" />
+                    <p className="text-[12px] text-gray-800"><span className="italic font-black text-[10px] uppercase tracking-tighter mr-1">Express</span> Delivery in 2 days, Fri</p>
                   </div>
                 </div>
 
-                <button 
-                  onClick={() => navigate('/vendor/checkout')}
-                  className="w-full bg-[var(--color-gold)] text-black py-4 rounded-xl font-black uppercase tracking-widest text-xs hover:brightness-110 transition-all shadow-[0_0_20px_rgba(226,167,80,0.2)] flex items-center justify-center gap-2"
-                >
-                  Proceed to Checkout <ChevronRight size={16} />
-                </button>
-
-                <div className="mt-6 flex items-center justify-center gap-2 text-[10px] text-[var(--card-sub)] font-bold uppercase tracking-widest">
-                  <ShieldCheck size={14} className="text-green-500" /> Safe & Secure Payments
+                {/* Actions */}
+                <div className="flex border-t border-gray-100">
+                  <button 
+                    onClick={() => handleRemove(item.cartId)}
+                    className="flex-1 py-3.5 flex items-center justify-center gap-2 text-[13px] font-medium text-gray-600 active:bg-gray-50 border-r border-gray-100"
+                  >
+                    <Trash2 size={16} className="text-gray-400" /> Remove
+                  </button>
+                  <button className="flex-1 py-3.5 flex items-center justify-center gap-2 text-[13px] font-medium text-gray-600 active:bg-gray-50 border-r border-gray-100">
+                    <Heart size={16} className="text-gray-400" /> Save for later
+                  </button>
+                  <button className="flex-1 py-3.5 flex items-center justify-center gap-2 text-[13px] font-medium text-gray-600 active:bg-gray-50">
+                    <Zap size={16} className="text-gray-400" /> Buy this now
+                  </button>
                 </div>
               </div>
+            ))}
+
+            {/* Price Details Section */}
+            <div className="bg-white mt-2 p-4 pb-8 shadow-sm">
+              <h2 className="text-[14px] font-bold text-gray-500 uppercase tracking-tight mb-4">Price Details</h2>
+              <div className="space-y-4 text-[14px]">
+                <div className="flex justify-between">
+                  <span className="text-slate-700">Price ({cartItems.length} items)</span>
+                  <span className="text-slate-800">₹{totalOldPrice.toLocaleString('en-IN')}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-700">Discount</span>
+                  <span className="text-green-700">- ₹{savings.toLocaleString('en-IN')}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-700">Delivery Charges</span>
+                  <span className="text-green-700 font-medium">FREE Delivery</span>
+                </div>
+                <div className="flex justify-between pt-4 border-t border-dashed border-gray-200">
+                  <span className="text-[16px] font-bold text-slate-900">Total Amount</span>
+                  <span className="text-[16px] font-bold text-slate-900">₹{(totalPrice).toLocaleString('en-IN')}</span>
+                </div>
+              </div>
+              <div className="mt-4 pt-4 border-t border-gray-50">
+                <p className="text-[14px] font-bold text-green-700">You will save ₹{savings.toLocaleString('en-IN')} on this order</p>
+              </div>
             </div>
-          </div>
+          </>
         )}
+      </div>
+
+      {/* Fixed Bottom Action Bar */}
+      {cartItems.length > 0 && (
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 z-[200] shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
+          {/* Savings Banner */}
+          <div className="bg-[#f1f9f5] px-4 py-2 flex items-center gap-2 border-b border-[#e6f3ec]">
+             <div className="bg-green-600 rounded-full p-0.5 flex items-center justify-center">
+                <CheckCircle size={10} className="text-white" />
+             </div>
+             <p className="text-[11px] font-medium text-green-800">You'll save ₹{savings.toLocaleString('en-IN')} on this order!</p>
+          </div>
+          
+          <div className="px-4 py-2.5 flex items-center justify-between">
+            <div className="flex flex-col">
+               <span className="text-[12px] text-gray-400 line-through">₹{totalOldPrice.toLocaleString('en-IN')}</span>
+               <div className="flex items-center gap-1">
+                <span className="text-[18px] font-black text-slate-900">₹{totalPrice.toLocaleString('en-IN')}</span>
+                <Info size={14} className="text-gray-400" />
+               </div>
+            </div>
+            <button 
+              onClick={() => navigate('/vendor/checkout')}
+              className="bg-[#fb641b] text-white px-10 py-3 rounded-sm font-black uppercase text-[14px] shadow-lg active:scale-95 transition-transform"
+            >
+              Place Order
+            </button>
+          </div>
+        </div>
+      )}
+      
+      {/* Safe Payments Footer */}
+      <div className="mt-6 px-6 py-8 flex flex-col items-center gap-4 text-gray-400">
+         <div className="flex items-center gap-2">
+            <ShieldCheck size={20} />
+            <span className="text-[12px] font-bold uppercase tracking-widest">100% Safe and Secure Payments</span>
+         </div>
+         <p className="text-[10px] text-center leading-relaxed">
+           Cocia Trust Pay. 100% Payment Protection. Easy Returns.
+         </p>
       </div>
     </div>
   );
