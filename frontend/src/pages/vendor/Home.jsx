@@ -129,7 +129,16 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="bg-[var(--card-bg)] min-h-screen pb-4 overflow-x-hidden">
+    <div 
+      className="bg-[var(--card-bg)] min-h-screen pb-4 overflow-x-hidden"
+      style={{ 
+        WebkitBackfaceVisibility: 'hidden',
+        backfaceVisibility: 'hidden',
+        transform: 'translate3d(0,0,0)',
+        WebkitTransform: 'translate3d(0,0,0)',
+        contain: 'layout style'
+      }}
+    >
       {/* 🔴 REDESIGNED PROMOTIONAL AREA */}
       <div className="flex flex-col bg-[#2874f0]">
         {selectedCategory === 'Home' && <SaleBanner />}

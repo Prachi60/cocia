@@ -4,8 +4,8 @@ const StillLookingSection = ({ items }) => {
   return (
     <div className="px-3 mt-4">
       <div className="bg-[#2874f0] rounded-2xl p-4 shadow-sm border border-white/20 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ 
-          backgroundImage: 'repeating-conic-gradient(#fff 0% 25%, transparent 0% 50%)', 
+        <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ 
+          backgroundImage: 'linear-gradient(45deg, #fff 25%, transparent 25%, transparent 50%, #fff 50%, #fff 75%, transparent 75%, transparent)', 
           backgroundSize: '40px 40px' 
         }}></div>
         <h2 className="relative z-10 text-[17px] font-black text-white mb-4" style={{ fontFamily: "'Nunito', sans-serif" }}>
