@@ -1,7 +1,28 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { ChevronRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const TopSelection = ({ items }) => {
+  const navigate = useNavigate();
+
+  const handleProductClick = useCallback((product) => {
+    navigate('/vendor/product-detail', { 
+      state: { 
+        product: { 
+          id: Math.random().toString(36).substr(2, 9),
+          name: product.name,
+          brand: 'Top Selection',
+          price: 999,
+          oldPrice: 1999,
+          discount: '50% off',
+          rating: 4.8,
+          image: product.img,
+          label: 'Top Selection'
+        } 
+      } 
+    });
+  }, [navigate]);
+
   return (
     <div className="px-3 mt-6">
       <div className="bg-[#ff0000] rounded-[28px] p-3.5 shadow-lg border border-white/10">
@@ -17,7 +38,11 @@ const TopSelection = ({ items }) => {
         <div className="bg-white rounded-[20px] p-2.5">
           <div className="grid grid-cols-2 gap-x-3 gap-y-4">
             {items.map((product, idx) => (
-              <div key={idx} className="flex flex-col gap-1.5 group cursor-pointer transition-all">
+              <div 
+                key={idx} 
+                onClick={() => handleProductClick(product)}
+                className="flex flex-col gap-1.5 group cursor-pointer transition-all active:scale-95"
+              >
                 <div className="aspect-square rounded-none overflow-hidden bg-[#F5F5F5] flex items-center justify-center p-1.5">
                   <img 
                     src={product.img} 

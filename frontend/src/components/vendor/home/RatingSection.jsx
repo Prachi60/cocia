@@ -1,13 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Star, ChevronRight, Frown, Meh, Smile } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const RatingCard = React.memo(({ item }) => {
   const [selectedRating, setSelectedRating] = useState(0);
   const expressions = [Frown, Frown, Meh, Smile, Smile];
+  const navigate = useNavigate();
+
+  const handleProductClick = useCallback(() => {
+    navigate('/vendor/product-detail', { 
+      state: { 
+        product: { 
+          id: Math.random().toString(36).substr(2, 9),
+          name: item.fullName || item.name,
+          brand: 'Rate Product',
+          price: 599,
+          oldPrice: 1299,
+          discount: '54% off',
+          rating: 4.0,
+          image: item.img,
+          label: 'Your Recent Order'
+        } 
+      } 
+    });
+  }, [navigate, item]);
   
   return (
     <div className="min-w-[280px] bg-white rounded-none p-3 shadow-sm border border-gray-100 flex flex-col gap-3">
-      <div className="flex gap-3 items-center px-0.5">
+      <div 
+        onClick={handleProductClick}
+        className="flex gap-3 items-center px-0.5 cursor-pointer active:opacity-70 transition-opacity"
+      >
         <div className="w-12 h-12 rounded-none overflow-hidden bg-white border border-gray-100 p-0.5 flex-shrink-0 shadow-sm">
           <img 
             src={item.img} 
