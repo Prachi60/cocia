@@ -3,21 +3,32 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const BannerCarousel = ({ banners = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(true);
+  const containerRef = React.useRef(null);
 
   const nextSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev === banners.length - 1 ? 0 : prev + 1));
   }, [banners.length]);
 
   useEffect(() => {
-    if (banners.length <= 1) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    if (containerRef.current) observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (banners.length <= 1 || !isVisible) return;
     const interval = setInterval(nextSlide, 3000);
     return () => clearInterval(interval);
-  }, [nextSlide, banners.length]);
+  }, [nextSlide, banners.length, isVisible]);
 
   if (!banners || banners.length === 0) return null;
 
   return (
-    <div className="relative w-full overflow-hidden px-3 py-2">
+    <div ref={containerRef} className="relative w-full overflow-hidden px-3 py-2">
       <div className="relative aspect-[21/9] w-full overflow-hidden rounded-xl shadow-lg border border-gray-100">
         <AnimatePresence mode="wait">
           <motion.div

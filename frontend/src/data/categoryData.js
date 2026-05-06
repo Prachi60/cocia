@@ -32,6 +32,14 @@ import CoolerWhite from '../assets/products/cooler_white.png';
 import CookwareHero from '../assets/Cards/cookware_hero.png';
 
 export const allCategoryProducts = {
+  'For You': [
+    { id: 'fy1', name: 'Premium Gifting Box', category: 'Gifting', price: 699, oldPrice: 999, discount: '30% OFF', rating: 4.8, image: GiftingImg, shortDescription: 'Assorted luxury collection' },
+    { id: 'fy2', name: 'Samsung Galaxy S24', category: 'Electronics', price: 79999, oldPrice: 89999, discount: '11% OFF', rating: 4.9, image: SamsungS24, shortDescription: 'Flagship AI smartphone' },
+    { id: 'fy3', name: 'Luxury Matte Lipstick', category: 'Beauty', price: 499, oldPrice: 999, discount: '50% OFF', rating: 4.8, image: LipstickDeal, shortDescription: 'Long-lasting matte finish' },
+    { id: 'fy4', name: 'Wireless Earbuds', category: 'Electronics', price: 2499, oldPrice: 5999, discount: '58% OFF', rating: 4.7, image: EarbudsDeal, shortDescription: '40H playtime & ANC' },
+    { id: 'fy5', name: 'Diamond Pendant', category: 'Jewellery', price: 12999, oldPrice: 15999, discount: '18% OFF', rating: 4.9, image: JewelleryImg, shortDescription: '18K gold elegant design' },
+    { id: 'fy6', name: 'Men\'s Denim Jacket', category: 'Fashion', price: 1499, oldPrice: 2999, discount: '50% OFF', rating: 4.8, image: FashionHero, shortDescription: 'Classic blue wash' }
+  ],
   Beauty: [
     { id: 'b1', name: 'Luxury Matte Lipstick', category: 'Beauty', price: 499, oldPrice: 999, discount: '50% OFF', rating: 4.8, image: LipstickDeal, shortDescription: 'Long-lasting matte finish' },
     { id: 'b2', name: 'Vitamin C Face Serum', category: 'Beauty', price: 799, oldPrice: 1299, discount: '38% OFF', rating: 4.6, image: MakeupHero, shortDescription: 'Brightens and evens skin tone' },
