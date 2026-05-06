@@ -64,7 +64,8 @@ const VendorLayout = () => {
     };
   }, []);
 
-  const isImmersivePage = location.pathname.includes('category-products') || location.pathname.includes('product-detail') || location.pathname.includes('all-offers') || location.pathname.includes('cart') || location.pathname.includes('/vendor/profile') || location.pathname.includes('/vendor/deals') || location.pathname.includes('/vendor/search');
+  const isImmersivePage = location.pathname.includes('category-products') || location.pathname.includes('product-detail') || location.pathname.includes('continue-shopping') || location.pathname.includes('all-offers') || location.pathname.includes('cart') || location.pathname.includes('/vendor/profile') || location.pathname.includes('/vendor/deals') || location.pathname.includes('/vendor/search') || location.pathname.includes('wishlist');
+
 
   return (
     <div className="min-h-screen flex flex-col transition-colors duration-300 bg-gray-50 text-slate-900">

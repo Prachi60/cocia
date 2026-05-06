@@ -16,6 +16,8 @@ import Checkout from '../pages/vendor/Checkout';
 import AllOffers from '../pages/vendor/AllOffers';
 import DealsPage from '../pages/vendor/DealsPage';
 import Search from '../pages/vendor/Search';
+import ContinueShopping from '../pages/vendor/ContinueShopping';
+
 
 // Profile Sub-pages
 import EditProfile from '../pages/vendor/profile/EditProfile';
@@ -44,6 +46,7 @@ const VendorRoutes = () => {
         <Route path="/product-detail" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/bag" element={<Bag />} />
+        <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/profile" element={<Profile />} />
         
         {/* Profile Sub-routes */}
@@ -63,7 +66,9 @@ const VendorRoutes = () => {
         <Route path="/deals" element={<DealsPage />} />
         <Route path="/search" element={<Search />} />
         <Route path="/category-products" element={<CategoryProducts />} />
+        <Route path="/continue-shopping/:productId" element={<ContinueShopping />} />
         <Route path="/all-offers" element={<AllOffers />} />
+
       </Route>
 
       {/* Redirects */}

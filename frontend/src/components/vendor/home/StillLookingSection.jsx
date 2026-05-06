@@ -5,22 +5,33 @@ const StillLookingSection = ({ items }) => {
   const navigate = useNavigate();
 
   const handleCardClick = useCallback((item) => {
-    navigate('/vendor/product-detail', { 
+    // Generate or use existing ID
+    const productId = item.id || Math.random().toString(36).substr(2, 9);
+    
+    // Map categories based on labels for demo purposes
+    let category = 'Fashion';
+    if (item.label.toLowerCase().includes('neck')) category = 'Jewellery';
+    if (item.label.toLowerCase().includes('lips')) category = 'Beauty';
+    if (item.label.toLowerCase().includes('shamp')) category = 'Beauty';
+
+    navigate(`/vendor/continue-shopping/${productId}`, { 
       state: { 
         product: { 
-          id: Math.random().toString(36).substr(2, 9),
+          id: productId,
           name: item.label,
-          brand: 'Trending',
+          brand: 'Trending Now',
           price: 599,
           oldPrice: 1299,
           discount: '54% off',
           rating: 4.5,
           image: item.img,
+          category: category,
           label: 'Limited time deal'
         } 
       } 
     });
   }, [navigate]);
+
 
   return (
     <div className="px-3 mt-4">

@@ -38,7 +38,7 @@ const useAccountStore = create((set) => ({
       ]
     }
   ],
-  wishlist: [],
+  wishlist: JSON.parse(localStorage.getItem('userWishlist') || '[]'),
   coupons: [
     {
       code: 'COCIA50',
@@ -82,13 +82,17 @@ const useAccountStore = create((set) => ({
     savedCards: state.savedCards.filter(c => c.id !== id)
   })),
 
-  addToWishlist: (product) => set((state) => ({
-    wishlist: [...state.wishlist, product]
-  })),
+  addToWishlist: (product) => set((state) => {
+    const updated = [...state.wishlist, product];
+    localStorage.setItem('userWishlist', JSON.stringify(updated));
+    return { wishlist: updated };
+  }),
 
-  removeFromWishlist: (id) => set((state) => ({
-    wishlist: state.wishlist.filter(item => item.id !== id)
-  }))
+  removeFromWishlist: (id) => set((state) => {
+    const updated = state.wishlist.filter(item => item.id !== id);
+    localStorage.setItem('userWishlist', JSON.stringify(updated));
+    return { wishlist: updated };
+  })
 }));
 
 export default useAccountStore;
