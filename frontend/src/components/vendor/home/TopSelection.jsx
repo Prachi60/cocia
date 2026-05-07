@@ -24,41 +24,40 @@ const TopSelection = ({ items }) => {
   }, [navigate]);
 
   return (
-    <div className="px-3 mt-6">
-      <div className="bg-[#ff0000] rounded-[28px] p-3.5 shadow-lg border border-white/10">
-        <div className="flex justify-between items-center mb-3 px-1">
-          <h2 className="text-[18px] font-black text-white" style={{ fontFamily: "'Nunito', sans-serif" }}>
+    <div className="px-3 mt-3">
+      <div className="bg-[#ff0000] rounded-2xl p-2.5 shadow-md border border-white/10">
+        {/* Header */}
+        <div className="flex justify-between items-center mb-2 px-1">
+          <h2 className="text-[14px] font-black text-white" style={{ fontFamily: "'Nunito', sans-serif" }}>
             Top Selection
           </h2>
-          <button 
+          <button
             onClick={() => navigate('/vendor/all-offers')}
-            className="bg-white text-black p-1.5 rounded-none shadow-md active:scale-90 transition-all flex items-center justify-center"
+            className="bg-white text-black p-1 rounded shadow-sm active:scale-90 transition-all flex items-center justify-center"
           >
-            <ChevronRight size={16} strokeWidth={4} />
+            <ChevronRight size={13} strokeWidth={3.5} />
           </button>
         </div>
 
-        <div className="bg-white rounded-[20px] p-2.5">
-          <div className="grid grid-cols-2 gap-x-3 gap-y-4">
+        <div className="bg-white rounded-xl p-2">
+          <div className="grid grid-cols-2 gap-2">
             {items.map((product, idx) => (
-              <div 
-                key={idx} 
+              <div
+                key={idx}
                 onClick={() => handleProductClick(product)}
-                className="flex flex-col gap-1.5 group cursor-pointer transition-all active:scale-95"
+                className="flex flex-col gap-1 group cursor-pointer active:scale-95 transition-transform"
               >
-                <div className="aspect-square rounded-none overflow-hidden bg-[#F5F5F5] flex items-center justify-center p-1.5">
-                  <img 
-                    src={product.img} 
-                    alt={product.name} 
-                    className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-700" 
+                <div className="aspect-square rounded-lg overflow-hidden bg-gray-50 flex items-center justify-center p-1">
+                  <img
+                    src={product.img}
+                    alt={product.name}
+                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
-                    width="150"
-                    height="150"
                   />
                 </div>
                 <div>
-                  <p className="text-[11px] font-medium text-gray-600 leading-tight truncate">{product.name}</p>
-                  <p className="text-[13px] font-black text-slate-900 mt-0.5">{product.tag}</p>
+                  <p className="text-[10px] font-medium text-gray-500 leading-tight truncate">{product.name}</p>
+                  <p className="text-[11.5px] font-black text-slate-800 mt-0.5">{product.tag}</p>
                 </div>
               </div>
             ))}

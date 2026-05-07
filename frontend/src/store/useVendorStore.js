@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
 const useVendorStore = create((set) => ({
-  selectedCategory: 'Home',
+  selectedCategory: 'For You',
   setSelectedCategory: (category) => set({ selectedCategory: category }),
   
   // Header visibility state

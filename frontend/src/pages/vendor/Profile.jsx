@@ -45,6 +45,18 @@ const VendorProfile = () => {
 
   return (
     <div className="bg-[#f1f3f6] min-h-screen pb-24 font-sans text-slate-900">
+      {/* Back Button Header */}
+      <div className="sticky top-0 z-40 bg-white border-b border-gray-100 shadow-sm px-3 py-3 flex items-center gap-3">
+        <motion.button
+          onClick={() => navigate(-1)}
+          whileTap={{ scale: 0.88 }}
+          className="p-1.5 rounded-full hover:bg-gray-100 transition-colors"
+          aria-label="Go back"
+        >
+          <ChevronRight size={22} strokeWidth={2.5} className="text-gray-700 rotate-180" />
+        </motion.button>
+        <span className="text-[16px] font-black text-slate-800">My Profile</span>
+      </div>
       {/* Top Header Card */}
       <div className="px-3 pt-4">
         <div className="bg-gradient-to-br from-[#f0f5ff] to-white rounded-xl p-5 border border-blue-50 shadow-sm relative overflow-hidden">
