@@ -333,7 +333,7 @@ const CategoryProducts = () => {
   return (
     <div className="bg-[var(--card-bg)] min-h-screen text-[var(--card-text)] transition-colors duration-300 pb-10">
       {/* 🔶 Enhanced Multi-row Header */}
-      <div className="sticky top-0 z-[100] bg-[var(--card-bg)]/90 backdrop-blur-md border-b border-[var(--card-border)] shadow-sm" style={{ fontFamily: "'Nunito', sans-serif" }}>
+      <div className="sticky top-0 z-[100] bg-[var(--card-bg)]/90 backdrop-blur-md border-b border-[var(--card-border)] shadow-sm">
         {/* Row 1: Nav & Cart */}
         <div className="px-5 pt-4 pb-2 flex items-center justify-between">
           <div className="flex items-center gap-4">

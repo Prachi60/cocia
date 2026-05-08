@@ -25,7 +25,7 @@ const KeepShopping = ({ items }) => {
   return (
     <div className="px-3 mt-8">
       <div className="bg-gradient-to-br from-orange-50 to-pink-50 rounded-[28px] p-5 shadow-sm border border-white">
-        <h2 className="text-[20px] font-black text-slate-800 mb-4" style={{ fontFamily: "'Nunito', sans-serif" }}>
+        <h2 className="text-slate-800 mb-4" style={{ fontFamily: "'Inter', Arial, sans-serif", fontWeight: 700, fontSize: '26px', lineHeight: 1.2, letterSpacing: '-0.3px' }}>
           Keep shopping for these
         </h2>
         <div className="flex overflow-x-auto gap-3 no-scrollbar pb-1 touch-pan-y" style={{ WebkitOverflowScrolling: 'touch' }}>

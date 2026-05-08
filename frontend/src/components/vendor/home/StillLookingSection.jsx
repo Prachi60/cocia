@@ -42,7 +42,7 @@ const StillLookingSection = ({ items }) => {
           backgroundSize: '20px 20px' 
         }}></div>
 
-        <h2 className="relative z-10 text-[14px] font-black text-white mb-2.5" style={{ fontFamily: "'Nunito', sans-serif" }}>
+        <h2 className="text-white mb-3 pl-0.5 relative z-10" style={{ fontFamily: "'Inter', Arial, sans-serif", fontWeight: 700, fontSize: '26px', lineHeight: 1.2, letterSpacing: '-0.3px' }}>
           Still looking for these?
         </h2>
 

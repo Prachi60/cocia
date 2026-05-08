@@ -89,7 +89,7 @@ const RatingSection = ({ items }) => {
   return (
     <div className="px-3 mt-6 mb-2">
       <div className="flex justify-between items-center mb-3 px-1">
-        <h2 className="text-[18px] font-bold text-slate-900" style={{ fontFamily: "'Inter', sans-serif" }}>
+        <h2 className="text-slate-900" style={{ fontFamily: "'Inter', Arial, sans-serif", fontWeight: 700, fontSize: '26px', lineHeight: 1.2, letterSpacing: '-0.3px' }}>
           Help India make good choices
         </h2>
         <button className="bg-black text-white p-2 rounded-full shadow-lg active:scale-90 transition-all">

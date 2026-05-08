@@ -8,6 +8,21 @@
   --color-bg-luxury: #F4F4F4;
 }
 
+/* ── Global heading style ── */
+.section-heading {
+  font-family: 'Inter', Arial, sans-serif !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.3px !important;
+  font-size: 26px !important;
+}
+
+@media (min-width: 640px) {
+  .section-heading {
+    font-size: 30px !important;
+  }
+}
+
 @layer base {
   :root {
     --card-bg: #ffffff;
@@ -18,7 +33,7 @@
 
   body {
     @apply bg-gray-50 text-gray-900 transition-colors duration-300;
-    font-family: 'Inter', 'Roboto', sans-serif;
+    font-family: 'Inter', Arial, sans-serif;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
     overflow-x: hidden;

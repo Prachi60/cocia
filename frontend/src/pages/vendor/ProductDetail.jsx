@@ -121,6 +121,46 @@ const ProductDetail = () => {
     setTimeout(() => setShowToast(false), 2000);
   }, [product, isWishlisted, addToWishlist, removeFromWishlist]);
 
+  const handleShare = async () => {
+    const shareData = {
+      title: product.name,
+      text: `Check out ${product.name} - ₹${product.price} (${product.discount})`,
+      url: window.location.href
+    };
+
+    try {
+      // Check if Web Share API is supported (mobile devices)
+      if (navigator.share) {
+        await navigator.share(shareData);
+        setToastMessage('Shared successfully!');
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 2000);
+      } else {
+        // Fallback: Copy link to clipboard
+        await navigator.clipboard.writeText(window.location.href);
+        setToastMessage('Link copied to clipboard!');
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 2000);
+      }
+    } catch (error) {
+      // User cancelled share or error occurred
+      if (error.name !== 'AbortError') {
+        console.error('Error sharing:', error);
+        // Try clipboard as final fallback
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          setToastMessage('Link copied to clipboard!');
+          setShowToast(true);
+          setTimeout(() => setShowToast(false), 2000);
+        } catch (clipboardError) {
+          setToastMessage('Unable to share');
+          setShowToast(true);
+          setTimeout(() => setShowToast(false), 2000);
+        }
+      }
+    }
+  };
+
   const handleAddToCart = useCallback(() => {
     const cart = JSON.parse(localStorage.getItem('userCart') || '[]');
     cart.push({ ...product, cartId: Date.now(), qty: 1 });
@@ -243,7 +283,10 @@ const ProductDetail = () => {
           >
             <Heart size={18} className={isWishlisted ? "text-red-500 fill-red-500" : "text-slate-700"} />
           </button>
-          <button className="w-8 h-8 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center shadow-md active:scale-90 transition-transform">
+          <button 
+            onClick={handleShare}
+            className="w-8 h-8 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center shadow-md active:scale-90 transition-transform"
+          >
             <Send size={16} className="text-slate-700" />
           </button>
         </div>

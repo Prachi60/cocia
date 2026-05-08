@@ -23,6 +23,20 @@ const VendorProfile = () => {
   const navigate = useNavigate();
   const { userProfile } = useAccountStore();
 
+  const handleLogout = () => {
+    // Clear all user data from localStorage
+    localStorage.removeItem('userCart');
+    localStorage.removeItem('userWishlist');
+    localStorage.removeItem('userToken');
+    localStorage.removeItem('isAuthenticated');
+    
+    // Clear any session storage
+    sessionStorage.clear();
+    
+    // Navigate to login page
+    navigate('/vendor/login', { replace: true });
+  };
+
   const quickActions = [
     { label: 'Orders', icon: <ShoppingBag size={20} className="text-blue-600" />, path: '/vendor/profile/orders' },
     { label: 'Wishlist', icon: <Heart size={20} className="text-blue-600" />, path: '/vendor/profile/wishlist' },
@@ -236,6 +250,22 @@ const VendorProfile = () => {
                </div>
             ))}
          </div>
+      </div>
+
+      {/* Logout Button */}
+      <div className="px-3 pb-6">
+         <motion.button
+            onClick={handleLogout}
+            whileTap={{ scale: 0.95 }}
+            className="w-full bg-white border-2 border-[#2874F0] text-[#2874F0] py-4 rounded-xl font-black text-[15px] uppercase tracking-wider shadow-sm hover:bg-blue-50 active:bg-blue-100 transition-colors flex items-center justify-center gap-3"
+         >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+              <polyline points="16 17 21 12 16 7"/>
+              <line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+            Log Out
+         </motion.button>
       </div>
     </div>
   );

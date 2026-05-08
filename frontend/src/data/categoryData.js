@@ -119,5 +119,35 @@ export const allCategoryProducts = {
     { id: 'el6', name: 'Copper Wire Bundle', category: 'Electrical', price: 1299, oldPrice: 1999, discount: '35% OFF', rating: 4.6, image: ElectricalImg, shortDescription: '90m fire retardant' },
     { id: 'el7', name: 'Modular Switches Pack', category: 'Electrical', price: 399, oldPrice: 699, discount: '42% OFF', rating: 4.5, image: ElectricalImg, shortDescription: 'Set of 10, 6A switches' },
     { id: 'el8', name: 'Rechargeable Torch', category: 'Electrical', price: 299, oldPrice: 599, discount: '50% OFF', rating: 4.4, image: ElectricalImg, shortDescription: 'Long beam LED' }
+  ],
+  Cosmetics: [
+    { id: 'c1', name: 'Luxury Matte Lipstick', category: 'Cosmetics', price: 499, oldPrice: 999, discount: '50% OFF', rating: 4.8, image: LipstickDeal, shortDescription: 'Long-lasting matte finish' },
+    { id: 'c2', name: 'Shimmer Lip Gloss', category: 'Cosmetics', price: 299, oldPrice: 499, discount: '40% OFF', rating: 4.4, image: LipGloss, shortDescription: 'High shine gloss' },
+    { id: 'c3', name: 'Precision Lip Liner', category: 'Cosmetics', price: 199, oldPrice: 299, discount: '33% OFF', rating: 4.2, image: LipLiner, shortDescription: 'Smooth glide pencil' },
+    { id: 'c4', name: 'Volumizing Mascara', category: 'Cosmetics', price: 399, oldPrice: 599, discount: '33% OFF', rating: 4.5, image: Mascara, shortDescription: 'Waterproof extreme volume' },
+    { id: 'c5', name: 'Vitamin C Face Serum', category: 'Cosmetics', price: 799, oldPrice: 1299, discount: '38% OFF', rating: 4.6, image: MakeupHero, shortDescription: 'Brightens and evens skin tone' },
+    { id: 'c6', name: 'Plum Nourishing Shampoo', category: 'Cosmetics', price: 599, oldPrice: 899, discount: '33% OFF', rating: 4.7, image: PlumShampoo, shortDescription: 'Sulfate-free cleansing' },
+    { id: 'c7', name: 'Loreal Hair Serum', category: 'Cosmetics', price: 499, oldPrice: 799, discount: '37% OFF', rating: 4.5, image: LorealShampoo, shortDescription: 'Frizz control formula' },
+    { id: 'c8', name: 'Matrix Smoothing Mask', category: 'Cosmetics', price: 699, oldPrice: 999, discount: '30% OFF', rating: 4.6, image: MatrixShampoo, shortDescription: 'Deep hydration mask' }
+  ],
+  'Art. Jewellery': [
+    { id: 'aj1', name: 'Diamond Pendant', category: 'Art. Jewellery', price: 12999, oldPrice: 15999, discount: '18% OFF', rating: 4.9, image: JewelleryImg, shortDescription: '18K gold elegant design' },
+    { id: 'aj2', name: 'Silver Hoop Earrings', category: 'Art. Jewellery', price: 899, oldPrice: 1499, discount: '40% OFF', rating: 4.7, image: JewelleryImg, shortDescription: 'Pure 925 sterling silver' },
+    { id: 'aj3', name: 'Pearl Choker Set', category: 'Art. Jewellery', price: 2499, oldPrice: 4999, discount: '50% OFF', rating: 4.8, image: JewelleryImg, shortDescription: 'Freshwater pearls' },
+    { id: 'aj4', name: 'Couple Rings Set', category: 'Art. Jewellery', price: 1999, oldPrice: 3999, discount: '50% OFF', rating: 4.6, image: JewelleryImg, shortDescription: 'Platinum plated bands' },
+    { id: 'aj5', name: 'Temple Jewellery Necklace', category: 'Art. Jewellery', price: 3499, oldPrice: 6999, discount: '50% OFF', rating: 4.8, image: JewelleryImg, shortDescription: 'Traditional bridal set' },
+    { id: 'aj6', name: 'Rose Gold Bracelet', category: 'Art. Jewellery', price: 1299, oldPrice: 2499, discount: '48% OFF', rating: 4.7, image: JewelleryImg, shortDescription: 'Minimalist charm chain' },
+    { id: 'aj7', name: 'Stud Earrings Pack', category: 'Art. Jewellery', price: 499, oldPrice: 999, discount: '50% OFF', rating: 4.5, image: JewelleryImg, shortDescription: 'Set of 6 daily wear' },
+    { id: 'aj8', name: "Men's Chain", category: 'Art. Jewellery', price: 1599, oldPrice: 2999, discount: '46% OFF', rating: 4.6, image: JewelleryImg, shortDescription: 'Stainless steel link' }
+  ],
+  '1g Gold': [
+    { id: 'gg1', name: '1g Gold Coin', category: '1g Gold', price: 6499, oldPrice: 7200, discount: '10% OFF', rating: 4.9, image: JewelleryImg, shortDescription: '24K BIS hallmarked' },
+    { id: 'gg2', name: 'Gold Chain 1g', category: '1g Gold', price: 5999, oldPrice: 6800, discount: '12% OFF', rating: 4.8, image: JewelleryImg, shortDescription: 'Lightweight daily wear' },
+    { id: 'gg3', name: 'Gold Pendant 1g', category: '1g Gold', price: 6200, oldPrice: 7000, discount: '11% OFF', rating: 4.7, image: JewelleryImg, shortDescription: 'Elegant floral design' },
+    { id: 'gg4', name: 'Gold Ring 1g', category: '1g Gold', price: 5800, oldPrice: 6500, discount: '10% OFF', rating: 4.8, image: JewelleryImg, shortDescription: 'Classic band style' },
+    { id: 'gg5', name: 'Gold Earrings 1g', category: '1g Gold', price: 5500, oldPrice: 6200, discount: '11% OFF', rating: 4.9, image: JewelleryImg, shortDescription: 'Stud design, pair' },
+    { id: 'gg6', name: 'Gold Bangle 1g', category: '1g Gold', price: 6800, oldPrice: 7500, discount: '9% OFF', rating: 4.7, image: JewelleryImg, shortDescription: 'Traditional kangan' },
+    { id: 'gg7', name: 'Gold Nose Pin 1g', category: '1g Gold', price: 4999, oldPrice: 5800, discount: '13% OFF', rating: 4.6, image: JewelleryImg, shortDescription: 'Delicate floral pin' },
+    { id: 'gg8', name: 'Gold Mangalsutra 1g', category: '1g Gold', price: 7200, oldPrice: 8000, discount: '10% OFF', rating: 4.9, image: JewelleryImg, shortDescription: 'Black bead design' }
   ]
 };

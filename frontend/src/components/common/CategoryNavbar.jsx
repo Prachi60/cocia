@@ -102,6 +102,14 @@ const CategoryNavbar = ({ selectedCategory, setSelectedCategory }) => {
 
   const handleSelect = (cat) => {
     setSelectedCategory(cat.label);
+    if (cat.id === 'toys') {
+      navigate('/vendor/toys');
+      return;
+    }
+    if (cat.id === 'beauty') {
+      navigate('/vendor/beauty');
+      return;
+    }
     if (!location.pathname.includes('/vendor/home')) {
       navigate('/vendor/home');
     }
@@ -129,7 +137,7 @@ const CategoryNavbar = ({ selectedCategory, setSelectedCategory }) => {
             {isActive && (
               <motion.div
                 layoutId="activePill"
-                className="absolute top-1.5 left-1/2 -translate-x-1/2 w-12 h-10 rounded-xl bg-[#2874F0]/10"
+                className="absolute top-1 left-1/2 -translate-x-1/2 w-16 h-12 rounded-xl bg-[#2874F0]/10"
                 transition={{ type: 'spring', stiffness: 400, damping: 32 }}
               />
             )}

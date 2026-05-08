@@ -14,11 +14,16 @@ import Menu from '../pages/vendor/Menu';
 import Categories from '../pages/vendor/Categories';
 import CategoryProducts from '../pages/vendor/CategoryProducts';
 import ToysLanding from '../pages/vendor/ToysLanding';
+import BeautyLanding from '../pages/vendor/BeautyLanding';
 import Checkout from '../pages/vendor/Checkout';
 import AllOffers from '../pages/vendor/AllOffers';
 import DealsPage from '../pages/vendor/DealsPage';
 import Search from '../pages/vendor/Search';
 import ContinueShopping from '../pages/vendor/ContinueShopping';
+import TermsOfUse from '../pages/vendor/TermsOfUse';
+import PrivacyPolicy from '../pages/vendor/PrivacyPolicy';
+import CancellationReturns from '../pages/vendor/CancellationReturns';
+import ShippingPolicy from '../pages/vendor/ShippingPolicy';
 
 
 // Profile Sub-pages
@@ -40,6 +45,10 @@ const VendorRoutes = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/checkout" element={<Checkout />} />
+      <Route path="/terms" element={<TermsOfUse />} />
+      <Route path="/privacy" element={<PrivacyPolicy />} />
+      <Route path="/cancellation-returns" element={<CancellationReturns />} />
+      <Route path="/shipping" element={<ShippingPolicy />} />
 
       {/* Pages with layout */}
       <Route element={<VendorLayout />}>
@@ -70,6 +79,7 @@ const VendorRoutes = () => {
         <Route path="/category-products" element={<CategoryProducts />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/toys" element={<ToysLanding />} />
+        <Route path="/beauty" element={<BeautyLanding />} />
         <Route path="/continue-shopping/:productId" element={<ContinueShopping />} />
         <Route path="/all-offers" element={<AllOffers />} />
 

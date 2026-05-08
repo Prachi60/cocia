@@ -24,10 +24,10 @@ const BestQuality = ({ items }) => {
   }, [navigate]);
 
   return (
-    <div className="px-3 mt-8 mb-6">
-      <div className="bg-[#2874f0] rounded-[28px] p-5 shadow-sm border border-white/10">
-        <div className="flex justify-between items-center mb-5">
-          <h2 className="text-[19px] font-black text-white" style={{ fontFamily: "'Nunito', sans-serif" }}>
+    <div className="px-3 mt-3 mb-2">
+      <div className="bg-[#2874f0] rounded-[28px] p-4 shadow-sm border border-white/10">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-white" style={{ fontFamily: "'Inter', Arial, sans-serif", fontWeight: 700, fontSize: '26px', lineHeight: 1.2, letterSpacing: '-0.3px' }}>
             Best quality
           </h2>
           <button 
@@ -38,7 +38,7 @@ const BestQuality = ({ items }) => {
           </button>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-3">
           {items.map((product, idx) => (
             <div 
               key={idx} 

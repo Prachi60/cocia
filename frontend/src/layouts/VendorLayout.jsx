@@ -78,7 +78,6 @@ const VendorLayout = () => {
           }}
           transition={{ duration: 0.22 }}
           className="sticky top-0 z-50 bg-white pb-0"
-          style={{ fontFamily: "'Nunito', 'Inter', sans-serif" }}
         >
           {/* Row 1 + 2 : Logo, icons, address */}
           <HeaderTop

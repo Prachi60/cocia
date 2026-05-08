@@ -24,7 +24,7 @@ const BrandsSpotlight = ({ items }) => {
 
   return (
     <div className="px-3 mt-4">
-      <h2 className="text-[15px] font-black text-slate-900 mb-2.5 px-1" style={{ fontFamily: "'Nunito', sans-serif" }}>
+      <h2 className="text-slate-900 mb-3 px-1" style={{ fontFamily: "'Inter', Arial, sans-serif", fontWeight: 700, fontSize: '26px', lineHeight: 1.2, letterSpacing: '-0.3px' }}>
         Brands in Spotlight
       </h2>
       <div className="grid grid-cols-3 gap-x-2 gap-y-3">

@@ -1,83 +1,111 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { X } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const Login = () => {
   const navigate = useNavigate();
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [useEmail, setUseEmail] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Mock login - navigate to home
     navigate('/vendor/home');
   };
 
   return (
-    <div className="min-h-[80vh] flex flex-col items-center pt-8 bg-white md:bg-gray-50">
-      {/* Amazon Logo */}
-      <Link to="/vendor/home" className="mb-6">
-        <h1 className="text-3xl font-bold italic text-black">
-          Shop<span className="text-accent">Hub</span>
-        </h1>
-      </Link>
-
-      {/* Login Card */}
-      <div className="w-full max-w-[350px] bg-white border border-gray-300 rounded-lg p-6 shadow-sm md:shadow-none">
-        <h2 className="text-2xl font-medium mb-4">Sign in</h2>
-        
-        <form className="space-y-4" onSubmit={handleSubmit}>
-          <div>
-            <label className="block text-xs font-bold mb-1">Email or mobile phone number</label>
-            <input 
-              type="text" 
-              required
-              className="w-full p-2 border border-gray-400 rounded focus:ring-2 focus:ring-blue-400 outline-none transition-all"
-            />
-          </div>
-          
-          <div>
-            <div className="flex justify-between items-center mb-1">
-              <label className="text-xs font-bold">Password</label>
-              <a href="#" className="text-xs text-blue-600 hover:text-accent hover:underline">Forgot password?</a>
-            </div>
-            <input 
-              type="password" 
-              required
-              className="w-full p-2 border border-gray-400 rounded focus:ring-2 focus:ring-blue-400 outline-none transition-all"
-            />
-          </div>
-
-          <button 
-            type="submit"
-            className="w-full py-1.5 bg-primary hover:bg-primary-hover border border-gray-400 rounded shadow-sm text-sm font-medium transition-colors"
-          >
-            Continue
-          </button>
-        </form>
-
-        <p className="text-xs mt-4 text-gray-700 leading-tight">
-          By continuing, you agree to ShopHub's <a href="#" className="text-blue-600 hover:underline">Conditions of Use</a> and <a href="#" className="text-blue-600 hover:underline">Privacy Notice</a>.
-        </p>
-
-        <div className="mt-6 flex items-center space-x-1">
-          <div className="flex-1 h-px bg-gray-300"></div>
-          <span className="text-xs text-gray-500">New to ShopHub?</span>
-          <div className="flex-1 h-px bg-gray-300"></div>
-        </div>
-
-        <Link 
-          to="/vendor/signup"
-          className="mt-4 block w-full py-1.5 bg-gray-50 hover:bg-gray-100 border border-gray-300 rounded shadow-sm text-sm text-center font-medium transition-colors"
+    <div className="min-h-screen bg-white flex flex-col">
+      {/* Blue Header with Logo */}
+      <div className="bg-[#2874F0] px-4 py-4 flex items-center justify-between shadow-md">
+        <button 
+          onClick={() => navigate(-1)}
+          className="text-white active:scale-90 transition-transform"
         >
-          Create your ShopHub account
-        </Link>
+          <X size={24} strokeWidth={2.5} />
+        </button>
+        
+        <div className="flex items-center gap-2">
+          <img 
+            src="/Logo (4).png" 
+            alt="Cocia" 
+            className="h-14 w-auto object-contain brightness-0 invert"
+          />
+        </div>
+        
+        <div className="w-6"></div> {/* Spacer for centering */}
       </div>
 
-      {/* Footer Links */}
-      <div className="mt-10 py-6 border-t border-gray-200 w-full flex flex-col items-center bg-gray-50 md:bg-transparent">
-        <div className="flex space-x-6 mb-2">
-          <a href="#" className="text-xs text-blue-600 hover:underline">Conditions of Use</a>
-          <a href="#" className="text-xs text-blue-600 hover:underline">Privacy Notice</a>
-          <a href="#" className="text-xs text-blue-600 hover:underline">Help</a>
-        </div>
-        <p className="text-[10px] text-gray-500">© 2026-2027, ShopHub.com, Inc. or its affiliates</p>
+      {/* Login Form Content */}
+      <div className="flex-1 px-6 pt-8 pb-6">
+        <h1 className="text-[20px] font-bold text-slate-900 mb-8">
+          Log in to check your Cart
+        </h1>
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Phone Number / Email Input */}
+          <div>
+            <label className="block text-[13px] font-medium text-gray-600 mb-2">
+              {useEmail ? 'Email' : 'Phone Number'}
+            </label>
+            <div className="relative">
+              {!useEmail && (
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[15px] text-gray-600 font-medium pointer-events-none">
+                  +91
+                </span>
+              )}
+              <input
+                type={useEmail ? 'email' : 'tel'}
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                placeholder={useEmail ? 'Enter your email' : ''}
+                className={`w-full ${!useEmail ? 'pl-16' : 'pl-4'} pr-4 py-3 border-2 border-[#2874F0] rounded-sm text-[15px] font-medium text-slate-900 placeholder:text-gray-400 focus:outline-none focus:border-[#2874F0] focus:ring-2 focus:ring-[#2874F0]/20 transition-all`}
+                required
+                maxLength={useEmail ? undefined : 10}
+                pattern={useEmail ? undefined : '[0-9]*'}
+              />
+            </div>
+          </div>
+
+          {/* Use Email/Phone Toggle */}
+          <div className="text-right">
+            <button
+              type="button"
+              onClick={() => setUseEmail(!useEmail)}
+              className="text-[13px] font-bold text-[#2874F0] hover:underline"
+            >
+              {useEmail ? 'Use Phone Number' : 'Use Email-ID'}
+            </button>
+          </div>
+
+          {/* Terms and Conditions - Moved here */}
+          <p className="text-[10px] text-gray-400 leading-relaxed">
+            By continuing, you confirm that you are above 18 years of age, and you agree to the Cocia's{' '}
+            <Link to="/vendor/terms" className="text-[#2874F0] hover:underline">
+              Terms of Use
+            </Link>{' '}
+            and{' '}
+            <Link to="/vendor/privacy" className="text-[#2874F0] hover:underline">
+              Privacy Policy
+            </Link>
+          </p>
+        </form>
+      </div>
+
+      {/* Fixed Bottom Continue Button */}
+      <div className="sticky bottom-0 bg-white border-t border-gray-200 px-6 py-4 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
+        <motion.button
+          onClick={handleSubmit}
+          whileTap={{ scale: 0.98 }}
+          disabled={!phoneNumber}
+          className={`w-full py-4 rounded-sm text-[15px] font-bold uppercase tracking-wide transition-all ${
+            phoneNumber
+              ? 'bg-[#2874F0] text-white shadow-md active:shadow-sm'
+              : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+          }`}
+        >
+          Continue
+        </motion.button>
       </div>
     </div>
   );

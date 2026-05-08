@@ -13,6 +13,7 @@ const Categories = () => {
   const [cartCount, setCartCount] = useState(0);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [wishlist, setWishlist] = useState([]);
 
   useEffect(() => {
     const updateCartCount = () => {
@@ -24,6 +25,33 @@ const Categories = () => {
     window.addEventListener('cartUpdated', updateCartCount);
     return () => window.removeEventListener('cartUpdated', updateCartCount);
   }, []);
+
+  useEffect(() => {
+    const savedWishlist = JSON.parse(localStorage.getItem('userWishlist') || '[]');
+    setWishlist(savedWishlist);
+  }, []);
+
+  const handleWishlistClick = (product) => {
+    const savedWishlist = JSON.parse(localStorage.getItem('userWishlist') || '[]');
+    const isInWishlist = savedWishlist.some(item => item.id === product.id);
+    
+    let updatedWishlist;
+    if (isInWishlist) {
+      updatedWishlist = savedWishlist.filter(item => item.id !== product.id);
+    } else {
+      updatedWishlist = [...savedWishlist, product];
+    }
+    
+    localStorage.setItem('userWishlist', JSON.stringify(updatedWishlist));
+    setWishlist(updatedWishlist);
+    
+    // Dispatch event for other components to update
+    window.dispatchEvent(new Event('wishlistUpdated'));
+  };
+
+  const isInWishlist = (productId) => {
+    return wishlist.some(item => item.id === productId);
+  };
 
   const categories = useMemo(() => Object.keys(allCategoryProducts), []);
 
@@ -178,16 +206,40 @@ const Categories = () => {
                currentProducts.map((product) => (
                  <div 
                   key={product.id} 
-                  onClick={() => navigate('/vendor/product-detail', { state: { product } })}
-                  className="bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm active:scale-[0.98] transition-transform animate-in fade-in zoom-in duration-300"
+                  className="bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm transition-transform animate-in fade-in zoom-in duration-300"
                  >
-                    <div className="aspect-square bg-gray-50 p-3 relative">
-                       <img src={product.image} className="w-full h-full object-contain mix-blend-multiply" alt={product.name} />
-                       <button className="absolute top-2 right-2 w-7 h-7 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm">
-                          <Heart size={14} className="text-gray-400" />
-                       </button>
+                    <div 
+                      className="aspect-square bg-gray-50 p-3 relative cursor-pointer active:scale-[0.98]"
+                      onClick={() => navigate('/vendor/product-detail', { state: { product } })}
+                    >
+                       <img 
+                         src={product.image} 
+                         className="w-full h-full object-contain mix-blend-multiply pointer-events-none" 
+                         alt={product.name} 
+                       />
+                       <div 
+                         onMouseDown={(e) => {
+                           e.stopPropagation();
+                           e.preventDefault();
+                           handleWishlistClick(product);
+                         }}
+                         onTouchEnd={(e) => {
+                           e.stopPropagation();
+                           e.preventDefault();
+                           handleWishlistClick(product);
+                         }}
+                         className="absolute top-2 right-2 w-7 h-7 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm active:scale-90 transition-all hover:bg-white cursor-pointer z-20"
+                       >
+                          <Heart 
+                            size={14} 
+                            className={`transition-all ${isInWishlist(product.id) ? "text-red-500 fill-red-500" : "text-gray-400"}`}
+                          />
+                       </div>
                     </div>
-                    <div className="p-3">
+                    <div 
+                      className="p-3 cursor-pointer active:bg-gray-50"
+                      onClick={() => navigate('/vendor/product-detail', { state: { product } })}
+                    >
                        <h3 className="text-[13px] font-medium text-slate-800 line-clamp-1 mb-1">{product.name}</h3>
                        <div className="flex items-center gap-1.5 mb-2">
                           <div className="flex items-center bg-green-700 text-white px-1 py-0.5 rounded-sm text-[9px] font-black">
