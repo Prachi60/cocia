@@ -92,7 +92,11 @@ const useAccountStore = create((set) => ({
     const updated = state.wishlist.filter(item => item.id !== id);
     localStorage.setItem('userWishlist', JSON.stringify(updated));
     return { wishlist: updated };
-  })
+  }),
+
+  addOrder: (order) => set((state) => ({
+    orders: [order, ...state.orders]
+  }))
 }));
 
 export default useAccountStore;

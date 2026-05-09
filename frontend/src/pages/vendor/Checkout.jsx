@@ -4,6 +4,7 @@ import {
   ArrowLeft, CheckCircle2, ChevronRight, ShieldCheck, 
   Star, Info, Truck, CheckCircle, Zap, Loader2, IndianRupee, CreditCard
 } from 'lucide-react';
+import useAccountStore from '../../store/useAccountStore';
 
 const Checkout = () => {
   const location = useLocation();
@@ -12,6 +13,7 @@ const Checkout = () => {
   const [selectedPayment, setSelectedPayment] = useState('UPI');
   const [selectedUpi, setSelectedUpi] = useState('paytm');
   const [orderStatus, setOrderStatus] = useState('idle'); // 'idle', 'processing', 'success'
+  const addOrder = useAccountStore((state) => state.addOrder);
 
   const product = location.state?.product || {
     name: 'EVOFOX Blaze Wired Ambidextrous ...',
@@ -39,9 +41,22 @@ const Checkout = () => {
       setCurrentStep(3);
     } else if (currentStep === 3) {
       setOrderStatus('processing');
+      
+      const newOrder = {
+        id: `OD${Math.floor(Math.random() * 1000000000)}`,
+        status: 'Confirmed',
+        date: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }),
+        items: [{
+          name: product.name,
+          price: product.price,
+          image: product.image
+        }]
+      };
+
       setTimeout(() => {
+        addOrder(newOrder);
         setOrderStatus('success');
-        setTimeout(() => navigate('/vendor/home'), 2000);
+        setTimeout(() => navigate('/vendor/profile/orders'), 2000);
       }, 2000);
     }
   };

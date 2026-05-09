@@ -55,9 +55,9 @@ const VendorLayout = () => {
     location.pathname.includes('continue-shopping') ||
     location.pathname.includes('all-offers') ||
     location.pathname.includes('cart') ||
-    location.pathname.includes('/vendor/profile') ||
-    location.pathname.includes('/vendor/deals') ||
-    location.pathname.includes('/vendor/search') ||
+    location.pathname.includes('/profile') ||
+    location.pathname.includes('/deals') ||
+    location.pathname.includes('/search') ||
     location.pathname.includes('wishlist');
 
   const hideHeader = isImmersivePage;
@@ -113,28 +113,28 @@ const VendorLayout = () => {
       {/* Mobile-First Bottom Navbar (Fixed) */}
       {!hideFooter && (
         <nav className={`md:hidden fixed bottom-0 left-0 right-0 border-t px-6 py-2 flex justify-between items-center z-50 transition-colors duration-300 ${isDarkMode ? 'bg-black border-[var(--color-gold)]/20 text-[var(--color-gold)] shadow-[0_-2px_20px_rgba(212,175,55,0.1)]' : 'bg-white border-gray-200 text-slate-900 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]'}`}>
-        <Link to="/vendor/home" className={`flex flex-col items-center transition-transform active:scale-90`}>
+        <Link to="/home" className={`flex flex-col items-center transition-transform active:scale-90`}>
           <HomeIcon size={22} strokeWidth={1.5} />
-          <span className={`text-[10px] ${location.pathname === '/vendor/home' ? 'font-black' : 'font-medium'}`}>Home</span>
-          {location.pathname === '/vendor/home' && <div className="w-1 h-1 bg-current rounded-full mt-0.5 animate-pulse" />}
+          <span className={`text-[10px] ${location.pathname === '/home' ? 'font-black' : 'font-medium'}`}>Home</span>
+          {location.pathname === '/home' && <div className="w-1 h-1 bg-current rounded-full mt-0.5 animate-pulse" />}
         </Link>
         <Link 
-          to="/vendor/categories"
-          className={`flex flex-col items-center transition-transform active:scale-90 ${location.pathname === '/vendor/categories' ? 'text-[#2874f0]' : ''}`}
+          to="/categories"
+          className={`flex flex-col items-center transition-transform active:scale-90 ${location.pathname === '/categories' ? 'text-[#2874f0]' : ''}`}
         >
           <LayoutGrid size={22} strokeWidth={1.5} />
-          <span className={`text-[10px] ${location.pathname === '/vendor/categories' ? 'font-black' : 'font-medium'}`}>Categories</span>
+          <span className={`text-[10px] ${location.pathname === '/categories' ? 'font-black' : 'font-medium'}`}>Categories</span>
         </Link>
-        <Link to="/vendor/cart" className={`flex flex-col items-center transition-transform active:scale-90`}>
+        <Link to="/cart" className={`flex flex-col items-center transition-transform active:scale-90`}>
           <div className="relative">
             <ShoppingCart size={22} strokeWidth={1.5} />
             <span className={`absolute -top-1 -right-1.5 text-[8px] font-black px-1 rounded-full border shadow-sm ${isDarkMode ? 'bg-[var(--color-gold)] text-black border-black' : 'bg-[#cc0c39] text-white border-white'}`}>{cartCount}</span>
           </div>
-          <span className={`text-[10px] ${location.pathname === '/vendor/cart' ? 'font-black' : 'font-medium'}`}>Cart</span>
+          <span className={`text-[10px] ${location.pathname === '/cart' ? 'font-black' : 'font-medium'}`}>Cart</span>
         </Link>
-        <Link to="/vendor/profile" className={`flex flex-col items-center transition-transform active:scale-90`}>
+        <Link to="/profile" className={`flex flex-col items-center transition-transform active:scale-90`}>
           <User size={22} strokeWidth={1.5} />
-          <span className={`text-[10px] ${location.pathname === '/vendor/profile' ? 'font-black' : 'font-medium'}`}>You</span>
+          <span className={`text-[10px] ${location.pathname === '/profile' ? 'font-black' : 'font-medium'}`}>You</span>
         </Link>
       </nav>
       )}

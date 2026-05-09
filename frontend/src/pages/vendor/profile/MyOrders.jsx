@@ -1,101 +1,463 @@
-import React from 'react';
-import { ArrowLeft, ChevronRight, Truck, CheckCircle2, LayoutGrid } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { 
+  ArrowLeft, ChevronRight, Search, ListFilter, Star, 
+  Edit3, ShoppingBag, X, Check, Calendar, Package, Filter, MessageSquare
+} from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import useAccountStore from '../../../store/useAccountStore';
 
-const MyOrders = () => {
-  const navigate = useNavigate();
+// Real Images from Assets
+import BannerImg from '../../../assets/Banner.jpeg';
+import FashionHero from '../../../assets/Cards/fashion_hero.png';
+import ElectronicsDeal from '../../../assets/Cards/electronics_deal.png';
 
-  const orders = [
-    {
-      id: 'OD123456789',
-      status: 'DELIVERED',
-      date: '25 Apr 2026',
-      items: [
-        { name: 'Sleek Geometric Pendant', price: '4,499', image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=200' }
-      ]
+const BannerCarousel = () => {
+  const [currentBanner, setCurrentBanner] = useState(0);
+  const [isBannerLoaded, setIsBannerLoaded] = useState(false);
+
+  const banners = [
+    { 
+      image: BannerImg, 
+      title: "Super Saver Days", 
+      desc: "Up to 80% Off on Electronics", 
+      label: "SALE"
     },
-    {
-      id: 'OD123456790',
-      status: 'SHIPPED',
-      date: '27 Apr 2026',
-      items: [
-        { name: 'Premium Hard Trolley', price: '3,499', image: 'https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=200' }
-      ]
+    { 
+      image: FashionHero, 
+      title: "Fashion Carnival", 
+      desc: "Extra 20% Off for Plus Members", 
+      label: "OFFER"
+    },
+    { 
+      image: ElectronicsDeal, 
+      title: "Tech Spotlight", 
+      desc: "Latest Gadgets at Best Prices", 
+      label: "NEW"
     }
   ];
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIsBannerLoaded(false);
+      setCurrentBanner((prev) => (prev + 1) % banners.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [banners.length]);
+
   return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="bg-white min-h-screen text-slate-800 font-sans"
-    >
-      {/* Header - Matching Screenshot */}
-      <div className="sticky top-0 z-50 bg-white border-b border-gray-50 p-6 flex items-center gap-6">
-        <button onClick={() => navigate(-1)} className="text-slate-900 active:scale-90 transition-transform">
-          <ArrowLeft size={28} strokeWidth={2.5} />
-        </button>
-        <h1 className="text-[22px] font-black uppercase tracking-tight text-[#1c2331]">My Orders</h1>
-      </div>
+    <div className="p-4">
+      <div className="rounded-2xl relative overflow-hidden h-44 shadow-lg group bg-gray-100">
+        <AnimatePresence mode="wait">
+          <motion.div 
+            key={currentBanner}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: isBannerLoaded ? 1 : 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="absolute inset-0 w-full h-full"
+          >
+            <img 
+              src={banners[currentBanner].image} 
+              className="w-full h-full object-cover" 
+              alt="banner" 
+              onLoad={() => setIsBannerLoaded(true)}
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent" />
+          </motion.div>
+        </AnimatePresence>
 
-      <div className="container mx-auto px-5 py-8 max-w-xl space-y-6">
-        {orders.map((order) => (
-          <div key={order.id} className="bg-[#cccccc] rounded-[32px] p-6 space-y-5 shadow-sm active:scale-[0.98] transition-transform cursor-pointer overflow-hidden border border-gray-200">
-            {/* Order Status Header */}
-            <div className="flex justify-between items-center border-b border-white/30 pb-4">
-              <div className="flex items-center gap-3">
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                  order.status === 'DELIVERED' ? 'bg-green-100 text-green-600' : 'bg-blue-100 text-blue-600'
-                }`}>
-                   {order.status === 'DELIVERED' ? <CheckCircle2 size={18} strokeWidth={2.5} /> : <Truck size={18} strokeWidth={2.5} />}
-                </div>
-                <span className={`text-[13px] font-black tracking-widest ${
-                  order.status === 'DELIVERED' ? 'text-[#2ecc71]' : 'text-[#3498db]'
-                }`}>{order.status}</span>
-              </div>
-              <span className="text-[11px] font-bold text-slate-600 uppercase tracking-widest">Order ID: {order.id}</span>
-            </div>
-
-            {/* Product Detail Section */}
-            {order.items.map((item, idx) => (
-              <div key={idx} className="flex gap-5 items-center">
-                <div className="w-24 h-24 bg-white rounded-3xl overflow-hidden p-3 flex-shrink-0 shadow-inner">
-                  <img src={item.image} alt={item.name} className="w-full h-full object-contain" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-[16px] font-black text-[#1c2331] leading-tight mb-1">{item.name}</h3>
-                  <p className="text-[15px] font-black text-[#f39c12]">₹{item.price}</p>
-                  <p className="text-[11px] text-slate-500 mt-2 font-bold uppercase tracking-wide">Ordered on {order.date}</p>
-                </div>
-                <div className="flex items-center pr-1">
-                  <ChevronRight size={24} className="text-slate-600" />
-                </div>
-              </div>
-            ))}
-          </div>
-        ))}
-
-        {orders.length === 0 && (
-          <div className="flex flex-col items-center justify-center py-24 text-center">
-             <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center text-gray-300 mb-6">
-                <LayoutGrid size={40} />
-             </div>
-             <h3 className="text-xl font-black uppercase text-slate-800">No Orders Found</h3>
-             <p className="text-sm text-slate-500 font-bold mt-2">Looks like you haven't placed any orders yet.</p>
-             <button 
-               onClick={() => navigate('/vendor/home')} 
-               className="mt-8 bg-[#2874f0] text-white px-10 py-4 rounded-2xl font-black uppercase tracking-widest text-[12px] shadow-lg shadow-blue-100"
-             >
-                Start Shopping
-             </button>
+        {!isBannerLoaded && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-8 h-8 border-4 border-blue-200 border-t-blue-500 rounded-full animate-spin" />
           </div>
         )}
+
+        <AnimatePresence>
+          {isBannerLoaded && (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="relative z-10 px-8 h-full flex flex-col justify-center"
+            >
+              <motion.div 
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  className="flex items-center gap-2 mb-2"
+              >
+                  <div className="bg-[#ffc107] text-slate-900 px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider">{banners[currentBanner].label}</div>
+              </motion.div>
+              <motion.h2 
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 }}
+                  className="text-white text-[24px] font-black leading-tight drop-shadow-lg"
+                >
+                  {banners[currentBanner].title}
+                </motion.h2>
+              <motion.p 
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="text-white/90 text-[15px] font-medium mt-1 drop-shadow-md"
+                >
+                  {banners[currentBanner].desc}
+                </motion.p>
+              <button className="mt-5 w-fit bg-white text-slate-900 px-8 py-2.5 rounded-full text-[12px] font-black uppercase tracking-widest shadow-xl active:scale-95 transition-transform">
+                Shop Now
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <div className="absolute bottom-5 right-8 flex gap-2.5">
+          {banners.map((_, i) => (
+            <button 
+              key={i} 
+              onClick={() => {
+                if (i !== currentBanner) {
+                  setIsBannerLoaded(false);
+                  setCurrentBanner(i);
+                }
+              }}
+              className={`h-1.5 rounded-full transition-all duration-300 ${i === currentBanner ? 'w-8 bg-white' : 'w-2 bg-white/40'}`} 
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const MyOrders = () => {
+  const navigate = useNavigate();
+  const orders = useAccountStore((state) => state.orders);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showFilterSheet, setShowFilterSheet] = useState(false);
+  const [showReviewModal, setShowReviewModal] = useState(null); 
+  const [ratings, setRatings] = useState({}); 
+  
+  const [activeFilters, setActiveFilters] = useState({
+    status: 'All',
+    time: 'Anytime'
+  });
+
+  const filteredOrders = orders.filter(order => {
+    const matchesSearch = 
+      order.items.some(item => item.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      order.id.toLowerCase().includes(searchQuery.toLowerCase());
+    
+    const matchesStatus = activeFilters.status === 'All' || order.status.toLowerCase() === activeFilters.status.toLowerCase();
+    const matchesTime = activeFilters.time === 'Anytime' || true; 
+
+    return matchesSearch && matchesStatus && matchesTime;
+  });
+
+  const statusOptions = ['All', 'Delivered', 'Cancelled', 'Confirmed', 'Shipped', 'Returned'];
+  const timeOptions = ['Anytime', 'Last 30 days', '2026', '2025', 'Older'];
+
+  const OrderCard = ({ order }) => {
+    const mainItem = order.items[0];
+    const statusColor = order.status === 'Delivered' ? 'text-green-600' : order.status === 'Cancelled' ? 'text-red-600' : 'text-blue-600';
+    const currentOrderRating = ratings[order.id] || { rating: 0, review: '' };
+
+    return (
+      <motion.div 
+        layout
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="bg-white mx-3 my-2 rounded-xl shadow-sm border border-gray-100 p-3 active:bg-gray-50 transition-all cursor-pointer group"
+      >
+        <div className="flex gap-3" onClick={() => navigate(`/vendor/profile/orders/${order.id}`)}>
+          {/* Compact Image */}
+          <div className="w-16 h-20 bg-gray-50 rounded-lg overflow-hidden flex-shrink-0 flex items-center justify-center p-1.5 border border-gray-100">
+            <img src={mainItem.image} alt={mainItem.name} className="w-full h-full object-contain mix-blend-multiply" />
+          </div>
+
+          <div className="flex-1 min-w-0 flex flex-col justify-between py-0.5">
+            <div className="flex justify-between items-start">
+              <div className="flex-1 pr-2">
+                <p className={`text-[13px] font-bold mb-0.5 ${statusColor}`}>
+                  {order.status} on {order.date}
+                </p>
+                <h3 className="text-[12px] text-gray-500 line-clamp-1 leading-tight font-medium">
+                  {mainItem.name}
+                </h3>
+              </div>
+              <ChevronRight size={16} className="text-gray-300 mt-0.5 flex-shrink-0 group-hover:text-blue-500 group-hover:translate-x-1 transition-all" />
+            </div>
+
+            {/* Compact Bottom Section */}
+            <div className="mt-2 flex items-center justify-between" onClick={(e) => e.stopPropagation()}>
+              <div className="flex items-center gap-1.5">
+                <span className="text-[10px] text-gray-400 font-bold uppercase tracking-tight">
+                  {currentOrderRating.rating > 0 ? 'Your Rating' : 'Rate & Review'}
+                </span>
+                <div className="flex gap-0.5">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <Star 
+                      key={star} 
+                      size={14} 
+                      onClick={() => setRatings(prev => ({ ...prev, [order.id]: { ...currentOrderRating, rating: star } }))}
+                      className={`cursor-pointer transition-colors ${star <= currentOrderRating.rating ? 'text-green-600 fill-green-600' : 'text-gray-200'}`} 
+                    />
+                  ))}
+                </div>
+              </div>
+              {order.status === 'Delivered' && (
+                <button 
+                  onClick={() => setShowReviewModal(order.id)}
+                  className="flex items-center gap-1 px-2.5 py-1.5 border border-blue-100 bg-blue-50/50 rounded-lg text-blue-600 text-[10px] font-black uppercase tracking-tight active:scale-95 transition-transform"
+                >
+                  <Edit3 size={11} />
+                  Write Review
+                </button>
+              )}
+            </div>
+            {currentOrderRating.review && (
+              <p className="mt-1.5 text-[11px] text-gray-500 italic line-clamp-1 border-l-2 border-green-500 pl-2">
+                "{currentOrderRating.review}"
+              </p>
+            )}
+          </div>
+        </div>
+      </motion.div>
+    );
+  };
+
+  return (
+    <div className="bg-[#f1f2f4] min-h-screen font-nunito pb-20">
+      {/* Header */}
+      <div className="sticky top-0 z-50 bg-white px-4 py-4 flex items-center gap-4 shadow-sm">
+        <button onClick={() => navigate(-1)} className="p-1 -ml-1 text-slate-800 active:scale-90 transition-transform">
+          <ArrowLeft size={24} />
+        </button>
+        <h1 className="text-[18px] font-bold text-slate-900 font-montserrat">My Orders</h1>
       </div>
 
-      {/* Background Decor (Matching Theme) */}
-      <div className="fixed -bottom-10 -right-10 w-64 h-64 bg-gray-50 rounded-full -z-10 blur-3xl opacity-50" />
-    </motion.div>
+      <div className="max-w-2xl mx-auto">
+        {/* Working Banner Carousel - Optimized for Performance */}
+        <BannerCarousel />
+
+        {/* Search & Filters */}
+        <div className="px-4 pb-4 sticky top-[68px] z-40 bg-[#f1f2f4]/80 backdrop-blur-md">
+           <div className="flex gap-3">
+              <div className="flex-1 bg-white border border-gray-200 rounded-xl px-4 py-3 flex items-center gap-3 shadow-sm focus-within:ring-2 focus-within:ring-blue-500 transition-all">
+                 <Search size={18} className="text-gray-400" />
+                 <input 
+                   type="text" 
+                   placeholder="Search your order here" 
+                   className="flex-1 bg-transparent border-none outline-none text-[14px] text-slate-800 placeholder:text-gray-400 font-medium"
+                   value={searchQuery}
+                   onChange={(e) => setSearchQuery(e.target.value)}
+                 />
+                 {searchQuery && (
+                   <button onClick={() => setSearchQuery('')} className="text-gray-400 hover:text-slate-600">
+                     <X size={16} />
+                   </button>
+                 )}
+              </div>
+              <button 
+                onClick={() => setShowFilterSheet(true)}
+                className={`bg-white border border-gray-200 rounded-xl px-4 flex items-center gap-2 shadow-sm active:scale-95 transition-all ${activeFilters.status !== 'All' ? 'border-blue-500 bg-blue-50' : ''}`}
+              >
+                 <ListFilter size={18} className={activeFilters.status !== 'All' ? 'text-blue-600' : 'text-gray-600'} />
+                 <span className={`text-[13px] font-bold ${activeFilters.status !== 'All' ? 'text-blue-600' : 'text-gray-700'}`}>Filters</span>
+                 {activeFilters.status !== 'All' && <div className="w-2 h-2 bg-blue-600 rounded-full" />}
+              </button>
+           </div>
+        </div>
+
+        {/* Orders List */}
+        <div className="bg-white shadow-sm mt-2 border-t border-gray-100">
+           <AnimatePresence mode="popLayout">
+              {filteredOrders.length > 0 ? (
+                filteredOrders.map((order) => (
+                  <OrderCard key={order.id} order={order} />
+                ))
+              ) : (
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="flex flex-col items-center justify-center py-24 px-10 text-center bg-white"
+                >
+                  <div className="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center text-gray-200 mb-8">
+                    <ShoppingBag size={48} />
+                  </div>
+                  <h3 className="text-[20px] font-black text-slate-800 uppercase tracking-tight">No Orders Found</h3>
+                  <p className="text-[14px] text-gray-400 mt-3 max-w-[240px] mx-auto font-medium leading-relaxed">
+                    {searchQuery ? "We couldn't find anything matching your search." : "Looks like you haven't placed any orders recently."}
+                  </p>
+                  <button 
+                    onClick={() => navigate('/vendor/home')}
+                    className="mt-10 bg-[#2874f0] text-white px-12 py-4 rounded-2xl font-black uppercase tracking-widest text-[12px] shadow-xl shadow-blue-100 active:scale-95 transition-transform"
+                  >
+                    Start Shopping
+                  </button>
+                </motion.div>
+              )}
+           </AnimatePresence>
+        </div>
+      </div>
+
+      {/* Review Modal */}
+      <AnimatePresence>
+        {showReviewModal && (
+          <div className="fixed inset-0 z-[200] flex items-center justify-center px-4">
+             <motion.div 
+               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+               onClick={() => setShowReviewModal(null)}
+               className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+             />
+             <motion.div 
+               initial={{ scale: 0.9, opacity: 0 }}
+               animate={{ scale: 1, opacity: 1 }}
+               exit={{ scale: 0.9, opacity: 0 }}
+               className="relative w-full max-w-md bg-white rounded-[24px] overflow-hidden shadow-2xl p-6"
+             >
+                <div className="flex justify-between items-center mb-6">
+                   <h3 className="text-[18px] font-black text-slate-900 uppercase tracking-tight">Write a Review</h3>
+                   <button onClick={() => setShowReviewModal(null)} className="p-2 bg-gray-100 rounded-full">
+                      <X size={18} className="text-gray-500" />
+                   </button>
+                </div>
+                
+                <div className="flex flex-col items-center mb-8">
+                   <div className="flex gap-2 mb-3">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <Star 
+                          key={star} 
+                          size={32} 
+                          onClick={() => setRatings(prev => ({ ...prev, [showReviewModal]: { ...prev[showReviewModal], rating: star } }))}
+                          className={`cursor-pointer transition-all active:scale-125 ${star <= (ratings[showReviewModal]?.rating || 0) ? 'text-green-600 fill-green-600 shadow-sm' : 'text-gray-200'}`} 
+                        />
+                      ))}
+                   </div>
+                   <p className="text-[13px] font-bold text-gray-400 uppercase tracking-widest">
+                     {(ratings[showReviewModal]?.rating === 5 && 'Excellent!') || 
+                      (ratings[showReviewModal]?.rating === 4 && 'Very Good!') || 
+                      (ratings[showReviewModal]?.rating === 3 && 'Good') || 
+                      (ratings[showReviewModal]?.rating === 2 && 'Fair') || 
+                      (ratings[showReviewModal]?.rating === 1 && 'Bad') || 'Select Rating'}
+                   </p>
+                </div>
+
+                <div className="bg-gray-50 rounded-2xl p-4 border border-gray-100 mb-6">
+                   <textarea 
+                    placeholder="Share your experience with this product..."
+                    className="w-full bg-transparent border-none outline-none text-[14px] text-slate-800 placeholder:text-gray-400 min-h-[120px] resize-none"
+                    value={ratings[showReviewModal]?.review || ''}
+                    onChange={(e) => setRatings(prev => ({ ...prev, [showReviewModal]: { ...prev[showReviewModal], review: e.target.value } }))}
+                   />
+                </div>
+
+                <button 
+                  onClick={() => setShowReviewModal(null)}
+                  className="w-full bg-slate-900 text-white py-4 rounded-2xl font-black uppercase tracking-widest text-[13px] shadow-xl active:scale-[0.98] transition-transform flex items-center justify-center gap-2"
+                >
+                   <MessageSquare size={18} />
+                   Submit Review
+                </button>
+             </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Filter Bottom Sheet */}
+      <AnimatePresence>
+        {showFilterSheet && (
+          <div className="fixed inset-0 z-[100] flex items-end justify-center">
+             <motion.div 
+               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+               onClick={() => setShowFilterSheet(false)}
+               className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+             />
+             <motion.div 
+               initial={{ y: "100%" }}
+               animate={{ y: 0 }}
+               exit={{ y: "100%" }}
+               transition={{ type: "spring", damping: 25, stiffness: 300 }}
+               className="relative w-full max-w-xl bg-white rounded-t-[32px] overflow-hidden shadow-2xl"
+             >
+                <div className="p-6">
+                   <div className="flex justify-between items-center mb-8">
+                      <div className="flex items-center gap-3">
+                         <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center">
+                            <Filter size={20} className="text-blue-600" />
+                         </div>
+                         <h2 className="text-[20px] font-black text-slate-900 uppercase tracking-tight">Filter Orders</h2>
+                      </div>
+                      <button onClick={() => setShowFilterSheet(false)} className="bg-gray-100 p-2 rounded-full active:scale-90 transition-transform">
+                         <X size={20} className="text-gray-500" />
+                      </button>
+                   </div>
+
+                   <div className="mb-8">
+                      <p className="text-[11px] font-black text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                        <Package size={14} /> Order Status
+                      </p>
+                      <div className="flex flex-wrap gap-2.5">
+                         {statusOptions.map(opt => (
+                            <button 
+                              key={opt}
+                              onClick={() => setActiveFilters(prev => ({ ...prev, status: opt }))}
+                              className={`px-5 py-2.5 rounded-xl text-[13px] font-bold transition-all ${
+                                activeFilters.status === opt 
+                                ? 'bg-[#2874f0] text-white shadow-lg shadow-blue-100 scale-105' 
+                                : 'bg-gray-50 text-slate-600 border border-gray-100'
+                              }`}
+                            >
+                               {opt}
+                            </button>
+                         ))}
+                      </div>
+                   </div>
+
+                   <div className="mb-10">
+                      <p className="text-[11px] font-black text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                        <Calendar size={14} /> Timeframe
+                      </p>
+                      <div className="flex flex-wrap gap-2.5">
+                         {timeOptions.map(opt => (
+                            <button 
+                              key={opt}
+                              onClick={() => setActiveFilters(prev => ({ ...prev, time: opt }))}
+                              className={`px-5 py-2.5 rounded-xl text-[13px] font-bold transition-all ${
+                                activeFilters.time === opt 
+                                ? 'bg-[#2874f0] text-white shadow-lg shadow-blue-100 scale-105' 
+                                : 'bg-gray-50 text-slate-600 border border-gray-100'
+                              }`}
+                            >
+                               {opt}
+                            </button>
+                         ))}
+                      </div>
+                   </div>
+
+                   <div className="flex gap-4">
+                      <button 
+                        onClick={() => {
+                          setActiveFilters({ status: 'All', time: 'Anytime' });
+                          setShowFilterSheet(false);
+                        }}
+                        className="flex-1 py-4 border border-gray-200 rounded-2xl text-[13px] font-black uppercase tracking-widest text-slate-500 active:bg-gray-50 transition-colors"
+                      >
+                         Clear All
+                      </button>
+                      <button 
+                        onClick={() => setShowFilterSheet(false)}
+                        className="flex-[2] py-4 bg-slate-900 text-white rounded-2xl text-[13px] font-black uppercase tracking-widest shadow-xl active:scale-[0.98] transition-transform"
+                      >
+                         Apply Filters
+                      </button>
+                   </div>
+                </div>
+                <div className="h-6" />
+             </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 };
 

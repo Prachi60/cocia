@@ -39,7 +39,7 @@ import MyReviews from '../pages/vendor/profile/MyReviews';
 import QuestionsAnswers from '../pages/vendor/profile/QuestionsAnswers';
 import OrderDetail from '../pages/vendor/profile/OrderDetail';
 
-const VendorRoutes = () => {
+const MarketRoutes = () => {
   return (
     <Routes>
       {/* Auth routes without layout */}
@@ -93,4 +93,4 @@ const VendorRoutes = () => {
   );
 };
 
-export default VendorRoutes;
+export default MarketRoutes;

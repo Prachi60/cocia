@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import VendorRoutes from './routes/VendorRoutes';
+import MarketRoutes from './routes/MarketRoutes';
+import SellerRoutes from './routes/SellerRoutes';
 import AdminRoutes from './routes/AdminRoutes';
 
 function App() {
@@ -19,14 +20,12 @@ function App() {
         }
       }} />
       <Routes>
-        {/* Admin Panel Routes */}
+        {/* Unified Admin Management Panel */}
         <Route path="/admin/*" element={<AdminRoutes />} />
 
-        {/* Vendor Panel Routes */}
-        <Route path="/vendor/*" element={<VendorRoutes />} />
-
-        {/* Default Redirect */}
-        <Route path="/" element={<Navigate to="/vendor/home" replace />} />
+        {/* Marketplace App (Restored to root and /vendor) */}
+        <Route path="/vendor/*" element={<MarketRoutes />} />
+        <Route path="/*" element={<MarketRoutes />} />
       </Routes>
     </BrowserRouter>
   );

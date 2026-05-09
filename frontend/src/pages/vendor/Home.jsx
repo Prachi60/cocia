@@ -43,7 +43,7 @@ import useVendorStore from '../../store/useVendorStore';
 const Home = () => {
   const [activeTab, setActiveTab] = useState('For You');
   const navigate = useNavigate();
-  const { selectedCategory } = useVendorStore();
+  const { selectedCategory, homeSections } = useVendorStore();
 
   const categoryBanners = useMemo(() => ({
     'Home': [
@@ -79,38 +79,6 @@ const Home = () => {
   }), []);
 
   const data = useMemo(() => ({
-    stillLooking: [
-      { label: 'Co-ords', img: FashionHero },
-      { label: 'Necklaces', img: JewelleryImg },
-      { label: "Women's Tops", img: ClothesImg },
-      { label: 'Lipsticks', img: LipstickDeal }
-    ],
-    topSelection: [
-      { name: 'Biotique Face Wash', tag: 'Grab Or Gone', img: PlumShampoo },
-      { name: 'Lakmé Moisturizer', tag: 'Best Picks', img: MakeupHero },
-      { name: 'Vaseline Lip Balm', tag: 'Popular', img: LorealShampoo },
-      { name: 'MARS Lipstick', tag: 'Widest Range', img: LipGloss }
-    ],
-    brandsSpotlight: [
-      { title: 'Flat 73% off', sub: 'Limited time deal', img: EarbudsDeal },
-      { title: 'Shop now', sub: 'Blend easily', img: MakeupHero },
-      { title: 'Coming to India', sub: 'CMF Watch 3 Pro', img: EarbudsDeal },
-      { title: 'Just ₹599', sub: 'Lowest price ever', img: PlumShampoo },
-      { title: 'From ₹1,099', sub: 'Track your health', img: LorealShampoo },
-      { title: 'Spl.price ₹899', sub: 'Sale price live', img: LipGloss }
-    ],
-    bestQuality: [
-      { name: "GUTI Women's Jeans", tag: 'Grab Or Gone', img: FashionHero },
-      { name: "Mandarin Women's Shirts", tag: 'Popular', img: ClothesImg },
-      { name: 'Royatto Necklaces', tag: 'Popular', img: JewelleryImg },
-      { name: "Sqew Women's Trousers", tag: 'In Focus Now', img: FashionHero }
-    ],
-    keepShopping: [
-      { label: 'Suitcases', img: Suitcase },
-      { label: 'Smartphones', img: SamsungS24 },
-      { label: 'Electronics', img: ElectronicsHero },
-      { label: 'Beauty', img: MakeupHero }
-    ],
     ratings: [
       { name: 'SONATA...', fullName: 'SONATA NP7987YM06W So...', date: 'Delivered on Apr 13, 2026', img: JewelleryImg },
       { name: 'LAKME...', fullName: 'LAKME 9TO5 VITAMIN C+...', date: 'Delivered on Apr 10, 2026', img: MakeupHero }
@@ -166,23 +134,23 @@ const Home = () => {
       {(selectedCategory === 'For You' || selectedCategory === 'Home') && (
         <>
           <LazySection height="240px">
-            <StillLookingSection items={data.stillLooking} />
+            <StillLookingSection items={homeSections.stillLooking} />
           </LazySection>
 
           <LazySection height="400px">
-            <TopSelection items={data.topSelection} />
+            <TopSelection items={homeSections.topSelection} />
           </LazySection>
 
           <LazySection height="350px">
-            <BrandsSpotlight items={data.brandsSpotlight} />
+            <BrandsSpotlight items={homeSections.brandsSpotlight} />
           </LazySection>
 
           <LazySection height="500px">
-            <BestQuality items={data.bestQuality} />
+            <BestQuality items={homeSections.bestQuality} />
           </LazySection>
 
           <LazySection height="250px">
-            <KeepShopping items={data.keepShopping} />
+            <KeepShopping items={homeSections.keepShopping} />
           </LazySection>
 
           <LazySection height="200px">
