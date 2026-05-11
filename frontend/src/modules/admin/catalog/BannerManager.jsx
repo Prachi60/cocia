@@ -33,7 +33,98 @@ const INITIAL_BANNERS = {
 
 const CATEGORY_TABS = ['Home', 'Fashion', 'Beauty', 'Toys', 'Electronics'];
 
-const EMPTY_BANNER = { title: '', subtitle: '', image: '', link: '/home', active: true };
+const EMPTY_BANNER = { title: '', subtitle: '', image: '', link: '/home', active: true, targetCategory: 'Home' };
+
+const BannerForm = ({ formData, setFormData, onSave, onCancel, label, categories }) => (
+  <motion.div
+    initial={{ opacity: 0, y: -10 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -10 }}
+    className="bg-blue-50/60 border border-blue-100 rounded-xl p-4 space-y-3 mb-4"
+  >
+    <div className="flex justify-between items-center border-b border-blue-100 pb-2">
+      <p className="text-[10px] font-black text-blue-500 uppercase tracking-widest">{label}</p>
+      <div className="flex items-center gap-2">
+         <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Show in:</label>
+         <select 
+            value={formData.targetCategory}
+            onChange={e => setFormData(p => ({ ...p, targetCategory: e.target.value }))}
+            className="bg-white border border-slate-200 rounded-lg px-2 py-1 text-[10px] font-bold outline-none"
+         >
+            {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
+         </select>
+      </div>
+    </div>
+    <div className="grid grid-cols-2 gap-3">
+      <div>
+        <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1">Banner Title *</label>
+        <input
+          value={formData.title}
+          onChange={e => setFormData(p => ({ ...p, title: e.target.value }))}
+          placeholder="e.g. Summer Sale"
+          className="w-full border border-slate-200 rounded-lg px-3 py-2 text-[12px] font-bold outline-none focus:ring-2 focus:ring-blue-200 bg-white"
+        />
+      </div>
+      <div>
+        <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1">Subtitle</label>
+        <input
+          value={formData.subtitle}
+          onChange={e => setFormData(p => ({ ...p, subtitle: e.target.value }))}
+          placeholder="e.g. Up to 70% Off"
+          className="w-full border border-slate-200 rounded-lg px-3 py-2 text-[12px] font-bold outline-none focus:ring-2 focus:ring-blue-200 bg-white"
+        />
+      </div>
+      <div className="col-span-2">
+        <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1">Image URL *</label>
+        <input
+          value={formData.image}
+          onChange={e => setFormData(p => ({ ...p, image: e.target.value }))}
+          placeholder="https://... or upload image"
+          className="w-full border border-slate-200 rounded-lg px-3 py-2 text-[12px] font-bold outline-none focus:ring-2 focus:ring-blue-200 bg-white"
+        />
+      </div>
+      <div>
+        <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1">Link (on click)</label>
+        <input
+          value={formData.link}
+          onChange={e => setFormData(p => ({ ...p, link: e.target.value }))}
+          placeholder="/home or /vendor/beauty"
+          className="w-full border border-slate-200 rounded-lg px-3 py-2 text-[12px] font-bold outline-none focus:ring-2 focus:ring-blue-200 bg-white"
+        />
+      </div>
+      <div className="flex items-end gap-3">
+        <label className="flex items-center gap-2 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={formData.active}
+            onChange={e => setFormData(p => ({ ...p, active: e.target.checked }))}
+            className="accent-blue-500 w-4 h-4"
+          />
+          <span className="text-[11px] font-bold text-slate-600">Active on publish</span>
+        </label>
+      </div>
+    </div>
+    {/* Preview */}
+    {formData.image && (
+      <div className="relative rounded-lg overflow-hidden h-20 bg-slate-100 border border-slate-200">
+        <img src={formData.image} alt="Preview" className="w-full h-full object-cover" onError={e => e.target.style.display='none'} />
+        <div className="absolute bottom-2 left-3 text-white">
+          <p className="text-[11px] font-black">{formData.title}</p>
+          <p className="text-[9px] opacity-80">{formData.subtitle}</p>
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+      </div>
+    )}
+    <div className="flex gap-2">
+      <button onClick={onSave} className="px-4 py-2 bg-blue-500 text-white rounded-lg text-[10px] font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all flex items-center gap-1.5">
+        <Save size={12} /> Save Banner
+      </button>
+      <button onClick={onCancel} className="px-4 py-2 bg-slate-100 text-slate-600 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-slate-200 transition-all flex items-center gap-1.5">
+        <X size={12} /> Cancel
+      </button>
+    </div>
+  </motion.div>
+);
 
 const BannerManager = () => {
   const [banners, setBanners] = useState(INITIAL_BANNERS);
@@ -61,16 +152,42 @@ const BannerManager = () => {
 
   const handleEdit = (banner) => {
     setEditingId(banner.id);
-    setFormData({ title: banner.title, subtitle: banner.subtitle, image: banner.image, link: banner.link, active: banner.active });
+    setFormData({ 
+      title: banner.title, 
+      subtitle: banner.subtitle, 
+      image: banner.image, 
+      link: banner.link, 
+      active: banner.active,
+      targetCategory: activeTab
+    });
     setIsAdding(false);
   };
 
   const handleSaveEdit = () => {
     if (!formData.title || !formData.image) return;
-    setBanners(prev => ({
-      ...prev,
-      [activeTab]: prev[activeTab].map(b => b.id === editingId ? { ...b, ...formData } : b)
-    }));
+    
+    const originalCategory = activeTab;
+    const newCategory = formData.targetCategory;
+
+    setBanners(prev => {
+      const updatedBanners = { ...prev };
+      
+      if (originalCategory === newCategory) {
+        // Simple update within same category
+        updatedBanners[originalCategory] = prev[originalCategory].map(b => 
+          b.id === editingId ? { ...b, ...formData } : b
+        );
+      } else {
+        // Move to different category
+        const bannerToMove = { ...prev[originalCategory].find(b => b.id === editingId), ...formData };
+        updatedBanners[originalCategory] = prev[originalCategory].filter(b => b.id !== editingId);
+        updatedBanners[newCategory] = [...(prev[newCategory] || []), bannerToMove];
+        setActiveTab(newCategory); // Switch to the new category to show the moved banner
+      }
+      
+      return updatedBanners;
+    });
+    
     setEditingId(null);
     setFormData(EMPTY_BANNER);
   };
@@ -78,10 +195,14 @@ const BannerManager = () => {
   const handleAddNew = () => {
     if (!formData.title || !formData.image) return;
     const newId = Date.now();
+    const targetCat = formData.targetCategory;
+
     setBanners(prev => ({
       ...prev,
-      [activeTab]: [...(prev[activeTab] || []), { id: newId, ...formData }]
+      [targetCat]: [...(prev[targetCat] || []), { id: newId, ...formData }]
     }));
+    
+    setActiveTab(targetCat); // Switch to the target category
     setIsAdding(false);
     setFormData(EMPTY_BANNER);
   };
@@ -91,91 +212,12 @@ const BannerManager = () => {
     setTimeout(() => setSaved(false), 2500);
   };
 
-  const BannerForm = ({ onSave, onCancel, label }) => (
-    <motion.div
-      initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -10 }}
-      className="bg-blue-50/60 border border-blue-100 rounded-xl p-4 space-y-3"
-    >
-      <p className="text-[10px] font-black text-blue-500 uppercase tracking-widest">{label}</p>
-      <div className="grid grid-cols-2 gap-3">
-        <div>
-          <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1">Banner Title *</label>
-          <input
-            value={formData.title}
-            onChange={e => setFormData(p => ({ ...p, title: e.target.value }))}
-            placeholder="e.g. Summer Sale"
-            className="w-full border border-slate-200 rounded-lg px-3 py-2 text-[12px] font-bold outline-none focus:ring-2 focus:ring-blue-200 bg-white"
-          />
-        </div>
-        <div>
-          <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1">Subtitle</label>
-          <input
-            value={formData.subtitle}
-            onChange={e => setFormData(p => ({ ...p, subtitle: e.target.value }))}
-            placeholder="e.g. Up to 70% Off"
-            className="w-full border border-slate-200 rounded-lg px-3 py-2 text-[12px] font-bold outline-none focus:ring-2 focus:ring-blue-200 bg-white"
-          />
-        </div>
-        <div className="col-span-2">
-          <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1">Image URL *</label>
-          <input
-            value={formData.image}
-            onChange={e => setFormData(p => ({ ...p, image: e.target.value }))}
-            placeholder="https://... or upload image"
-            className="w-full border border-slate-200 rounded-lg px-3 py-2 text-[12px] font-bold outline-none focus:ring-2 focus:ring-blue-200 bg-white"
-          />
-        </div>
-        <div>
-          <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1">Link (on click)</label>
-          <input
-            value={formData.link}
-            onChange={e => setFormData(p => ({ ...p, link: e.target.value }))}
-            placeholder="/home or /vendor/beauty"
-            className="w-full border border-slate-200 rounded-lg px-3 py-2 text-[12px] font-bold outline-none focus:ring-2 focus:ring-blue-200 bg-white"
-          />
-        </div>
-        <div className="flex items-end gap-3">
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={formData.active}
-              onChange={e => setFormData(p => ({ ...p, active: e.target.checked }))}
-              className="accent-blue-500 w-4 h-4"
-            />
-            <span className="text-[11px] font-bold text-slate-600">Active on publish</span>
-          </label>
-        </div>
-      </div>
-      {/* Preview */}
-      {formData.image && (
-        <div className="relative rounded-lg overflow-hidden h-20 bg-slate-100 border border-slate-200">
-          <img src={formData.image} alt="Preview" className="w-full h-full object-cover" onError={e => e.target.style.display='none'} />
-          <div className="absolute bottom-2 left-3 text-white">
-            <p className="text-[11px] font-black">{formData.title}</p>
-            <p className="text-[9px] opacity-80">{formData.subtitle}</p>
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-        </div>
-      )}
-      <div className="flex gap-2">
-        <button onClick={onSave} className="px-4 py-2 bg-blue-500 text-white rounded-lg text-[10px] font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all flex items-center gap-1.5">
-          <Save size={12} /> Save Banner
-        </button>
-        <button onClick={onCancel} className="px-4 py-2 bg-slate-100 text-slate-600 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-slate-200 transition-all flex items-center gap-1.5">
-          <X size={12} /> Cancel
-        </button>
-      </div>
-    </motion.div>
-  );
-
   return (
     <div className="space-y-6">
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-black text-slate-900 tracking-tight font-montserrat uppercase">Banner Manager</h1>
+          <h1 className="text-2xl font-semibold text-slate-900 tracking-tight font-montserrat uppercase">Banner Manager</h1>
           <p className="text-[11px] text-slate-400 font-bold uppercase tracking-widest mt-0.5 font-raleway">Control banners shown in the user home carousel</p>
         </div>
         <div className="flex gap-2">
@@ -215,7 +257,10 @@ const BannerManager = () => {
       <AnimatePresence>
         {isAdding && (
           <BannerForm
-            label={`Add new banner for "${activeTab}" tab`}
+            label={`Creating new banner`}
+            formData={formData}
+            setFormData={setFormData}
+            categories={CATEGORY_TABS}
             onSave={handleAddNew}
             onCancel={() => { setIsAdding(false); setFormData(EMPTY_BANNER); }}
           />
@@ -224,7 +269,7 @@ const BannerManager = () => {
 
       {/* Banner List */}
       <div className="space-y-3">
-        <AnimatePresence>
+        <AnimatePresence mode="popLayout">
           {currentBanners.map((banner, index) => (
             <motion.div
               key={banner.id}
@@ -236,7 +281,10 @@ const BannerManager = () => {
             >
               {editingId === banner.id ? (
                 <BannerForm
-                  label={`Editing: "${banner.title}"`}
+                  label={`Editing banner`}
+                  formData={formData}
+                  setFormData={setFormData}
+                  categories={CATEGORY_TABS}
                   onSave={handleSaveEdit}
                   onCancel={() => { setEditingId(null); setFormData(EMPTY_BANNER); }}
                 />

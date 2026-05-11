@@ -19,6 +19,13 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import useAccountStore from '../../store/useAccountStore';
 
+// Import local assets for recently viewed products
+import TshirtImg from '../../assets/products/tshirt.png';
+import ElectronicsImg from '../../assets/Cards/electronics_deal.png';
+import FashionImg from '../../assets/products/Fashion.png';
+import JewelleryImg from '../../assets/products/jewellery.png';
+import ShoesImg from '../../assets/products/flip_flops.png';
+
 const VendorProfile = () => {
   const navigate = useNavigate();
   const { userProfile } = useAccountStore();
@@ -51,10 +58,10 @@ const VendorProfile = () => {
   ];
 
   const recentlyViewed = [
-    { name: "Women's T-sh...", img: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=200' },
-    { name: "Mouse", img: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=200' },
-    { name: "Kids' Camisole...", img: 'https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?w=200' },
-    { name: "Pendant", img: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=200' }
+    { name: "Women's T-sh...", img: TshirtImg },
+    { name: "Mouse", img: ElectronicsImg },
+    { name: "Kids' Camisole...", img: FashionImg },
+    { name: "Pendant", img: JewelleryImg }
   ];
 
   return (
@@ -200,7 +207,7 @@ const VendorProfile = () => {
          <div className="px-4">
             <div className="bg-gray-50 rounded-2xl p-4 flex gap-4 border border-gray-100 relative overflow-hidden">
                <div className="w-16 h-16 bg-white rounded-xl p-2 flex-shrink-0 shadow-sm">
-                  <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=100" className="w-full h-full object-contain" alt="product" />
+                  <img src={ShoesImg} className="w-full h-full object-contain" alt="product" />
                </div>
                <div className="flex-1">
                   <h4 className="text-[14px] font-black text-slate-800">WALKAROO Men Casual</h4>

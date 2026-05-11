@@ -50,7 +50,7 @@ const Bag = () => {
               </div>
               <div className="p-3 bg-blue-50 border border-blue-100 rounded-lg">
                 <p className="text-xs font-bold text-blue-700">Flat ₹500 Cashback</p>
-                <p className="text-[10px] text-blue-600">On your first purchase using ShopHub Pay</p>
+                <p className="text-[10px] text-blue-600">On your first purchase using Cocio Pay</p>
               </div>
             </div>
           </div>

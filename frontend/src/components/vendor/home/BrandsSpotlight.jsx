@@ -34,12 +34,16 @@ const BrandsSpotlight = ({ items }) => {
             onClick={() => handleBrandClick(card)}
             className="flex flex-col gap-1 cursor-pointer group active:scale-95 transition-transform"
           >
-            <div className="relative aspect-square rounded-xl overflow-hidden bg-[#F5F5F5] border border-gray-100 shadow-sm">
+            <div className="relative aspect-square rounded-xl overflow-hidden bg-white border border-gray-100 shadow-sm flex items-center justify-center p-3">
               <img
                 src={card.img}
                 alt={card.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500"
                 loading="lazy"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"%3E%3Crect fill="%23f3f4f6" width="100" height="100"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="12" fill="%239ca3af"%3ENo Image%3C/text%3E%3C/svg%3E';
+                }}
               />
               <div className="absolute top-1 right-1 bg-black/10 backdrop-blur-sm text-white text-[7px] px-1 py-0.5 rounded-sm font-bold border border-white/20">AD</div>
               <div className="absolute bottom-0 left-0 right-0 bg-[#ff0000] text-white text-center py-0.5 text-[9.5px] font-black leading-tight">

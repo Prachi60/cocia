@@ -4,6 +4,14 @@ import { Search as SearchIcon, Filter, ArrowLeft, SlidersHorizontal, LayoutGrid,
 import ProductCard from '../../components/common/ProductCard';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// Import local assets
+import SamsungImg from '../../assets/Cards/samsung_s24.png';
+import EarbudsImg from '../../assets/Cards/earbuds_deal.png';
+import ElectronicsImg from '../../assets/Cards/electronics_deal.png';
+import LaptopImg from '../../assets/Cards/asus_laptop.png';
+import ShoesImg from '../../assets/products/flip_flops.png';
+import JewelleryImg from '../../assets/products/jewellery.png';
+
 const Search = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -13,14 +21,14 @@ const Search = () => {
   const [sortBy, setSortBy] = useState('relevance');
 
   const allProducts = [
-    { id: 1, name: 'Apple iPhone 15 (Blue, 128 GB)', price: '69,999', oldPrice: '79,900', rating: '4.6', reviews: '2,450', image: 'https://images.unsplash.com/photo-1696446701796-da61225697cc?w=400', brand: 'APPLE' },
-    { id: 2, name: 'Sony WH-1000XM5 Wireless Headphones', price: '29,990', oldPrice: '34,990', rating: '4.8', reviews: '1,120', image: 'https://images.unsplash.com/photo-1670057037305-64d84711833d?w=400', brand: 'SONY' },
-    { id: 3, name: 'Samsung Galaxy Watch 6 (44mm)', price: '18,499', oldPrice: '29,999', rating: '4.5', reviews: '890', image: 'https://images.unsplash.com/photo-1695213601569-8088019316d3?w=400', brand: 'SAMSUNG' },
-    { id: 4, name: 'Dell Inspiron 15 Laptop', price: '45,990', oldPrice: '58,000', rating: '4.3', reviews: '560', image: 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=400', brand: 'DELL' },
-    { id: 5, name: 'Nike Air Max Pulse', price: '12,995', oldPrice: '14,995', rating: '4.7', reviews: '320', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400', brand: 'NIKE' },
-    { id: 6, name: 'Adidas Ultraboost Light', price: '16,199', oldPrice: '18,999', rating: '4.6', reviews: '450', image: 'https://images.unsplash.com/photo-1587563871167-1ee9c731aefb?w=400', brand: 'ADIDAS' },
-    { id: 7, name: 'Premium Gold Finish Watch', price: '4,499', oldPrice: '5,999', rating: '4.9', reviews: '1.2k', image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400', brand: 'COCIA' },
-    { id: 8, name: 'Sleek Geometric Pendant', price: '3,499', oldPrice: '4,499', rating: '4.8', reviews: '850', image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=400', brand: 'COCIA' },
+    { id: 1, name: 'Apple iPhone 15 (Blue, 128 GB)', price: '69,999', oldPrice: '79,900', rating: '4.6', reviews: '2,450', image: SamsungImg, brand: 'APPLE' },
+    { id: 2, name: 'Sony WH-1000XM5 Wireless Headphones', price: '29,990', oldPrice: '34,990', rating: '4.8', reviews: '1,120', image: EarbudsImg, brand: 'SONY' },
+    { id: 3, name: 'Samsung Galaxy Watch 6 (44mm)', price: '18,499', oldPrice: '29,999', rating: '4.5', reviews: '890', image: ElectronicsImg, brand: 'SAMSUNG' },
+    { id: 4, name: 'Dell Inspiron 15 Laptop', price: '45,990', oldPrice: '58,000', rating: '4.3', reviews: '560', image: LaptopImg, brand: 'DELL' },
+    { id: 5, name: 'Nike Air Max Pulse', price: '12,995', oldPrice: '14,995', rating: '4.7', reviews: '320', image: ShoesImg, brand: 'NIKE' },
+    { id: 6, name: 'Adidas Ultraboost Light', price: '16,199', oldPrice: '18,999', rating: '4.6', reviews: '450', image: ShoesImg, brand: 'ADIDAS' },
+    { id: 7, name: 'Premium Gold Finish Watch', price: '4,499', oldPrice: '5,999', rating: '4.9', reviews: '1.2k', image: JewelleryImg, brand: 'COCIA' },
+    { id: 8, name: 'Sleek Geometric Pendant', price: '3,499', oldPrice: '4,499', rating: '4.8', reviews: '850', image: JewelleryImg, brand: 'COCIA' },
   ];
 
   const filteredProducts = allProducts.filter(p => 

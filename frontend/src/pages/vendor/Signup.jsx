@@ -52,7 +52,7 @@ const Signup = () => {
         </form>
 
         <p className="text-xs mt-6 text-gray-700 leading-tight">
-          By creating an account, you agree to ShopHub's <a href="#" className="text-blue-600 hover:underline">Conditions of Use</a> and <a href="#" className="text-blue-600 hover:underline">Privacy Notice</a>.
+          By creating an account, you agree to Cocio's <a href="#" className="text-blue-600 hover:underline">Conditions of Use</a> and <a href="#" className="text-blue-600 hover:underline">Privacy Notice</a>.
         </p>
 
         <div className="mt-8 pt-4 border-t border-gray-200">
@@ -69,7 +69,7 @@ const Signup = () => {
           <a href="#" className="text-xs text-blue-600 hover:underline">Privacy Notice</a>
           <a href="#" className="text-xs text-blue-600 hover:underline">Help</a>
         </div>
-        <p className="text-[10px] text-gray-500">© 2026-2027, ShopHub.com, Inc. or its affiliates</p>
+        <p className="text-[10px] text-gray-500">© 2026-2027, Cocio.com, Inc. or its affiliates</p>
       </div>
     </div>
   );

@@ -53,12 +53,16 @@ const StillLookingSection = ({ items }) => {
               onClick={() => handleCardClick(item)}
               className="flex-shrink-0 bg-white rounded-xl p-2 w-[100px] shadow-sm flex flex-col gap-1.5 snap-start cursor-pointer active:scale-95 transition-transform"
             >
-              <div className="aspect-square rounded-lg overflow-hidden bg-gray-50">
+              <div className="aspect-square rounded-lg overflow-hidden bg-gray-50 flex items-center justify-center p-2">
                 <img 
                   src={item.img} 
                   alt={item.label} 
-                  className="w-full h-full object-cover" 
+                  className="w-full h-full object-contain mix-blend-multiply" 
                   loading="lazy"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.parentElement.innerHTML = '<div class="w-full h-full flex items-center justify-center text-gray-400 text-xs">No Image</div>';
+                  }}
                 />
               </div>
               <div>

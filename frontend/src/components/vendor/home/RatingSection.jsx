@@ -31,14 +31,18 @@ const RatingCard = React.memo(({ item }) => {
         onClick={handleProductClick}
         className="flex gap-3 items-center px-0.5 cursor-pointer active:opacity-70 transition-opacity"
       >
-        <div className="w-12 h-12 rounded-none overflow-hidden bg-white border border-gray-100 p-0.5 flex-shrink-0 shadow-sm">
+        <div className="w-12 h-12 rounded-none overflow-hidden bg-white border border-gray-100 p-1 flex-shrink-0 shadow-sm flex items-center justify-center">
           <img 
             src={item.img} 
             alt={item.name} 
-            className="w-full h-full object-contain" 
+            className="w-full h-full object-contain mix-blend-multiply" 
             loading="lazy"
             width="48"
             height="48"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"%3E%3Crect fill="%23f3f4f6" width="48" height="48"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="10" fill="%239ca3af"%3E?%3C/text%3E%3C/svg%3E';
+            }}
           />
         </div>
         <div className="flex-1 min-w-0">

@@ -16,7 +16,7 @@ const Wallet = () => {
                 <div className="p-2 bg-primary rounded-lg">
                    <WalletIcon size={24} className="text-slate-900" />
                 </div>
-                <h1 className="text-xl font-bold">ShopHub Pay Balance</h1>
+                <h1 className="text-xl font-bold">Cocio Pay Balance</h1>
              </div>
              <ChevronRight size={20} className="text-slate-400" />
           </div>

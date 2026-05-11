@@ -1,16 +1,24 @@
 import React from 'react';
 import ProductCard from '../../components/common/ProductCard';
 
+// Import local assets
+import SamsungImg from '../../assets/Cards/samsung_s24.png';
+import EarbudsImg from '../../assets/Cards/earbuds_deal.png';
+import ElectronicsImg from '../../assets/Cards/electronics_deal.png';
+import LaptopImg from '../../assets/Cards/asus_laptop.png';
+import ShoesImg from '../../assets/products/flip_flops.png';
+import JewelleryImg from '../../assets/products/jewellery.png';
+
 const Products = () => {
   const dummyProducts = [
-    { id: 1, title: 'Apple iPhone 15 (Blue, 128 GB)', price: '69,999', oldPrice: '79,900', rating: '4.6', reviews: '2,450', image: 'https://images.unsplash.com/photo-1696446701796-da61225697cc?w=400' },
-    { id: 2, title: 'Sony WH-1000XM5 Wireless Noise Cancelling Headphones', price: '29,990', oldPrice: '34,990', rating: '4.8', reviews: '1,120', image: 'https://images.unsplash.com/photo-1670057037305-64d84711833d?w=400' },
-    { id: 3, title: 'Samsung Galaxy Watch 6 (44mm, Bluetooth)', price: '18,499', oldPrice: '29,999', rating: '4.5', reviews: '890', image: 'https://images.unsplash.com/photo-1695213601569-8088019316d3?w=400' },
-    { id: 4, title: 'Dell Inspiron 15 Laptop (16GB RAM, 512GB SSD)', price: '45,990', oldPrice: '58,000', rating: '4.3', reviews: '560', image: 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=400' },
-    { id: 5, title: 'Nike Air Max Pulse Mens Shoes', price: '12,995', oldPrice: '14,995', rating: '4.7', reviews: '320', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400' },
-    { id: 6, title: 'Adidas Ultraboost Light Running Shoes', price: '16,199', oldPrice: '18,999', rating: '4.6', reviews: '450', image: 'https://images.unsplash.com/photo-1587563871167-1ee9c731aefb?w=400' },
-    { id: 7, title: 'Canon EOS R100 Mirrorless Camera', price: '42,990', oldPrice: '52,990', rating: '4.4', reviews: '210', image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=400' },
-    { id: 8, title: 'Logitech MX Master 3S Wireless Mouse', price: '9,495', oldPrice: '10,995', rating: '4.9', reviews: '780', image: 'https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=400' },
+    { id: 1, title: 'Apple iPhone 15 (Blue, 128 GB)', price: '69,999', oldPrice: '79,900', rating: '4.6', reviews: '2,450', image: SamsungImg },
+    { id: 2, title: 'Sony WH-1000XM5 Wireless Noise Cancelling Headphones', price: '29,990', oldPrice: '34,990', rating: '4.8', reviews: '1,120', image: EarbudsImg },
+    { id: 3, title: 'Samsung Galaxy Watch 6 (44mm, Bluetooth)', price: '18,499', oldPrice: '29,999', rating: '4.5', reviews: '890', image: ElectronicsImg },
+    { id: 4, title: 'Dell Inspiron 15 Laptop (16GB RAM, 512GB SSD)', price: '45,990', oldPrice: '58,000', rating: '4.3', reviews: '560', image: LaptopImg },
+    { id: 5, title: 'Nike Air Max Pulse Mens Shoes', price: '12,995', oldPrice: '14,995', rating: '4.7', reviews: '320', image: ShoesImg },
+    { id: 6, title: 'Adidas Ultraboost Light Running Shoes', price: '16,199', oldPrice: '18,999', rating: '4.6', reviews: '450', image: ShoesImg },
+    { id: 7, title: 'Canon EOS R100 Mirrorless Camera', price: '42,990', oldPrice: '52,990', rating: '4.4', reviews: '210', image: ElectronicsImg },
+    { id: 8, title: 'Logitech MX Master 3S Wireless Mouse', price: '9,495', oldPrice: '10,995', rating: '4.9', reviews: '780', image: ElectronicsImg },
   ];
 
   return (

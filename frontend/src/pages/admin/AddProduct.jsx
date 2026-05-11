@@ -3,7 +3,8 @@ import {
   Package, Upload, Plus, X, 
   Save, CheckCircle2, ChevronRight,
   Info, Image as ImageIcon, Layers,
-  DollarSign, Tag, FileText, AlertCircle
+  DollarSign, Tag, FileText, AlertCircle,
+  Truck, ShieldCheck
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -132,10 +133,99 @@ const AddProduct = () => {
                </div>
             </div>
           </section>
+          {/* Variations Section */}
+          <section className="bg-white rounded-3xl border border-slate-100 shadow-sm p-8 space-y-6">
+            <div className="flex justify-between items-center mb-2">
+               <div className="flex items-center gap-2">
+                  <Layers size={18} className="text-purple-500" />
+                  <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest font-montserrat">Variations (SKUs)</h3>
+               </div>
+               <button className="text-[10px] font-black text-blue-500 uppercase tracking-widest hover:underline">+ Add Attribute</button>
+            </div>
+            
+            <div className="p-10 border-2 border-dashed border-slate-100 rounded-2xl flex flex-col items-center justify-center text-slate-300 gap-3">
+               <Layers size={32} />
+               <p className="text-[10px] font-black uppercase tracking-widest text-center">No variations defined.<br/>Add Size, Color or Material to create SKUs.</p>
+            </div>
+          </section>
+
+          {/* Shipping & Logistics */}
+          <section className="bg-white rounded-3xl border border-slate-100 shadow-sm p-8 space-y-6">
+            <div className="flex items-center gap-2 mb-2">
+               <Truck size={18} className="text-blue-500" />
+               <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest font-montserrat">Shipping & Logistics</h3>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+               <div>
+                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2">Weight (kg)</label>
+                  <input type="number" placeholder="0.5" className="w-full bg-slate-50 border border-slate-100 rounded-xl py-4 px-6 text-sm font-black outline-none" />
+               </div>
+               <div>
+                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2">Length (cm)</label>
+                  <input type="number" placeholder="10" className="w-full bg-slate-50 border border-slate-100 rounded-xl py-4 px-6 text-sm font-black outline-none" />
+               </div>
+               <div>
+                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2">Width (cm)</label>
+                  <input type="number" placeholder="10" className="w-full bg-slate-50 border border-slate-100 rounded-xl py-4 px-6 text-sm font-black outline-none" />
+               </div>
+               <div>
+                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2">Height (cm)</label>
+                  <input type="number" placeholder="5" className="w-full bg-slate-50 border border-slate-100 rounded-xl py-4 px-6 text-sm font-black outline-none" />
+               </div>
+            </div>
+          </section>
         </div>
 
         {/* Sidebar Controls */}
         <div className="space-y-8">
+           {/* Product Flags */}
+           <section className="bg-white rounded-3xl border border-slate-100 shadow-sm p-6 space-y-4">
+              <div className="flex items-center gap-2 mb-2">
+                 <Tag size={18} className="text-blue-500" />
+                 <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest font-montserrat">Product Flags</h3>
+              </div>
+              <div className="space-y-3">
+                 {[
+                   { label: 'Featured Product', desc: 'Show on home page' },
+                   { label: 'Trending Now', desc: 'Mark with fire icon' },
+                   { label: 'Flash Sale Eligible', desc: 'Can be added to sales' },
+                 ].map((flag, i) => (
+                   <div key={i} className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100">
+                      <div>
+                         <p className="text-[10px] font-black text-slate-900 uppercase tracking-tight">{flag.label}</p>
+                         <p className="text-[8px] text-slate-400 font-bold uppercase">{flag.desc}</p>
+                      </div>
+                      <div className="w-10 h-5 bg-slate-200 rounded-full relative cursor-pointer">
+                         <div className="absolute left-1 top-1 w-3 h-3 bg-white rounded-full shadow-sm" />
+                      </div>
+                   </div>
+                 ))}
+              </div>
+           </section>
+
+           {/* Tax & Compliance */}
+           <section className="bg-white rounded-3xl border border-slate-100 shadow-sm p-6 space-y-4">
+              <div className="flex items-center gap-2 mb-2">
+                 <ShieldCheck size={18} className="text-green-500" />
+                 <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest font-montserrat">Tax & Compliance</h3>
+              </div>
+              <div className="space-y-4">
+                 <div>
+                    <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1.5">GST Category</label>
+                    <select className="w-full bg-slate-50 border border-slate-100 rounded-xl py-2.5 px-4 text-xs font-bold outline-none appearance-none">
+                       <option>GST 18% (Standard)</option>
+                       <option>GST 12%</option>
+                       <option>GST 5%</option>
+                       <option>GST 0% (Exempt)</option>
+                    </select>
+                 </div>
+                 <div>
+                    <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1.5">HSN Code</label>
+                    <input type="text" placeholder="e.g. 4202" className="w-full bg-slate-50 border border-slate-100 rounded-xl py-2.5 px-4 text-xs font-bold outline-none" />
+                 </div>
+              </div>
+           </section>
+
            {/* Image Gallery */}
            <section className="bg-white rounded-3xl border border-slate-100 shadow-sm p-6 space-y-4">
               <div className="flex justify-between items-center mb-2">

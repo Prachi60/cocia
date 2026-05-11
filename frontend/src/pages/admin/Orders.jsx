@@ -19,20 +19,17 @@ const MOCK_ORDERS = [
 const StatusBadge = ({ status }) => {
   const styles = {
     'Pending': 'bg-amber-50 text-amber-600 border-amber-100',
-    'Processing': 'bg-blue-50 text-blue-600 border-blue-100',
+    'Confirmed': 'bg-blue-50 text-blue-600 border-blue-100',
+    'Packed': 'bg-indigo-50 text-indigo-600 border-indigo-100',
+    'Shipped': 'bg-violet-50 text-violet-600 border-violet-100',
+    'Out for Delivery': 'bg-purple-50 text-purple-600 border-purple-100',
     'Delivered': 'bg-green-50 text-green-600 border-green-100',
+    'Returned': 'bg-orange-50 text-orange-600 border-orange-100',
+    'Refunded': 'bg-teal-50 text-teal-600 border-teal-100',
     'Cancelled': 'bg-red-50 text-red-600 border-red-100',
   };
-  const icon = {
-    'Pending': <Clock size={12} />,
-    'Processing': <Package size={12} />,
-    'Delivered': <CheckCircle2 size={12} />,
-    'Cancelled': <XCircle size={12} />,
-  };
-
   return (
-    <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border flex items-center gap-1.5 w-fit ${styles[status]}`}>
-      {icon[status]}
+    <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border ${styles[status]}`}>
       {status}
     </span>
   );
@@ -42,7 +39,7 @@ const Orders = () => {
   const [activeTab, setActiveTab] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const tabs = ['All', 'Pending', 'Processing', 'Delivered', 'Cancelled'];
+  const tabs = ['All', 'Pending', 'Confirmed', 'Packed', 'Shipped', 'Out for Delivery', 'Delivered', 'Returned', 'Refunded', 'Cancelled'];
 
   const filteredOrders = MOCK_ORDERS.filter(order => {
     const matchesTab = activeTab === 'All' || order.status === activeTab;

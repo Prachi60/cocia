@@ -48,14 +48,18 @@ const TopSelection = ({ items }) => {
               onClick={() => handleProductClick(product)}
               className="bg-white rounded-none p-2.5 shadow-sm flex flex-col gap-2 group cursor-pointer active:scale-95 transition-all"
             >
-              <div className="aspect-[3/4] rounded-none overflow-hidden bg-gray-50 border border-gray-100">
+              <div className="aspect-[3/4] rounded-none overflow-hidden bg-gray-50 border border-gray-100 flex items-center justify-center p-2">
                 <img
                   src={product.img}
                   alt={product.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-700"
                   loading="lazy"
                   width="140"
                   height="186"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.parentElement.innerHTML = '<div class="w-full h-full flex items-center justify-center text-gray-400 text-xs">No Image</div>';
+                  }}
                 />
               </div>
               <div>

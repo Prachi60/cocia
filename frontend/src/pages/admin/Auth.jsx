@@ -21,77 +21,90 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0f172a] px-4">
+    <div className="min-h-screen flex items-center justify-center bg-[#f8fafc] px-4 font-nunito">
       <div className="w-full max-w-md">
         {/* Admin Branding */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center p-3 bg-blue-600 rounded-xl shadow-lg shadow-blue-500/20 mb-4">
-            <ShieldCheck size={32} className="text-white" />
+          <div className="inline-flex items-center justify-center mb-4">
+            <img 
+              src="/Logo (4).png" 
+              alt="Cocio Logo" 
+              className="h-12 w-auto object-contain"
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.nextSibling.style.display = 'flex';
+              }}
+            />
+            <div className="hidden w-12 h-12 bg-blue-600 rounded-xl items-center justify-center shadow-lg shadow-blue-100">
+               <ShieldCheck size={24} className="text-white" />
+            </div>
           </div>
-          <h1 className="text-3xl font-bold text-white">ShopHub Admin</h1>
-          <p className="text-slate-400 mt-2">Admin Panel Login</p>
+          <h1 className="text-2xl font-semibold text-slate-900 tracking-tight font-montserrat uppercase">
+            Cocio<span className="text-blue-600">.</span> Admin
+          </h1>
+          <p className="text-slate-400 font-bold uppercase tracking-[2px] text-[9px] mt-1">Verified Management Session</p>
         </div>
 
         {/* Login Card */}
-        <div className="bg-slate-800/50 backdrop-blur-xl border border-slate-700 p-8 rounded-2xl shadow-2xl">
-          <form onSubmit={handleLogin} className="space-y-6">
+        <div className="bg-white border border-slate-100 p-8 rounded-[24px] shadow-[0_20px_50px_rgba(0,0,0,0.04)]">
+          <form onSubmit={handleLogin} className="space-y-5">
             {error && (
-              <div className="bg-red-500/10 border border-red-500/50 text-red-500 text-sm p-3 rounded-lg text-center">
+              <div className="bg-red-50 border border-red-100 text-red-500 text-[10px] font-bold p-3 rounded-xl text-center uppercase tracking-widest">
                 {error}
               </div>
             )}
 
-            <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">Admin Email</label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
+            <div className="space-y-1.5">
+              <label className="text-[9px] font-bold text-slate-400 uppercase tracking-widest ml-1">Admin Email</label>
+              <div className="relative group">
+                <Mail className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-blue-500 transition-colors" size={16} />
                 <input 
                   type="email" 
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@shophub.com"
-                  className="w-full bg-slate-900/50 border border-slate-700 rounded-lg py-2.5 pl-10 pr-4 text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all"
+                  placeholder="admin@cocio.com"
+                  className="w-full bg-slate-50 border border-slate-100 rounded-xl py-3.5 pl-14 pr-6 text-slate-900 font-bold placeholder:text-slate-300 focus:outline-none focus:ring-4 focus:ring-blue-50 focus:border-blue-500 transition-all text-sm"
                 />
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">Password</label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
+            <div className="space-y-1.5">
+              <label className="text-[9px] font-bold text-slate-400 uppercase tracking-widest ml-1">Secure Password</label>
+              <div className="relative group">
+                <Lock className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-blue-500 transition-colors" size={16} />
                 <input 
                   type={showPassword ? "text" : "password"} 
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full bg-slate-900/50 border border-slate-700 rounded-lg py-2.5 pl-10 pr-10 text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all"
+                  className="w-full bg-slate-50 border border-slate-100 rounded-xl py-3.5 pl-14 pr-14 text-slate-900 font-bold placeholder:text-slate-300 focus:outline-none focus:ring-4 focus:ring-blue-50 focus:border-blue-500 transition-all text-sm"
                 />
                 <button 
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300"
+                  className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-300 hover:text-blue-500 transition-colors"
                 >
-                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
               </div>
             </div>
 
             <button 
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-lg shadow-lg shadow-blue-500/20 active:scale-[0.98] transition-all"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold text-[11px] uppercase tracking-[2px] py-4 rounded-xl shadow-lg shadow-blue-100 active:scale-[0.98] transition-all mt-2"
             >
-              Login as Admin
+              Sign In to Dashboard
             </button>
           </form>
 
-          <div className="mt-8 pt-6 border-t border-slate-700 flex justify-between items-center text-xs text-slate-500">
-            <button className="hover:text-blue-400 transition-colors">Forgot Password?</button>
-            <span>v2.1.0</span>
+          <div className="mt-8 pt-6 border-t border-slate-50 flex justify-between items-center text-[9px] font-bold uppercase tracking-widest text-slate-300">
+            <button className="hover:text-blue-500 transition-colors">Recover Access</button>
+            <span>v2.4.0-Stable</span>
           </div>
         </div>
 
-        <p className="text-center text-slate-500 text-sm mt-8">
-          Not an admin? <button onClick={() => navigate('/user/login')} className="text-blue-500 hover:underline">Back to Shop</button>
+        <p className="text-center text-slate-400 text-[10px] font-bold mt-8 uppercase tracking-widest">
+          Not an admin? <button onClick={() => navigate('/')} className="text-blue-600 hover:underline">Back to Storefront</button>
         </p>
       </div>
     </div>

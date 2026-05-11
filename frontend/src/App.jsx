@@ -4,6 +4,7 @@ import { Toaster } from 'react-hot-toast';
 import MarketRoutes from './routes/MarketRoutes';
 import SellerRoutes from './routes/SellerRoutes';
 import AdminRoutes from './routes/AdminRoutes';
+import DeliveryRoutes from './routes/DeliveryRoutes';
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
         }
       }} />
       <Routes>
+        {/* Delivery Agent Portal */}
+        <Route path="/delivery/*" element={<DeliveryRoutes />} />
+
         {/* Unified Admin Management Panel */}
         <Route path="/admin/*" element={<AdminRoutes />} />
 

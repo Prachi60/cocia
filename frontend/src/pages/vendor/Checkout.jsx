@@ -20,7 +20,7 @@ const Checkout = () => {
     price: 622,
     oldPrice: 1299,
     discount: '52%',
-    image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=600&q=80',
+    image: ElectronicsImg,
     rating: '4.5',
     reviews: '5,960'
   };

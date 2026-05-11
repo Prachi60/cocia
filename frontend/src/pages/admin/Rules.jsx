@@ -29,33 +29,33 @@ const CommissionRules = () => {
       {/* Header */}
       <div className="flex justify-between items-end">
         <div>
-          <h1 className="text-4xl font-semibold text-slate-900 tracking-tight font-montserrat uppercase">Commission Policy</h1>
-          <p className="text-slate-500 font-medium mt-1 font-raleway">Define and manage revenue sharing rules for various product categories.</p>
+          <h1 className="text-2xl font-bold text-slate-900 tracking-tight font-montserrat uppercase">Commission Policy</h1>
+          <p className="text-slate-500 text-[11px] font-medium mt-0.5 font-raleway">Define and manage revenue sharing rules for various product categories.</p>
         </div>
         <button 
           onClick={() => setIsAdding(true)}
-          className="flex items-center gap-2 px-6 py-3 bg-blue-500 text-white rounded-xl text-[11px] font-black uppercase tracking-widest shadow-lg shadow-blue-100 hover:scale-105 active:scale-95 transition-all"
+          className="flex items-center gap-1.5 px-4 py-2 bg-blue-500 text-white rounded-lg text-[10px] font-black uppercase tracking-widest shadow-lg shadow-blue-100 hover:scale-105 active:scale-95 transition-all"
         >
-          <Plus size={16} />
+          <Plus size={14} />
           Create Rule
         </button>
       </div>
 
       {/* Info Warning */}
-      <div className="bg-amber-50 border border-amber-100 rounded-2xl p-5 flex items-start gap-4">
-        <div className="w-10 h-10 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center flex-shrink-0">
-           <AlertCircle size={20} />
+      <div className="bg-amber-50 border border-amber-100 rounded-xl p-3 flex items-start gap-3">
+        <div className="w-8 h-8 bg-amber-100 text-amber-600 rounded-lg flex items-center justify-center flex-shrink-0">
+           <AlertCircle size={16} />
         </div>
         <div>
-           <p className="text-xs font-black text-amber-800 uppercase tracking-widest">Policy Impact Notice</p>
-           <p className="text-xs text-amber-600 font-medium mt-1 leading-relaxed">
+           <p className="text-[10px] font-black text-amber-800 uppercase tracking-widest">Policy Impact Notice</p>
+           <p className="text-[10px] text-amber-600 font-medium mt-0.5 leading-tight">
              Any changes to commission rates will take effect on **new orders only**. Active subscriptions or past transactions will not be retroactively updated.
            </p>
         </div>
       </div>
 
       {/* Rules Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <AnimatePresence>
           {rules.map((rule, i) => (
             <motion.div
@@ -63,38 +63,38 @@ const CommissionRules = () => {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: i * 0.05 }}
-              className="bg-white border border-slate-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition-all group"
+              className="bg-white border border-slate-100 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all group"
             >
-              <div className="flex justify-between items-start mb-6">
-                 <div className="w-12 h-12 bg-blue-50 text-blue-500 rounded-2xl flex items-center justify-center font-black shadow-inner">
-                    <Layers size={24} />
+              <div className="flex justify-between items-start mb-3">
+                 <div className="w-10 h-10 bg-blue-50 text-blue-500 rounded-xl flex items-center justify-center font-black shadow-inner">
+                    <Layers size={20} />
                  </div>
-                 <div className="flex gap-2">
-                    <button className="p-2 bg-slate-50 text-slate-400 rounded-lg hover:bg-blue-50 hover:text-blue-500 transition-all">
-                       <Edit2 size={14} />
+                 <div className="flex gap-1.5">
+                    <button className="p-1.5 bg-slate-50 text-slate-400 rounded-lg hover:bg-blue-50 hover:text-blue-500 transition-all">
+                       <Edit2 size={12} />
                     </button>
-                    <button className="p-2 bg-slate-50 text-slate-400 rounded-lg hover:bg-red-50 hover:text-red-500 transition-all">
-                       <Trash2 size={14} />
+                    <button className="p-1.5 bg-slate-50 text-slate-400 rounded-lg hover:bg-red-50 hover:text-red-500 transition-all">
+                       <Trash2 size={12} />
                     </button>
                  </div>
               </div>
 
               <div>
-                 <h3 className="text-lg font-black text-slate-900 font-montserrat uppercase tracking-tight">{rule.category}</h3>
-                 <div className="mt-4 flex items-baseline gap-1">
-                    <span className="text-3xl font-black text-blue-600 font-roboto">{rule.rate}</span>
-                    <span className="text-sm font-black text-slate-400 uppercase tracking-widest">
+                 <h3 className="text-[13px] font-black text-slate-900 font-montserrat uppercase tracking-tight">{rule.category}</h3>
+                 <div className="mt-1 flex items-baseline gap-1">
+                    <span className="text-xl font-black text-blue-600 font-roboto">{rule.rate}</span>
+                    <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">
                        {rule.type === 'Percentage' ? '%' : 'FIXED'}
                     </span>
                  </div>
               </div>
 
-              <div className="mt-6 pt-6 border-t border-slate-50 space-y-3">
-                 <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-widest text-slate-400">
+              <div className="mt-3 pt-3 border-t border-slate-50 space-y-1.5">
+                 <div className="flex justify-between items-center text-[9px] font-black uppercase tracking-widest text-slate-400">
                     <span>Threshold</span>
                     <span className="text-slate-900">{rule.minSale}</span>
                  </div>
-                 <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-widest text-slate-400">
+                 <div className="flex justify-between items-center text-[9px] font-black uppercase tracking-widest text-slate-400">
                     <span>Status</span>
                     <span className={`px-2 py-0.5 rounded-lg ${rule.status === 'Active' ? 'bg-green-50 text-green-500' : 'bg-slate-50 text-slate-400'}`}>
                        {rule.status}
@@ -106,30 +106,30 @@ const CommissionRules = () => {
         </AnimatePresence>
 
         {/* Global Rule Card */}
-        <div className="bg-slate-900 rounded-3xl p-8 flex flex-col justify-between text-white relative overflow-hidden">
-           <div className="absolute top-0 right-0 p-8 opacity-10">
-              <ShieldCheck size={120} />
+        <div className="bg-slate-900 rounded-2xl p-5 flex flex-col justify-between text-white relative overflow-hidden">
+           <div className="absolute top-0 right-0 p-5 opacity-10">
+              <ShieldCheck size={80} />
            </div>
            <div>
-              <p className="text-[10px] font-black uppercase tracking-widest opacity-60">Global Policy</p>
-              <h3 className="text-2xl font-black mt-2 font-montserrat">Base Rate: 10%</h3>
-              <p className="text-xs opacity-60 mt-4 leading-relaxed font-medium">
-                This rate applies to all categories that do not have a specific custom rule defined above.
+              <p className="text-[9px] font-black uppercase tracking-widest opacity-60">Global Policy</p>
+              <h3 className="text-lg font-black mt-1 font-montserrat">Base Rate: 10%</h3>
+              <p className="text-[10px] opacity-60 mt-2 leading-tight font-medium">
+                Applied to all categories without specific custom rules.
               </p>
            </div>
-           <button className="mt-8 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all">
-              Update Base Policy
+           <button className="mt-4 py-2 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-xl text-[9px] font-black uppercase tracking-widest transition-all">
+              Update Base
            </button>
         </div>
       </div>
 
       {/* Save Button */}
-      <div className="flex justify-center pt-10">
+      <div className="flex justify-center pt-6">
          <button 
            onClick={handleSave}
-           className={`flex items-center gap-2 px-10 py-4 rounded-2xl font-black uppercase tracking-widest text-xs transition-all shadow-xl ${saved ? 'bg-green-500 text-white' : 'bg-blue-600 text-white hover:scale-105 shadow-blue-200'}`}
+           className={`flex items-center gap-2 px-8 py-3 rounded-xl font-black uppercase tracking-widest text-[10px] transition-all shadow-xl ${saved ? 'bg-green-500 text-white' : 'bg-blue-600 text-white hover:scale-105 shadow-blue-200'}`}
          >
-            {saved ? <CheckCircle2 size={18} /> : <Save size={18} />}
+            {saved ? <CheckCircle2 size={16} /> : <Save size={16} />}
             {saved ? 'Policy Published!' : 'Apply Global Changes'}
          </button>
       </div>

@@ -45,14 +45,18 @@ const BestQuality = ({ items }) => {
               onClick={() => handleProductClick(product)}
               className="bg-white rounded-none p-2.5 shadow-sm flex flex-col gap-2 group cursor-pointer active:scale-95 transition-all"
             >
-              <div className="aspect-[3/4] rounded-none overflow-hidden bg-gray-50 border border-gray-100">
+              <div className="aspect-[3/4] rounded-none overflow-hidden bg-white border border-gray-100 flex items-center justify-center p-3">
                 <img 
                   src={product.img} 
                   alt={product.name} 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                  className="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500" 
                   loading="lazy"
                   width="140"
                   height="186"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="140" height="186" viewBox="0 0 140 186"%3E%3Crect fill="%23f3f4f6" width="140" height="186"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="14" fill="%239ca3af"%3ENo Image%3C/text%3E%3C/svg%3E';
+                  }}
                 />
               </div>
               <div>

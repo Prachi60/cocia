@@ -12,6 +12,8 @@ import ElectricRideon from '../../assets/products/electric_rideon.png';
 import BabyBlanket from '../../assets/products/baby_blanket.png';
 import LearningTablet from '../../assets/products/learning_tablet.png';
 import ToysTab from '../../assets/products/toys_tab.png';
+import BeautyTab from '../../assets/products/beauty_tab.png';
+import Balloons from '../../assets/products/balloons.png';
 
 const ToysLanding = () => {
   const navigate = useNavigate();
@@ -39,13 +41,13 @@ const ToysLanding = () => {
   const savingsCards = [
     { title: 'Electric ride-ons...', badge: 'Min. 50% Off', img: ElectricRideon },
     { title: 'Baby blankets', badge: 'Under ₹499', img: BabyBlanket },
-    { title: 'Body washes', badge: 'From ₹99', img: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=200' },
+    { title: 'Body washes', badge: 'From ₹99', img: BeautyTab },
     { title: 'Learning toys', badge: 'From ₹119', img: LearningTablet }
   ];
 
   const irresistibleDeals = [
-    { title: 'Diapers', badge: 'Up to 60% Off', img: 'https://images.unsplash.com/photo-1544126592-807daa2b5650?w=200' },
-    { title: 'Tricycles', badge: 'Extra 10% Off', img: 'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=200' }
+    { title: 'Diapers', badge: 'Up to 60% Off', img: BabyBlanket },
+    { title: 'Tricycles', badge: 'Extra 10% Off', img: Balloons }
   ];
 
   return (
