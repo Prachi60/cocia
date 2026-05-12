@@ -187,16 +187,19 @@ const AdminLayout = () => {
         <div className="h-20 flex items-center px-6 gap-3">
           {isSidebarOpen ? (
             <Link to="/admin/dashboard" className="flex items-center gap-3 group">
-              <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-100 group-hover:scale-105 transition-all">
-                <ShieldCheck size={22} className="text-white" />
-              </div>
-              <span className="text-2xl font-black tracking-tighter text-slate-900 font-montserrat">
-                Cocio<span className="text-blue-600">.</span>
-              </span>
+              <img 
+                src="/Logo (4).png" 
+                alt="Logo" 
+                className="h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
+              />
             </Link>
           ) : (
-            <div className={`w-10 h-10 bg-blue-500 shadow-blue-100 rounded-xl shadow-xl flex items-center justify-center flex-shrink-0 transition-all`}>
-              <ShieldCheck size={22} className="text-white" />
+            <div className="w-12 h-12 flex items-center justify-center transition-all">
+              <img 
+                src="/Logo (4).png" 
+                alt="Logo" 
+                className="h-10 w-10 object-contain" 
+              />
             </div>
           )}
         </div>
