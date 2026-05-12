@@ -20,11 +20,11 @@ import { motion } from 'framer-motion';
 import useAccountStore from '../../store/useAccountStore';
 
 // Import local assets for recently viewed products
-import TshirtImg from '../../assets/products/tshirt.png';
-import ElectronicsImg from '../../assets/Cards/electronics_deal.png';
-import FashionImg from '../../assets/products/Fashion.png';
-import JewelleryImg from '../../assets/products/jewellery.png';
-import ShoesImg from '../../assets/products/flip_flops.png';
+import TshirtImg from '../../assets/products/product03.jpg';
+import ElectronicsImg from '../../assets/products/product08.jpg';
+import FashionImg from '../../assets/products/product01.jpg';
+import JewelleryImg from '../../assets/products/product12.jpg';
+import ShoesImg from '../../assets/products/product07.jpg';
 
 const VendorProfile = () => {
   const navigate = useNavigate();

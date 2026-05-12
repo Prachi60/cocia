@@ -7,16 +7,17 @@ import { useLocation, useNavigate, Link } from 'react-router-dom';
 import useAccountStore from '../../store/useAccountStore';
 
 // Import Assets
-import PlumShampoo from '../../assets/Cards/plum_shampoo.png';
-import FashionHero from '../../assets/Cards/fashion_hero.png';
-import LorealShampoo from '../../assets/Cards/loreal_shampoo.png';
-import EarbudsDeal from '../../assets/Cards/earbuds_deal.png';
-import Tshirt from '../../assets/products/tshirt.png';
-import FlipFlops from '../../assets/products/flip_flops.png';
-import Suitcase from '../../assets/products/suitcase.png';
-import Balloons from '../../assets/products/balloons.png';
-import SplitAC from '../../assets/products/split_ac.png';
-import TowerFan from '../../assets/products/tower_fan.png';
+import PlumShampoo from '../../assets/products/product05.jpg';
+import FashionHero from '../../assets/products/product06.jpg';
+import LorealShampoo from '../../assets/products/product07.jpg';
+import EarbudsDeal from '../../assets/products/product03.jpg';
+import Tshirt from '../../assets/products/product05.jpg';
+import FlipFlops from '../../assets/products/product07.jpg';
+import Suitcase from '../../assets/products/product09.jpg';
+import TopSection1 from '../../assets/TopSection/TopSection1.jpg';
+import Balloons from '../../assets/products/product10.jpg';
+import SplitAC from '../../assets/products/product08.jpg';
+import TowerFan from '../../assets/products/product09.jpg';
 
 const ProductDetail = () => {
   const location = useLocation();
@@ -210,26 +211,8 @@ const ProductDetail = () => {
         </div>
       </div>
 
-      {/* AD Banner Row - Compact */}
-      <div className="px-3 py-1.5 bg-gray-50 flex items-center gap-2.5 border-b border-gray-100">
-        <div className="w-8 h-8 bg-white rounded-sm overflow-hidden border border-gray-200 flex-shrink-0">
-          <img src={FashionHero} className="w-full h-full object-cover" alt="ad" />
-        </div>
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center justify-between">
-            <p className="text-[10px] font-medium text-slate-700 truncate">The Souled Store Women Regular Fit Printed Spread...</p>
-            <span className="text-[8px] font-bold text-gray-400 bg-gray-200 px-1 rounded-none ml-1">AD</span>
-          </div>
-          <div className="flex items-center gap-1.5 leading-none">
-            <span className="text-[9px] font-bold text-green-600">↓ 8%</span>
-            <span className="text-[9px] text-gray-400 line-through">1,299</span>
-            <span className="text-[10px] font-black text-slate-900">₹1,199</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Product Image Carousel */}
-      <div className="relative w-full aspect-[4/5] bg-gray-50 overflow-hidden">
+      {/* Product Image Carousel - Cover Style */}
+      <div className="relative w-full aspect-[4/5] bg-gray-100 overflow-hidden">
         <div 
           className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar"
           onScroll={handleScroll}
@@ -240,33 +223,33 @@ const ProductDetail = () => {
               
               {/* Highlight Overlay on Second Slide */}
               {idx === 1 && (
-                <div className="absolute inset-0 bg-black/10 backdrop-blur-[2px] p-6 flex flex-col justify-start pt-12 text-white">
-                  <h2 className="text-[24px] font-black mb-6 drop-shadow-md">Key Highlights</h2>
+                <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px] p-5 flex flex-col justify-start pt-10 text-white z-10">
+                  <h2 className="text-[20px] font-black mb-4 drop-shadow-md uppercase tracking-tight">Key Highlights</h2>
                   
-                  <div className="space-y-4">
+                  <div className="space-y-2.5 max-h-[70%] overflow-hidden">
                     <div>
-                      <p className="text-[12px] font-bold opacity-80 uppercase tracking-wider mb-1">Fit</p>
-                      <p className="text-[18px] font-black drop-shadow-sm">Boxy</p>
+                      <p className="text-[10px] font-bold opacity-80 uppercase tracking-widest mb-0.5">Fit</p>
+                      <p className="text-[15px] font-black drop-shadow-sm">{product.fit || 'Boxy'}</p>
                     </div>
-                    <div className="w-12 h-[1px] bg-white/40" />
+                    <div className="w-8 h-[1px] bg-white/30" />
                     <div>
-                      <p className="text-[12px] font-bold opacity-80 uppercase tracking-wider mb-1">Collar</p>
-                      <p className="text-[18px] font-black drop-shadow-sm">Spread</p>
+                      <p className="text-[10px] font-bold opacity-80 uppercase tracking-widest mb-0.5">Collar</p>
+                      <p className="text-[15px] font-black drop-shadow-sm">{product.collar || 'Spread'}</p>
                     </div>
-                    <div className="w-12 h-[1px] bg-white/40" />
+                    <div className="w-8 h-[1px] bg-white/30" />
                     <div>
-                      <p className="text-[12px] font-bold opacity-80 uppercase tracking-wider mb-1">Fabric</p>
-                      <p className="text-[18px] font-black drop-shadow-sm">Wool Blend</p>
+                      <p className="text-[10px] font-bold opacity-80 uppercase tracking-widest mb-0.5">Fabric</p>
+                      <p className="text-[15px] font-black drop-shadow-sm">{product.fabric || 'Wool Blend'}</p>
                     </div>
-                    <div className="w-12 h-[1px] bg-white/40" />
+                    <div className="w-8 h-[1px] bg-white/30" />
                     <div>
-                      <p className="text-[12px] font-bold opacity-80 uppercase tracking-wider mb-1">Pattern</p>
-                      <p className="text-[18px] font-black drop-shadow-sm">Checkered</p>
+                      <p className="text-[10px] font-bold opacity-80 uppercase tracking-widest mb-0.5">Pattern</p>
+                      <p className="text-[15px] font-black drop-shadow-sm">{product.pattern || 'Checkered'}</p>
                     </div>
-                    <div className="w-12 h-[1px] bg-white/40" />
+                    <div className="w-8 h-[1px] bg-white/30" />
                     <div>
-                      <p className="text-[12px] font-bold opacity-80 uppercase tracking-wider mb-1">Occasion</p>
-                      <p className="text-[18px] font-black drop-shadow-sm">Casual</p>
+                      <p className="text-[10px] font-bold opacity-80 uppercase tracking-widest mb-0.5">Occasion</p>
+                      <p className="text-[15px] font-black drop-shadow-sm">Casual</p>
                     </div>
                   </div>
                 </div>
@@ -327,117 +310,117 @@ const ProductDetail = () => {
       </div>
 
       {/* Delivery Details */}
-      <div className="px-3 mb-6">
-        <h3 className="text-[18px] font-bold text-slate-900 mb-4">Delivery details</h3>
-        <div className="space-y-1">
+      <div className="px-3 mb-4">
+        <h3 className="text-[15px] font-black uppercase tracking-tight text-slate-900 mb-3">Delivery details</h3>
+        <div className="space-y-0.5">
           {/* Address */}
-          <div className="bg-white border border-gray-100 rounded-t-sm p-4 flex items-center gap-4">
-            <div className="bg-gray-50 p-2 rounded-sm">
-              <MapPin size={22} className="text-slate-700" />
+          <div className="bg-white border border-gray-100 rounded-t-lg p-2.5 flex items-center gap-3">
+            <div className="bg-gray-50 p-1.5 rounded-md">
+              <MapPin size={18} className="text-slate-700" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-[14px] font-black text-slate-800">HOME <span className="font-medium text-gray-600">83 kishan pura mataji mandir, sector n...</span></p>
+              <p className="text-[12px] font-black text-slate-800 uppercase tracking-tight">HOME <span className="font-medium text-gray-500 normal-case">83 kishan pura mataji mandir, sector n...</span></p>
             </div>
-            <ChevronRight size={20} className="text-gray-400" />
+            <ChevronRight size={16} className="text-gray-400" />
           </div>
           
           {/* Date */}
-          <div className="bg-white border border-gray-100 p-4 flex items-center gap-4">
-            <div className="bg-gray-50 p-2 rounded-sm">
-              <Truck size={22} className="text-slate-700" />
+          <div className="bg-white border border-gray-100 p-2.5 flex items-center gap-3">
+            <div className="bg-gray-50 p-1.5 rounded-md">
+              <Truck size={18} className="text-slate-700" />
             </div>
             <div className="flex-1">
-              <p className="text-[15px] font-bold text-slate-800">Delivery by 16 May, Sat</p>
-              <p className="text-[12px] text-orange-600 font-bold">Order in 00h 00m 14s</p>
+              <p className="text-[13px] font-bold text-slate-800">Delivery by 16 May, Sat</p>
+              <p className="text-[10px] text-orange-600 font-bold">Order in 00h 00m 14s</p>
             </div>
           </div>
 
           {/* Seller */}
-          <div className="bg-white border border-gray-100 rounded-b-sm p-4 flex items-center gap-4">
-            <div className="bg-gray-50 p-2 rounded-sm">
-              <div className="w-[22px] h-[22px] border-2 border-slate-700 rounded-[2px]" />
+          <div className="bg-white border border-gray-100 rounded-b-lg p-2.5 flex items-center gap-3">
+            <div className="bg-gray-50 p-1.5 rounded-md">
+              <div className="w-[18px] h-[18px] border-2 border-slate-700 rounded-[2px]" />
             </div>
             <div className="flex-1">
-              <p className="text-[13px] text-slate-600">Fulfilled by <span className="font-bold text-slate-800">Lounge Dreams Clothing Pvt Ltd</span></p>
-              <div className="flex items-center gap-2 mt-1">
-                <span className="text-[12px] font-bold text-slate-600 bg-gray-100 px-1.5 py-0.5 rounded-sm">3.2 ★</span>
-                <span className="text-gray-300">•</span>
-                <span className="text-[12px] text-slate-500 font-medium">4 years with Cocia</span>
+              <p className="text-[11px] text-slate-600">Fulfilled by <span className="font-bold text-slate-800 text-[12px]">Lounge Dreams</span></p>
+              <div className="flex items-center gap-1.5 mt-0.5">
+                <span className="text-[10px] font-bold text-slate-600 bg-gray-100 px-1 py-0.5 rounded-sm">3.2 ★</span>
+                <span className="text-gray-300 text-[10px]">•</span>
+                <span className="text-[10px] text-slate-500 font-medium">4 years with Cocia</span>
               </div>
-              <button className="text-[13px] font-bold text-[#2874f0] mt-1.5">See other sellers</button>
+              <button className="text-[11px] font-bold text-[#2874f0] mt-1 underline underline-offset-2">See other sellers</button>
             </div>
         </div>
       </div>
     </div>
 
       {/* Service Icons Row */}
-      <div className="px-3 py-6 flex justify-around items-center border-t border-gray-50">
+      <div className="px-3 py-4 flex justify-around items-center border-t border-gray-50 bg-gray-50/30">
         <div 
           onClick={() => setShowReturnPolicy(true)}
-          className="flex flex-col items-center gap-3 cursor-pointer group active:scale-95 transition-transform"
+          className="flex flex-col items-center gap-2 cursor-pointer group active:scale-95 transition-transform"
         >
-          <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center group-hover:bg-blue-100 transition-colors">
-            <RotateCcw size={24} className="text-[#2874f0]" />
+          <div className="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center group-hover:bg-blue-100 transition-colors">
+            <RotateCcw size={20} className="text-[#2874f0]" />
           </div>
-          <span className="text-[12px] font-bold text-slate-600 text-center leading-tight">10-Day<br/>Return ›</span>
+          <span className="text-[10px] font-bold text-slate-600 text-center leading-tight">10-Day<br/>Return ›</span>
         </div>
         <div 
           onClick={() => setShowPaymentOptions(true)}
-          className="flex flex-col items-center gap-3 cursor-pointer group active:scale-95 transition-transform"
+          className="flex flex-col items-center gap-2 cursor-pointer group active:scale-95 transition-transform"
         >
-          <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center group-hover:bg-blue-100 transition-colors">
-            <IndianRupee size={24} className="text-[#2874f0]" />
+          <div className="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center group-hover:bg-blue-100 transition-colors">
+            <IndianRupee size={20} className="text-[#2874f0]" />
           </div>
-          <span className="text-[12px] font-bold text-slate-600 text-center leading-tight">Cash on<br/>Delivery ›</span>
+          <span className="text-[10px] font-bold text-slate-600 text-center leading-tight">Cash on<br/>Delivery ›</span>
         </div>
-        <div className="flex flex-col items-center gap-3 cursor-pointer group active:scale-95 transition-transform"
+        <div className="flex flex-col items-center gap-2 cursor-pointer group active:scale-95 transition-transform"
           onClick={() => setShowSupportInfo(true)}
         >
-          <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center group-hover:bg-blue-100 transition-colors">
-            <span className="text-[#2874f0] font-black text-[12px]">24x7</span>
+          <div className="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center group-hover:bg-blue-100 transition-colors">
+            <span className="text-[#2874f0] font-black text-[10px]">24x7</span>
           </div>
-          <span className="text-[12px] font-bold text-slate-600 text-center leading-tight">Customer<br/>support ›</span>
+          <span className="text-[10px] font-bold text-slate-600 text-center leading-tight">Customer<br/>support ›</span>
         </div>
       </div>
 
-      <div className="h-2 bg-gray-100" />
+      <div className="h-1.5 bg-gray-50" />
 
       {/* Similar Products */}
-      <div className="py-4 border-t border-gray-200">
-        <div className="flex justify-between items-center px-3 mb-4">
-          <h3 className="text-[18px] font-bold text-slate-900">Similar Products</h3>
-          <button className="w-8 h-8 bg-slate-900 rounded-full flex items-center justify-center text-white">
-            <ChevronRight size={20} />
+      <div className="py-3 border-t border-gray-100">
+        <div className="flex justify-between items-center px-3 mb-3">
+          <h3 className="text-[15px] font-bold uppercase tracking-tight text-slate-900">Similar Products</h3>
+          <button className="w-7 h-7 bg-slate-900 rounded-full flex items-center justify-center text-white active:scale-90 transition-transform">
+            <ChevronRight size={18} />
           </button>
         </div>
-        <div className="flex gap-6 px-3 overflow-x-auto no-scrollbar pb-4">
+        <div className="flex gap-4 px-3 overflow-x-auto no-scrollbar pb-3">
           {[
-            { img: Tshirt, name: 'Checked Cotton Shirt', brand: 'Fashion Hub', price: 899, oldPrice: 1999 },
+            { img: TopSection1, name: 'Checked Cotton Shirt', brand: 'Fashion Hub', price: 899, oldPrice: 1999 },
             { img: FlipFlops, name: 'Casual Flip Flops', brand: 'Drasert', price: 1299, oldPrice: 2499 },
             { img: Suitcase, name: 'Premium Suitcase', brand: 'Lounge Dreams', price: 1599, oldPrice: 2999 }
           ].map((item, idx) => (
             <div 
               key={idx} 
               onClick={() => navigate('/vendor/product-detail', { state: { product: { ...item, image: item.img, rating: 4.1, discount: '55% OFF' } } })}
-              className="flex-shrink-0 w-[155px] bg-white border border-gray-200 rounded-sm overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer active:scale-95"
+              className="flex-shrink-0 w-[130px] bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm active:scale-95 transition-transform cursor-pointer"
             >
               <div className="aspect-[4/5] relative">
                 <img src={item.img} className="w-full h-full object-cover" alt="similar" />
-                <div className="absolute bottom-2 left-2 bg-white/95 px-1.5 py-0.5 rounded-sm flex items-center gap-0.5 border border-gray-100 shadow-sm">
-                  <span className="text-[11px] font-bold">4.1</span>
-                  <Star size={10} fill="#15803d" className="text-green-700" />
+                <div className="absolute bottom-1.5 left-1.5 bg-white/95 px-1 py-0.5 rounded-sm flex items-center gap-0.5 border border-gray-50 shadow-sm">
+                  <span className="text-[9px] font-bold">4.1</span>
+                  <Star size={7} fill="#15803d" className="text-green-700" />
                 </div>
               </div>
-              <div className="p-2.5">
-                <h4 className="text-[12px] font-bold text-slate-800 line-clamp-1 mb-1 uppercase tracking-tighter">{item.name}</h4>
+              <div className="p-2">
+                <h4 className="text-[10px] font-bold text-slate-800 line-clamp-1 mb-1 uppercase tracking-tight">{item.name}</h4>
                 <div className="flex items-center gap-1.5 leading-none">
-                  <span className="text-[12px] font-bold text-green-600">55% OFF</span>
+                  <span className="text-[10px] font-black text-green-600">55% OFF</span>
                 </div>
                 <div className="flex items-center gap-1 mt-1">
-                  <span className="text-[11px] text-gray-400 line-through">₹1,999</span>
-                  <span className="text-[14px] font-black">₹899</span>
+                  <span className="text-[9px] text-gray-400 line-through">₹1,999</span>
+                  <span className="text-[12px] font-black">₹899</span>
                 </div>
-                <p className="text-[11px] text-blue-600 font-bold mt-1.5">₹799 <span className="font-medium text-gray-400 text-[10px]">with UPI</span></p>
+                <p className="text-[9px] text-blue-600 font-bold mt-1">₹799 <span className="font-medium text-gray-400 text-[8px]">with UPI</span></p>
               </div>
             </div>
           ))}
@@ -445,24 +428,24 @@ const ProductDetail = () => {
       </div>
 
       {/* Product Highlights */}
-      <div className="px-3 py-4 border-t border-gray-200">
+      <div className="px-3 py-3 border-t border-gray-100">
         <div 
           onClick={() => setIsHighlightsOpen(!isHighlightsOpen)}
           className="flex justify-between items-center cursor-pointer group"
         >
-          <h3 className="text-[18px] font-bold text-slate-900 group-active:scale-[0.98] transition-transform">Product highlights</h3>
+          <h3 className="text-[15px] font-black uppercase tracking-tight text-slate-900 group-active:scale-[0.98] transition-transform">Product highlights</h3>
           <ChevronRight 
-            size={22} 
+            size={18} 
             className={`text-gray-400 transition-transform duration-300 ${isHighlightsOpen ? '-rotate-90' : 'rotate-90'}`} 
           />
         </div>
         
         {isHighlightsOpen && (
-          <div className="grid grid-cols-2 gap-y-7 gap-x-12 mt-8 animate-in fade-in slide-in-from-top-2 duration-300">
+          <div className="grid grid-cols-2 gap-y-4 gap-x-8 mt-4 animate-in fade-in slide-in-from-top-2 duration-300">
             {detailsData.highlights.map((item, idx) => (
-              <div key={idx} className="border-b border-gray-50 pb-3">
-                <p className="text-[12px] font-medium text-gray-400 uppercase tracking-tight mb-1.5">{item.label}</p>
-                <p className="text-[15px] font-bold text-slate-800">{item.value}</p>
+              <div key={idx} className="border-b border-gray-50 pb-2">
+                <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-1">{item.label}</p>
+                <p className="text-[13px] font-black text-slate-800">{item.value}</p>
               </div>
             ))}
           </div>
@@ -470,27 +453,27 @@ const ProductDetail = () => {
       </div>
 
       {/* All Details */}
-      <div className="border-t border-gray-200">
+      <div className="border-t border-gray-100">
         <div 
           onClick={() => setIsAllDetailsOpen(!isAllDetailsOpen)}
-          className="px-3 py-4 flex justify-between items-center cursor-pointer group"
+          className="px-3 py-3 flex justify-between items-center cursor-pointer group"
         >
           <div>
-            <h3 className="text-[18px] font-bold text-slate-900 group-active:scale-[0.98] transition-transform">All details</h3>
-            <p className="text-[14px] text-gray-500">Features, description and more</p>
+            <h3 className="text-[15px] font-black uppercase tracking-tight text-slate-900 group-active:scale-[0.98] transition-transform">All details</h3>
+            <p className="text-[11px] text-gray-500">Features, description and more</p>
           </div>
-          <div className="w-8 h-8 bg-gray-50 rounded-sm flex items-center justify-center">
+          <div className="w-7 h-7 bg-gray-50 rounded-full flex items-center justify-center">
             <ChevronRight 
-              size={22} 
+              size={18} 
               className={`text-gray-400 transition-transform duration-300 ${isAllDetailsOpen ? '-rotate-90' : 'rotate-90'}`} 
             />
           </div>
         </div>
 
         {isAllDetailsOpen && (
-          <div className="px-3 pb-8 animate-in fade-in slide-in-from-top-2 duration-300">
+          <div className="px-3 pb-6 animate-in fade-in slide-in-from-top-2 duration-300">
             {/* Tabs */}
-            <div className="flex gap-2 overflow-x-auto no-scrollbar mb-8">
+            <div className="flex gap-2 overflow-x-auto no-scrollbar mb-6">
               {['Specifications', 'Description', 'Manufacturer info'].map(tab => (
                 <button
                   key={tab}
@@ -498,7 +481,7 @@ const ProductDetail = () => {
                     e.stopPropagation();
                     setActiveDetailTab(tab);
                   }}
-                  className={`px-4 py-2.5 rounded-sm text-[14px] font-bold border whitespace-nowrap transition-all ${
+                  className={`px-3 py-1.5 rounded-full text-[11px] font-bold border whitespace-nowrap transition-all ${
                     activeDetailTab === tab 
                     ? 'bg-[#212121] text-white border-[#212121]' 
                     : 'bg-white text-slate-600 border-gray-200 active:scale-95'
@@ -510,41 +493,41 @@ const ProductDetail = () => {
             </div>
 
             {activeDetailTab === 'Specifications' && (
-              <div className="space-y-8">
+              <div className="space-y-6">
                 <div>
-                  <h4 className="text-[15px] font-black text-slate-900 mb-4 tracking-tight">General</h4>
-                  <div className="grid grid-cols-2 gap-x-12 gap-y-5">
+                  <h4 className="text-[13px] font-black text-slate-900 mb-3 tracking-tight uppercase">General</h4>
+                  <div className="grid grid-cols-2 gap-x-8 gap-y-4">
                     {detailsData.specs.map((item, idx) => (
-                      <div key={idx} className="border-b border-gray-50 pb-2.5">
-                        <p className="text-[12px] font-medium text-gray-400 mb-1">{item.label}</p>
-                        <p className="text-[14px] font-bold text-slate-800 tracking-tight">{item.value}</p>
+                      <div key={idx} className="border-b border-gray-50 pb-2">
+                        <p className="text-[10px] font-bold text-gray-400 mb-0.5">{item.label}</p>
+                        <p className="text-[12px] font-black text-slate-800 tracking-tight">{item.value}</p>
                       </div>
                     ))}
                   </div>
-                  <div className="mt-6 border-b border-gray-50 pb-5">
-                    <p className="text-[12px] font-medium text-gray-400 mb-2">Other Details</p>
-                    <p className="text-[13px] font-medium text-slate-700 leading-relaxed">
+                  <div className="mt-4 border-b border-gray-50 pb-4">
+                    <p className="text-[10px] font-bold text-gray-400 mb-1">Other Details</p>
+                    <p className="text-[12px] font-medium text-slate-700 leading-relaxed">
                       Oversized shirt in crisp cotton poplin. Dropped shoulders, long sleeves with buttoned cuffs.
                     </p>
                   </div>
                 </div>
 
                 <div className="flex justify-center">
-                  <button className="flex items-center gap-1.5 px-6 py-2 border border-gray-200 rounded-sm text-[14px] font-bold text-slate-800 active:scale-95 transition-transform">
-                    See more <ChevronRight size={18} className="rotate-90 text-gray-400" />
+                  <button className="flex items-center gap-1.5 px-5 py-1.5 border border-gray-200 rounded-full text-[12px] font-bold text-slate-800 active:scale-95 transition-transform">
+                    See more <ChevronRight size={16} className="rotate-90 text-gray-400" />
                   </button>
                 </div>
               </div>
             )}
             
             {activeDetailTab === 'Description' && (
-              <div className="text-[14px] text-slate-600 leading-relaxed">
+              <div className="text-[12px] text-slate-600 leading-relaxed">
                 Premium wool blend shirt with a modern boxy fit. Features a classic spread collar and checkered pattern. Perfect for seasonal transitions.
               </div>
             )}
 
             {activeDetailTab === 'Manufacturer info' && (
-              <div className="text-[14px] text-slate-600 leading-relaxed">
+              <div className="text-[12px] text-slate-600 leading-relaxed">
                 Manufactured by Lounge Dreams Clothing Pvt Ltd. Made in India.
               </div>
             )}
@@ -552,22 +535,20 @@ const ProductDetail = () => {
         )}
       </div>
 
-
-
-      <div className="h-2 bg-gray-100" />
+      <div className="h-1.5 bg-gray-50" />
 
       {/* Bought Together */}
-      <div className="py-6 mb-12">
-        <div className="flex justify-between items-center px-3 mb-5">
-          <h3 className="text-[18px] font-bold text-slate-900">Bought Together</h3>
+      <div className="py-4 mb-8">
+        <div className="flex justify-between items-center px-3 mb-4">
+          <h3 className="text-[15px] font-bold uppercase tracking-tight text-slate-900">Bought Together</h3>
           <button 
             onClick={() => navigate('/vendor/all-offers')}
-            className="w-8 h-8 bg-slate-900 rounded-full flex items-center justify-center text-white active:scale-90 transition-transform"
+            className="w-7 h-7 bg-slate-900 rounded-full flex items-center justify-center text-white active:scale-90 transition-transform"
           >
-            <ChevronRight size={20} />
+            <ChevronRight size={18} />
           </button>
         </div>
-        <div className="flex gap-6 px-3 overflow-x-auto no-scrollbar pb-6">
+        <div className="flex gap-4 px-3 overflow-x-auto no-scrollbar pb-4">
           {[
             { img: Balloons, name: 'Party Pack', price: 299, oldPrice: 599 },
             { img: SplitAC, name: 'Samsung AC', price: 34999, oldPrice: 45999 },
@@ -576,20 +557,20 @@ const ProductDetail = () => {
             <div 
               key={i} 
               onClick={() => navigate('/vendor/product-detail', { state: { product: { ...item, image: item.img, rating: 4.3, discount: '60% off' } } })}
-              className="flex-shrink-0 w-[175px] bg-white border border-gray-200 rounded-sm overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer active:scale-95"
+              className="flex-shrink-0 w-[145px] bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm active:scale-95 transition-transform cursor-pointer"
             >
-              <div className="aspect-[3/4] bg-gray-50">
+              <div className="aspect-[4/5] bg-gray-50">
                 <img src={item.img} className="w-full h-full object-cover" alt="bought" />
               </div>
-              <div className="p-3">
-                <h4 className="text-[13px] font-bold text-slate-800 line-clamp-1 mb-1.5">{item.name}</h4>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-[16px] font-black">₹{item.price}</span>
-                  <span className="text-[12px] font-bold text-green-600">60% off</span>
+              <div className="p-2">
+                <h4 className="text-[11px] font-bold text-slate-800 line-clamp-1 mb-1 tracking-tight">{item.name}</h4>
+                <div className="flex items-center gap-2 mb-1.5">
+                  <span className="text-[14px] font-black">₹{item.price}</span>
+                  <span className="text-[10px] font-black text-green-600">60% off</span>
                 </div>
                 <div className="flex items-center gap-0.5">
-                  {[1, 2, 3, 4].map(s => <Star key={s} size={12} fill="#16a34a" className="text-green-600" />)}
-                  <span className="text-[11px] ml-1 text-slate-400">(1.2k)</span>
+                  {[1, 2, 3, 4].map(s => <Star key={s} size={9} fill="#16a34a" className="text-green-600" />)}
+                  <span className="text-[9px] ml-1 text-slate-400 font-bold">(1.2k)</span>
                 </div>
               </div>
             </div>

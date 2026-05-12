@@ -8,9 +8,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import useAccountStore from '../../../store/useAccountStore';
 
 // Real Images from Assets
-import BannerImg from '../../../assets/Banner.jpeg';
-import FashionHero from '../../../assets/Cards/fashion_hero.png';
-import ElectronicsDeal from '../../../assets/Cards/electronics_deal.png';
+// Real Images from Assets
+import ImageBanner1 from '../../../assets/TopBanner/ImageBanner1.jpg';
+import ImageBanner2 from '../../../assets/TopBanner/ImageBanner2.jpg';
+import ImageBanner3 from '../../../assets/TopBanner/ImageBanner3.webp';
+import ImageBanner4 from '../../../assets/TopBanner/ImageBanner4.jpg';
 
 const BannerCarousel = () => {
   const [currentBanner, setCurrentBanner] = useState(0);
@@ -18,22 +20,28 @@ const BannerCarousel = () => {
 
   const banners = [
     { 
-      image: BannerImg, 
+      image: ImageBanner1, 
       title: "Super Saver Days", 
       desc: "Up to 80% Off on Electronics", 
       label: "SALE"
     },
     { 
-      image: FashionHero, 
+      image: ImageBanner2, 
       title: "Fashion Carnival", 
       desc: "Extra 20% Off for Plus Members", 
       label: "OFFER"
     },
     { 
-      image: ElectronicsDeal, 
+      image: ImageBanner3, 
       title: "Tech Spotlight", 
       desc: "Latest Gadgets at Best Prices", 
       label: "NEW"
+    },
+    { 
+      image: ImageBanner4, 
+      title: "Grocery Offers", 
+      desc: "Best Quality Groceries", 
+      label: "SALE"
     }
   ];
 

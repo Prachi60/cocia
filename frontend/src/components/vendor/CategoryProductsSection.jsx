@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo, useCallback } from 'react';
-import { Heart, CheckCircle, Star } from 'lucide-react'; 
+import { Heart, CheckCircle, Star } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { allCategoryProducts } from '../../data/categoryData';
 
@@ -11,20 +11,20 @@ const ProductCard = React.memo(({ product, onProductClick, onAddToCart }) => {
   }, [product.id]);
 
   return (
-    <div 
-      className="flex flex-col cursor-pointer group" 
+    <div
+      className="flex flex-col cursor-pointer group"
       onClick={() => onProductClick(product)}
     >
       <div className="relative aspect-square rounded-xl overflow-hidden bg-gray-50 border border-gray-100">
-        <img 
-          src={product.image} 
-          alt={product.name} 
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
+        <img
+          src={product.image}
+          alt={product.name}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           loading="lazy"
           width="200"
           height="200"
         />
-        
+
         {/* Rating Badge on Image */}
         <div className="absolute bottom-2 left-2 flex items-center gap-1 bg-white/90 backdrop-blur-sm px-1.5 py-0.5 rounded shadow-sm border border-gray-100">
           <span className="text-[10px] font-bold text-slate-800">{product.rating || '4.1'}</span>
@@ -33,12 +33,12 @@ const ProductCard = React.memo(({ product, onProductClick, onAddToCart }) => {
           <span className="text-[9px] font-medium text-gray-500">({ratingCount})</span>
         </div>
       </div>
-      
+
       <div className="pt-2 px-0.5">
         <h3 className="text-[12px] font-medium text-slate-700 line-clamp-1 leading-tight">
           <span className="font-bold text-slate-900">{product.brand || 'Drasert'}</span> {product.name}
         </h3>
-        
+
         <div className="mt-1 flex flex-col gap-0.5">
           <div className="flex items-center gap-1.5">
             <span className="text-[12px] text-gray-400 line-through font-medium">₹{product.oldPrice || '1,999'}</span>
@@ -59,7 +59,7 @@ const CategoryProductsSection = ({ selectedCategory }) => {
   const [displayCount, setDisplayCount] = useState(6);
   const navigate = useNavigate();
   const loaderRef = React.useRef(null);
-  
+
   const allProducts = useMemo(() => allCategoryProducts[selectedCategory] || [], [selectedCategory]);
   const products = useMemo(() => allProducts.slice(0, displayCount), [allProducts, displayCount]);
 
@@ -79,17 +79,17 @@ const CategoryProductsSection = ({ selectedCategory }) => {
   }, []);
 
   const handleProductClick = useCallback((product) => {
-    navigate('/vendor/product-detail', { 
-      state: { 
-        product: { 
-          ...product, 
+    navigate('/vendor/product-detail', {
+      state: {
+        product: {
+          ...product,
           off: product.discount,
           label: 'Limited time deal',
-          brand: 'Brand', 
-          reviews: '1,200', 
-          delivery: 'Tomorrow' 
-        } 
-      } 
+          brand: 'Brand',
+          reviews: '1,200',
+          delivery: 'Tomorrow'
+        }
+      }
     });
   }, [navigate]);
 
@@ -140,9 +140,9 @@ const CategoryProductsSection = ({ selectedCategory }) => {
         <>
           <div className={`grid grid-cols-2 gap-x-3 gap-y-6 transition-all duration-300 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
             {products.map((product) => (
-              <ProductCard 
-                key={product.id} 
-                product={product} 
+              <ProductCard
+                key={product.id}
+                product={product}
                 onProductClick={handleProductClick}
                 onAddToCart={handleAddToCart}
               />

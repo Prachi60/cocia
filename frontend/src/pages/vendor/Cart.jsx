@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  ShoppingCart, ChevronRight, CheckCircle, Info, Trash2, 
+import {
+  ShoppingCart, ChevronRight, CheckCircle, Info, Trash2,
   ArrowLeft, ShieldCheck, MapPin, Truck, Star, Heart, Zap, X
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -111,7 +111,7 @@ const Cart = () => {
                     </div>
                     {/* Qty Dropdown */}
                     <div className="relative">
-                      <select 
+                      <select
                         value={item.qty || 1}
                         onChange={(e) => handleSetQuantity(item.cartId, e.target.value)}
                         className="appearance-none border border-gray-200 rounded-sm pl-2 pr-6 py-1 text-[12px] font-bold bg-white focus:outline-none cursor-pointer"
@@ -123,11 +123,11 @@ const Cart = () => {
                       <ChevronRight size={14} className="absolute right-1.5 top-1/2 -translate-y-1/2 rotate-90 text-gray-400 pointer-events-none" />
                     </div>
                   </div>
-                  
+
                   <div className="flex-1 min-w-0">
                     <h3 className="text-[14px] text-slate-800 font-medium line-clamp-1 mb-0.5">{item.name}</h3>
                     <p className="text-[11px] text-gray-400 mb-2 uppercase">{item.brand || 'Premium Quality'}</p>
-                    
+
                     {/* Rating */}
                     <div className="flex items-center gap-1.5 mb-2">
                       <div className="flex items-center bg-green-700 text-white px-1 py-0.5 rounded-sm text-[10px] font-bold">
@@ -162,7 +162,7 @@ const Cart = () => {
                 </div>
 
                 <div className="px-4 pb-4">
-                   <div className="flex items-center gap-2 py-3 border-t border-gray-50">
+                  <div className="flex items-center gap-2 py-3 border-t border-gray-50">
                     <Truck size={16} className="text-gray-400" />
                     <p className="text-[12px] text-gray-800"><span className="italic font-black text-[10px] uppercase tracking-tighter mr-1">Express</span> Delivery in 2 days, Fri</p>
                   </div>
@@ -170,7 +170,7 @@ const Cart = () => {
 
                 {/* Actions */}
                 <div className="flex border-t border-gray-100">
-                  <button 
+                  <button
                     onClick={() => handleRemove(item.cartId)}
                     className="flex-1 py-3.5 flex items-center justify-center gap-2 text-[13px] font-medium text-gray-600 active:bg-gray-50 border-r border-gray-100"
                   >
@@ -220,21 +220,21 @@ const Cart = () => {
         <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 z-[200] shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
           {/* Savings Banner */}
           <div className="bg-[#f1f9f5] px-4 py-2 flex items-center gap-2 border-b border-[#e6f3ec]">
-             <div className="bg-green-600 rounded-full p-0.5 flex items-center justify-center">
-                <CheckCircle size={10} className="text-white" />
-             </div>
-             <p className="text-[11px] font-medium text-green-800">You'll save ₹{savings.toLocaleString('en-IN')} on this order!</p>
+            <div className="bg-green-600 rounded-full p-0.5 flex items-center justify-center">
+              <CheckCircle size={10} className="text-white" />
+            </div>
+            <p className="text-[11px] font-medium text-green-800">You'll save ₹{savings.toLocaleString('en-IN')} on this order!</p>
           </div>
-          
+
           <div className="px-4 py-2.5 flex items-center justify-between">
             <div className="flex flex-col">
-               <span className="text-[12px] text-gray-400 line-through">₹{totalOldPrice.toLocaleString('en-IN')}</span>
-               <div className="flex items-center gap-1">
+              <span className="text-[12px] text-gray-400 line-through">₹{totalOldPrice.toLocaleString('en-IN')}</span>
+              <div className="flex items-center gap-1">
                 <span className="text-[18px] font-black text-slate-900">₹{totalPrice.toLocaleString('en-IN')}</span>
                 <Info size={14} className="text-gray-400" />
-               </div>
+              </div>
             </div>
-            <button 
+            <button
               onClick={() => navigate('/vendor/checkout')}
               className="bg-[#fb641b] text-white px-10 py-3 rounded-sm font-black uppercase text-[14px] shadow-lg active:scale-95 transition-transform"
             >
@@ -243,16 +243,16 @@ const Cart = () => {
           </div>
         </div>
       )}
-      
+
       {/* Safe Payments Footer */}
       <div className="mt-6 px-6 py-8 flex flex-col items-center gap-4 text-gray-400">
-         <div className="flex items-center gap-2">
-            <ShieldCheck size={20} />
-            <span className="text-[12px] font-bold uppercase tracking-widest">100% Safe and Secure Payments</span>
-         </div>
-         <p className="text-[10px] text-center leading-relaxed">
-           Cocia Trust Pay. 100% Payment Protection. Easy Returns.
-         </p>
+        <div className="flex items-center gap-2">
+          <ShieldCheck size={20} />
+          <span className="text-[12px] font-bold uppercase tracking-widest">100% Safe and Secure Payments</span>
+        </div>
+        <p className="text-[10px] text-center leading-relaxed">
+          Cocia Trust Pay. 100% Payment Protection. Easy Returns.
+        </p>
       </div>
     </div>
   );

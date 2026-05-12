@@ -1,43 +1,45 @@
-import Mascara from '../assets/Cards/mascara.png';
-import LipstickDeal from '../assets/Cards/lipstick_deal.png';
-import LipGloss from '../assets/Cards/lip_gloss.png';
-import LipLiner from '../assets/Cards/lip_liner.png';
-import PlumShampoo from '../assets/Cards/plum_shampoo.png';
-import LorealShampoo from '../assets/Cards/loreal_shampoo.png';
-import MatrixShampoo from '../assets/Cards/matrix_shampoo.png';
-import MakeupHero from '../assets/Cards/makeup_picks.png';
+import Mascara from '../assets/products/product01.jpg';
+import LipstickDeal from '../assets/products/product02.jpg';
+import LipGloss from '../assets/products/product03.jpg';
+import LipLiner from '../assets/products/product04.jpg';
+import PlumShampoo from '../assets/products/product05.jpg';
+import LorealShampoo from '../assets/products/product06.jpg';
+import MatrixShampoo from '../assets/products/product07.jpg';
+import MakeupHero from '../assets/products/product08.jpg';
 
-import StationeryImg from '../assets/products/stationery.png';
-import GiftingImg from '../assets/products/gifting.png';
-import PrintingImg from '../assets/products/printing.png';
-import JewelleryImg from '../assets/products/jewellery.png';
-import ElectricalImg from '../assets/products/electrical.png';
-import ToysImg from '../assets/products/toys.png';
+import StationeryImg from '../assets/products/product09.jpg';
+import GiftingImg from '../assets/products/product10.jpg';
+import PrintingImg from '../assets/products/product11.webp';
+import JewelleryImg from '../assets/products/product12.jpg';
+import ElectricalImg from '../assets/products/product13.jpg';
+import ToysImg from '../assets/products/product14.jpg';
+import TopImg3 from '../assets/TopSection/TopSection3.jpg';
+import TopImg4 from '../assets/TopSection/TopSection21.jpg';
 
-import SamsungS24 from '../assets/Cards/samsung_s24.png';
-import AsusLaptop from '../assets/Cards/asus_laptop.png';
-import EarbudsDeal from '../assets/Cards/earbuds_deal.png';
-import ElectronicsHero from '../assets/Cards/electronics_deal.png';
+import SamsungS24 from '../assets/products/product01.jpg';
+import AsusLaptop from '../assets/products/product02.jpg';
+import EarbudsDeal from '../assets/products/product03.jpg';
+import ElectronicsHero from '../assets/products/product04.jpg';
 
-import ClothesImg from '../assets/Carousel/clths-removebg-preview.png';
-import Tshirt from '../assets/products/tshirt.png';
-import FashionHero from '../assets/Cards/fashion_hero.png';
-import FlipFlops from '../assets/products/flip_flops.png';
+import ClothesImg from '../assets/products/product15.webp';
+import Tshirt from '../assets/products/product05.jpg';
+import FashionHero from '../assets/products/product06.jpg';
+import FlipFlops from '../assets/products/product07.jpg';
 
-import SplitAC from '../assets/products/split_ac.png';
-import TowerFan from '../assets/products/tower_fan.png';
-import FanPedestal from '../assets/products/fan_pedestal.png';
-import FanBlack from '../assets/products/fan_black.png';
-import CoolerWhite from '../assets/products/cooler_white.png';
-import CookwareHero from '../assets/Cards/cookware_hero.png';
+import SplitAC from '../assets/products/product08.jpg';
+import TowerFan from '../assets/products/product09.jpg';
+import FanPedestal from '../assets/products/product10.jpg';
+import FanBlack from '../assets/products/product11.webp';
+import CoolerWhite from '../assets/products/product12.jpg';
+import CookwareHero from '../assets/products/product13.jpg';
 
 export const allCategoryProducts = {
   'For You': [
     { id: 'fy1', name: 'Premium Gifting Box', category: 'Gifting', price: 699, oldPrice: 999, discount: '30% OFF', rating: 4.8, image: GiftingImg, shortDescription: 'Assorted luxury collection' },
     { id: 'fy2', name: 'Samsung Galaxy S24', category: 'Electronics', price: 79999, oldPrice: 89999, discount: '11% OFF', rating: 4.9, image: SamsungS24, shortDescription: 'Flagship AI smartphone' },
     { id: 'fy3', name: 'Luxury Matte Lipstick', category: 'Beauty', price: 499, oldPrice: 999, discount: '50% OFF', rating: 4.8, image: LipstickDeal, shortDescription: 'Long-lasting matte finish' },
-    { id: 'fy4', name: 'Wireless Earbuds', category: 'Electronics', price: 2499, oldPrice: 5999, discount: '58% OFF', rating: 4.7, image: EarbudsDeal, shortDescription: '40H playtime & ANC' },
-    { id: 'fy5', name: 'Diamond Pendant', category: 'Jewellery', price: 12999, oldPrice: 15999, discount: '18% OFF', rating: 4.9, image: JewelleryImg, shortDescription: '18K gold elegant design' },
+    { id: 'fy4', name: 'Wireless Earbuds', category: 'Electronics', price: 2499, oldPrice: 5999, discount: '58% OFF', rating: 4.7, image: TopImg3, shortDescription: '40H playtime & ANC' },
+    { id: 'fy5', name: 'Diamond Pendant', category: 'Jewellery', price: 12999, oldPrice: 15999, discount: '18% OFF', rating: 4.9, image: TopImg4, shortDescription: '18K gold elegant design' },
     { id: 'fy6', name: 'Men\'s Denim Jacket', category: 'Fashion', price: 1499, oldPrice: 2999, discount: '50% OFF', rating: 4.8, image: FashionHero, shortDescription: 'Classic blue wash' }
   ],
   Beauty: [

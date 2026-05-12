@@ -1,21 +1,34 @@
 import { create } from 'zustand';
 
 // Import local assets for proper image display
-import FashionImg from '../assets/products/Fashion.png';
-import JewelleryImg from '../assets/products/jewellery.png';
-import TshirtImg from '../assets/products/tshirt.png';
-import BeautyImg from '../assets/products/beauty_tab.png';
-import MakeupImg from '../assets/Cards/makeup_picks.png';
-import EarbudsImg from '../assets/Cards/earbuds_deal.png';
-import SamsungImg from '../assets/Cards/samsung_s24.png';
-import ElectronicsImg from '../assets/Cards/electronics_deal.png';
-import SuitcaseImg from '../assets/products/suitcase.png';
-import FlipFlopsImg from '../assets/products/flip_flops.png';
-import LipstickImg from '../assets/Cards/lipstick_deal.png';
-import ShampooImg from '../assets/Cards/plum_shampoo.png';
-import ToysImg from '../assets/products/toys.png';
-import StationeryImg from '../assets/products/stationery.png';
-import GiftingImg from '../assets/products/gifting.png';
+import FashionImg from '../assets/products/product01.jpg';
+import JewelleryImg from '../assets/products/product02.jpg';
+import TshirtImg from '../assets/TopSection/TopSection2.jpg';
+import BeautyImg from '../assets/products/product04.jpg';
+import MakeupImg from '../assets/TopSection/TopSection1.jpg';
+import EarbudsImg from '../assets/products/product06.jpg';
+import SamsungImg from '../assets/products/product07.jpg';
+import ElectronicsImg from '../assets/products/product08.jpg';
+import SuitcaseImg from '../assets/products/product09.jpg';
+import FlipFlopsImg from '../assets/products/product10.jpg';
+import LipstickImg from '../assets/products/product11.webp';
+import ShampooImg from '../assets/products/product12.jpg';
+import ToysImg from '../assets/products/product13.jpg';
+import StationeryImg from '../assets/products/product14.jpg';
+import GiftingImg from '../assets/products/product15.webp';
+
+// Still Looking Section Assets
+import StillImg1 from '../assets/StillSection/StillImages1.png';
+import StillImg2 from '../assets/StillSection/StillImages2.jpg';
+import StillImg3 from '../assets/StillSection/StillImages3.jpg';
+import StillImg4 from '../assets/StillSection/StillImages4.png';
+import StillImg5 from '../assets/StillSection/StillImages5.jpg';
+
+// Top Selection Section Assets
+import TopImg1 from '../assets/TopSection/TopSection1.jpg';
+import TopImg2 from '../assets/TopSection/TopSection2.jpg';
+import TopImg3 from '../assets/TopSection/TopSection3.jpg';
+import TopImg4 from '../assets/TopSection/TopSection21.jpg';
 
 // Using local assets for products
 const PRODUCT_IMAGES = {
@@ -47,16 +60,16 @@ const useVendorStore = create((set) => ({
   // Home Page Sections Data
   homeSections: {
     stillLooking: [
-      { label: 'Co-ords', img: PRODUCT_IMAGES.fashion, link: '/vendor/products' },
-      { label: 'Necklaces', img: PRODUCT_IMAGES.jewellery, link: '/vendor/products' },
-      { label: "Women's Tops", img: PRODUCT_IMAGES.tshirt, link: '/vendor/products' },
-      { label: 'Lipsticks', img: PRODUCT_IMAGES.lipstick, link: '/vendor/products' }
+      { label: 'Co-ords', img: StillImg1, link: '/vendor/products' },
+      { label: 'Necklaces', img: StillImg2, link: '/vendor/products' },
+      { label: "Women's Tops", img: StillImg3, link: '/vendor/products' },
+      { label: 'Lipsticks', img: StillImg4, link: '/vendor/products' }
     ],
     topSelection: [
-      { name: 'Biotique Face Wash', tag: 'Grab Or Gone', img: PRODUCT_IMAGES.shampoo, link: '/vendor/product-detail' },
-      { name: 'Lakmé Moisturizer', tag: 'Best Picks', img: PRODUCT_IMAGES.makeup, link: '/vendor/product-detail' },
-      { name: 'Vaseline Lip Balm', tag: 'Popular', img: PRODUCT_IMAGES.beauty, link: '/vendor/product-detail' },
-      { name: 'MARS Lipstick', tag: 'Widest Range', img: PRODUCT_IMAGES.lipstick, link: '/vendor/product-detail' }
+      { name: 'Biotique Face Wash', tag: 'Grab Or Gone', img: TopImg1, link: '/vendor/product-detail' },
+      { name: 'Lakmé Moisturizer', tag: 'Best Picks', img: TopImg2, link: '/vendor/product-detail' },
+      { name: 'Vaseline Lip Balm', tag: 'Popular', img: TopImg3, link: '/vendor/product-detail' },
+      { name: 'MARS Lipstick', tag: 'Widest Range', img: TopImg4, link: '/vendor/product-detail' }
     ],
     brandsSpotlight: [
       { title: 'Flat 73% off', sub: 'Limited time deal', img: PRODUCT_IMAGES.earbuds, link: '/vendor/product-detail' },
@@ -66,15 +79,15 @@ const useVendorStore = create((set) => ({
     ],
     bestQuality: [
       { name: "GUTI Women's Jeans", tag: 'Grab Or Gone', img: PRODUCT_IMAGES.fashion, link: '/vendor/product-detail' },
-      { name: "Mandarin Women's Shirts", tag: 'Popular', img: PRODUCT_IMAGES.tshirt, link: '/vendor/product-detail' },
+      { name: "Mandarin Women's Shirts", tag: 'Popular', img: TopImg2, link: '/vendor/product-detail' },
       { name: 'Royatto Necklaces', tag: 'Popular', img: PRODUCT_IMAGES.jewellery, link: '/vendor/product-detail' },
       { name: "Sqew Women's Trousers", tag: 'In Focus Now', img: PRODUCT_IMAGES.shoes, link: '/vendor/product-detail' }
     ],
     keepShopping: [
-      { label: 'Suitcases', img: PRODUCT_IMAGES.suitcase, link: '/vendor/products' },
-      { label: 'Smartphones', img: PRODUCT_IMAGES.phone, link: '/vendor/products' },
+      { label: 'Suitcases', img: TopImg3, link: '/vendor/products' },
+      { label: 'Smartphones', img: TopImg1, link: '/vendor/products' },
       { label: 'Electronics', img: PRODUCT_IMAGES.electronics, link: '/vendor/products' },
-      { label: 'Beauty', img: PRODUCT_IMAGES.makeup, link: '/vendor/products' }
+      { label: 'Beauty', img: TopImg4, link: '/vendor/products' }
     ]
   },
   

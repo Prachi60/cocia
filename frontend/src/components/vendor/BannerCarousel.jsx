@@ -6,6 +6,14 @@ const BannerCarousel = ({ banners = [] }) => {
   const [isVisible, setIsVisible] = useState(true);
   const containerRef = React.useRef(null);
 
+  // Preload all banner images
+  useEffect(() => {
+    banners.forEach((banner) => {
+      const img = new Image();
+      img.src = banner.image;
+    });
+  }, [banners]);
+
   const nextSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev === banners.length - 1 ? 0 : prev + 1));
   }, [banners.length]);
@@ -21,7 +29,7 @@ const BannerCarousel = ({ banners = [] }) => {
 
   useEffect(() => {
     if (banners.length <= 1 || !isVisible) return;
-    const interval = setInterval(nextSlide, 3000);
+    const interval = setInterval(nextSlide, 4000);
     return () => clearInterval(interval);
   }, [nextSlide, banners.length, isVisible]);
 
@@ -29,25 +37,34 @@ const BannerCarousel = ({ banners = [] }) => {
 
   return (
     <div ref={containerRef} className="relative w-full overflow-hidden px-3 py-2">
-      <div className="relative aspect-[21/9] w-full overflow-hidden rounded-xl shadow-lg border border-gray-100">
-        <AnimatePresence mode="wait">
+      <div className="relative aspect-[21/9] w-full overflow-hidden rounded-xl shadow-lg border border-gray-100 bg-gray-50">
+        <AnimatePresence mode="popLayout">
           <motion.div
             key={banners[currentIndex]?.id || currentIndex}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
             className="absolute inset-0"
           >
             <img
               src={banners[currentIndex]?.image}
               alt={banners[currentIndex]?.title || "Banner"}
               className="h-full w-full object-cover"
+              loading="eager"
+              fetchpriority="high"
             />
-            {/* Gradient Overlay for Premium Look */}
+            {/* Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
           </motion.div>
         </AnimatePresence>
+
+        {/* Preload hidden images to keep them in browser cache */}
+        <div className="hidden">
+          {banners.map((b, i) => (
+            <img key={i} src={b.image} alt="preload" />
+          ))}
+        </div>
       </div>
 
       {/* Pagination Dots */}

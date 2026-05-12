@@ -129,7 +129,7 @@ const CategoryNavbar = ({ selectedCategory, setSelectedCategory }) => {
             key={cat.id}
             onClick={() => handleSelect(cat)}
             whileTap={{ scale: 0.88 }}
-            className="flex flex-col items-center flex-shrink-0 relative px-4 pt-2 pb-2.5 focus:outline-none"
+            className="flex flex-col items-center flex-shrink-0 relative px-3 pt-1.5 pb-2 focus:outline-none"
             aria-pressed={isActive}
             aria-label={cat.label}
           >
@@ -137,7 +137,7 @@ const CategoryNavbar = ({ selectedCategory, setSelectedCategory }) => {
             {isActive && (
               <motion.div
                 layoutId="activePill"
-                className="absolute top-1 left-1/2 -translate-x-1/2 w-16 h-12 rounded-xl bg-[#2874F0]/10"
+                className="absolute top-1 left-1/2 -translate-x-1/2 w-14 h-10 rounded-lg bg-[#2874F0]/10"
                 transition={{ type: 'spring', stiffness: 400, damping: 32 }}
               />
             )}
@@ -146,9 +146,9 @@ const CategoryNavbar = ({ selectedCategory, setSelectedCategory }) => {
             <motion.div
               animate={{ color: isActive ? '#2874F0' : '#374151' }}
               transition={{ duration: 0.18 }}
-              className="mb-1 leading-none relative z-10"
+              className="mb-0.5 leading-none relative z-10"
             >
-              <cat.Svg size={24} active={isActive} />
+              <cat.Svg size={22} active={isActive} />
             </motion.div>
 
             {/* Label */}
@@ -158,7 +158,7 @@ const CategoryNavbar = ({ selectedCategory, setSelectedCategory }) => {
                 fontWeight: isActive ? 700 : 500,
               }}
               transition={{ duration: 0.18 }}
-              className="text-[10.5px] tracking-tight whitespace-nowrap leading-tight relative z-10"
+              className="text-[10px] tracking-tight whitespace-nowrap leading-tight relative z-10"
             >
               {cat.label}
             </motion.span>

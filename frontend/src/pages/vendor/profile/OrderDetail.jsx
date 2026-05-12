@@ -12,12 +12,12 @@ import useAccountStore from '../../../store/useAccountStore';
 import BannerImg from '../../../assets/Banner.jpeg';
 
 // Recommendation Assets
-import Appliances from '../../../assets/Cards/appliances.png';
-import Cookware from '../../../assets/Cards/cookware_hero.png';
-import HomeRevamp from '../../../assets/Cards/home_revamp.png';
-import Earbuds from '../../../assets/Cards/earbuds_deal.png';
-import SamsungS24 from '../../../assets/Cards/samsung_s24.png';
-import AsusLaptop from '../../../assets/Cards/asus_laptop.png';
+import Appliances from '../../../assets/products/product08.jpg';
+import Cookware from '../../../assets/products/product13.jpg';
+import HomeRevamp from '../../../assets/products/product01.jpg';
+import Earbuds from '../../../assets/products/product03.jpg';
+import SamsungS24 from '../../../assets/products/product01.jpg';
+import AsusLaptop from '../../../assets/products/product02.jpg';
 
 const OrderDetail = () => {
   const navigate = useNavigate();

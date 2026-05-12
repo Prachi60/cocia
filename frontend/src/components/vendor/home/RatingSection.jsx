@@ -91,13 +91,13 @@ const RatingCard = React.memo(({ item }) => {
 
 const RatingSection = ({ items }) => {
   return (
-    <div className="px-3 mt-6 mb-2">
-      <div className="flex justify-between items-center mb-3 px-1">
-        <h2 className="text-slate-900" style={{ fontFamily: "'Inter', Arial, sans-serif", fontWeight: 700, fontSize: '26px', lineHeight: 1.2, letterSpacing: '-0.3px' }}>
+    <div className="px-3 mt-4 mb-1">
+      <div className="flex justify-between items-center mb-2 px-1">
+        <h2 className="text-slate-900 flex-1 pr-4" style={{ fontFamily: "'Inter', Arial, sans-serif", fontWeight: 700, fontSize: '18px', lineHeight: 1.2, letterSpacing: '-0.3px' }}>
           Help India make good choices
         </h2>
-        <button className="bg-black text-white p-2 rounded-full shadow-lg active:scale-90 transition-all">
-          <ChevronRight size={16} strokeWidth={3} />
+        <button className="bg-black text-white p-1.5 rounded-full shadow-lg active:scale-90 transition-all">
+          <ChevronRight size={14} strokeWidth={3} />
         </button>
       </div>
       

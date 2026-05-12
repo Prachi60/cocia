@@ -7,18 +7,24 @@ import {
 } from 'lucide-react';
 
 // ── Assets ──────────────────────────────────────────────
-import LipstickDeal  from '../../assets/Cards/lipstick_deal.png';
-import LipGloss      from '../../assets/Cards/lip_gloss.png';
-import LipLiner      from '../../assets/Cards/lip_liner.png';
-import Mascara       from '../../assets/Cards/mascara.png';
-import MakeupHero    from '../../assets/Cards/makeup_picks.png';
-import PlumShampoo   from '../../assets/Cards/plum_shampoo.png';
-import LorealShampoo from '../../assets/Cards/loreal_shampoo.png';
-import MatrixShampoo from '../../assets/Cards/matrix_shampoo.png';
-import JewelleryImg  from '../../assets/products/jewellery.png';
-import BeautyTab     from '../../assets/products/beauty_tab.png';
+import LipstickDeal  from '../../assets/products/product12.jpg';
+import LipGloss      from '../../assets/products/product11.webp';
+import LipLiner      from '../../assets/products/product10.jpg';
+import Mascara       from '../../assets/products/product09.jpg';
+import MakeupHero    from '../../assets/products/product08.jpg';
+import PlumShampoo   from '../../assets/products/product07.jpg';
+import LorealShampoo from '../../assets/products/product06.jpg';
+import MatrixShampoo from '../../assets/products/product05.jpg';
+import JewelleryImg  from '../../assets/products/product12.jpg';
+import BeautyTab     from '../../assets/products/product08.jpg';
 
 import { allCategoryProducts } from '../../data/categoryData';
+
+// Banner Assets
+import ImageBanner1 from '../../assets/TopBanner/ImageBanner1.jpg';
+import ImageBanner2 from '../../assets/TopBanner/ImageBanner2.jpg';
+import ImageBanner3 from '../../assets/TopBanner/ImageBanner3.webp';
+import ImageBanner4 from '../../assets/TopBanner/ImageBanner4.jpg';
 
 // ── Sub-category config ──────────────────────────────────
 const SUB_CATS = [
@@ -28,12 +34,19 @@ const SUB_CATS = [
   { id: 'Cosmetics',     label: 'Cosmetics',      Icon: FlaskConical,dataKey: 'Cosmetics'     },
 ];
 
+const HOME_BANNERS = [
+  { id: 1, image: ImageBanner1, title: 'Summer Sale' },
+  { id: 2, image: ImageBanner2, title: 'New Arrivals' },
+  { id: 3, image: ImageBanner3, title: 'Electronics Deal' },
+  { id: 4, image: ImageBanner4, title: 'Grocery Offers' }
+];
+
 // ── Banners per sub-category ─────────────────────────────
 const BANNERS = {
-  'Beauty':        [{ id:1, image: MakeupHero,    title:'Beauty Sale' }, { id:2, image: LipstickDeal, title:'Lipstick Deals' }, { id:3, image: PlumShampoo, title:'Hair Care' }],
-  'Art. Jewellery':[{ id:1, image: JewelleryImg,  title:'Jewellery'   }, { id:2, image: JewelleryImg, title:'New Arrivals'   }],
-  '1g Gold':       [{ id:1, image: JewelleryImg,  title:'1g Gold'     }, { id:2, image: JewelleryImg, title:'Gold Coins'     }],
-  'Cosmetics':     [{ id:1, image: LipGloss,      title:'Cosmetics'   }, { id:2, image: Mascara,      title:'Makeup Picks'  }, { id:3, image: LorealShampoo, title:'Hair' }],
+  'Beauty':        HOME_BANNERS,
+  'Art. Jewellery': HOME_BANNERS,
+  '1g Gold':       HOME_BANNERS,
+  'Cosmetics':     HOME_BANNERS,
 };
 
 // ── Deal cards per sub-category ──────────────────────────
@@ -76,28 +89,39 @@ const ProductCard = React.memo(({ product, onPress }) => (
 // ── Auto-advancing banner carousel ──────────────────────
 const HeroBanner = ({ banners }) => {
   const [idx, setIdx] = useState(0);
+
+  // Preload images
+  useEffect(() => {
+    banners.forEach((b) => {
+      const img = new Image();
+      img.src = b.image;
+    });
+  }, [banners]);
+
   useEffect(() => {
     if (banners.length <= 1) return;
-    const t = setInterval(() => setIdx(p => (p + 1) % banners.length), 3000);
+    const t = setInterval(() => setIdx(p => (p + 1) % banners.length), 4000);
     return () => clearInterval(t);
   }, [banners.length]);
 
   return (
     <div className="px-3 py-2">
-      <div className="relative aspect-[21/9] rounded-2xl overflow-hidden shadow-md">
-        <AnimatePresence mode="wait">
+      <div className="relative aspect-[21/9] rounded-2xl overflow-hidden shadow-md bg-gray-50">
+        <AnimatePresence mode="popLayout">
           <motion.img
             key={banners[idx].id}
             src={banners[idx].image}
             alt={banners[idx].title}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.4 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
             className="absolute inset-0 w-full h-full object-cover"
+            loading="eager"
+            fetchpriority="high"
           />
         </AnimatePresence>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
       </div>
       <div className="flex justify-center gap-1.5 mt-2">
         {banners.map((_, i) => (
@@ -147,64 +171,7 @@ const BeautyLanding = () => {
   return (
     <div className="bg-white min-h-screen pb-24" style={{ fontFamily: "'Inter', Arial, sans-serif" }}>
 
-      {/* ── Blue gradient header ── */}
-      <div className="bg-gradient-to-b from-[#1259c3] to-[#2874F0] text-white">
 
-        {/* Top bar: back + title + cart */}
-        <div className="flex items-center justify-between px-4 pt-3 pb-2">
-          <button onClick={() => navigate(-1)} className="p-1.5 rounded-full bg-white/15 active:scale-90 transition-transform">
-            <ArrowLeft size={18} strokeWidth={2.5} />
-          </button>
-          <h1 className="text-[17px] font-bold tracking-tight">Beauty & Jewellery</h1>
-          <button onClick={() => navigate('/vendor/cart')} className="relative p-1.5 rounded-full bg-white/15 active:scale-90 transition-transform">
-            <ShoppingCart size={18} strokeWidth={2} />
-            {cartCount > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 text-[8px] font-black min-w-[15px] h-[15px] px-1 rounded-full bg-red-500 text-white flex items-center justify-center">{cartCount}</span>
-            )}
-          </button>
-        </div>
-
-        {/* Sub-category navbar */}
-        <div className="flex overflow-x-auto no-scrollbar border-t border-white/10 px-1">
-          {SUB_CATS.map(cat => {
-            const isActive = active === cat.id;
-            return (
-              <motion.button
-                key={cat.id}
-                onClick={() => setActive(cat.id)}
-                whileTap={{ scale: 0.88 }}
-                className={`flex flex-col items-center flex-shrink-0 px-4 pt-2.5 pb-3 relative focus:outline-none transition-all ${isActive ? 'opacity-100' : 'opacity-55'}`}
-              >
-                {/* Active pill bg */}
-                {isActive && (
-                  <motion.div
-                    layoutId="beautyActivePill"
-                    className="absolute inset-x-2 top-1.5 bottom-3 rounded-xl bg-white/20"
-                    transition={{ type: 'spring', stiffness: 400, damping: 32 }}
-                  />
-                )}
-                <motion.div
-                  animate={{ color: isActive ? '#FFD500' : '#ffffff' }}
-                  className="relative z-10 mb-1"
-                >
-                  <cat.Icon size={22} strokeWidth={isActive ? 2 : 1.5} />
-                </motion.div>
-                <span className={`text-[10.5px] whitespace-nowrap relative z-10 ${isActive ? 'font-bold text-white' : 'font-medium text-white/80'}`}>
-                  {cat.label}
-                </span>
-                {/* White underline */}
-                {isActive && (
-                  <motion.div
-                    layoutId="beautyUnderline"
-                    className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-white rounded-t-full"
-                    transition={{ type: 'spring', stiffness: 400, damping: 32 }}
-                  />
-                )}
-              </motion.button>
-            );
-          })}
-        </div>
-      </div>
 
       {/* ── Hero banner slider ── */}
       <HeroBanner banners={banners} />

@@ -17,26 +17,31 @@ import SaleBanner from '../../components/vendor/SaleBanner';
 import BannerCarousel from '../../components/vendor/BannerCarousel';
 
 // Import Assets
-import SamsungS24 from '../../assets/Cards/samsung_s24.png';
-import EarbudsDeal from '../../assets/Cards/earbuds_deal.png';
-import LorealShampoo from '../../assets/Cards/loreal_shampoo.png';
-import PlumShampoo from '../../assets/Cards/plum_shampoo.png';
-import LipGloss from '../../assets/Cards/lip_gloss.png';
-import JewelleryImg from '../../assets/products/jewellery.png';
-import FashionHero from '../../assets/Cards/fashion_hero.png';
-import ElectronicsHero from '../../assets/Cards/electronics_deal.png';
-import MakeupHero from '../../assets/Cards/makeup_picks.png';
-import FashionTabProduct from '../../assets/products/Fashion.png';
-import ForYouProduct from '../../assets/products/card.png';
-import BeautyTab from '../../assets/products/beauty_tab.png';
-import ToysTab from '../../assets/products/toys_tab.png';
-import StationeryTab from '../../assets/products/stationaryFinal.png';
-import ClothesImg from '../../assets/Carousel/clths-removebg-preview.png';
-import LipstickDeal from '../../assets/Cards/lipstick_deal.png';
-import Suitcase from '../../assets/products/suitcase.png';
-import BannerImg from '../../assets/Banner.jpeg';
-import CardImg from '../../assets/products/card.png';
-import FashionTabImg from '../../assets/fashion_tab_img.png';
+import SamsungS24 from '../../assets/products/product01.jpg';
+import EarbudsDeal from '../../assets/products/product02.jpg';
+import LorealShampoo from '../../assets/products/product03.jpg';
+import PlumShampoo from '../../assets/products/product04.jpg';
+import LipGloss from '../../assets/products/product05.jpg';
+import JewelleryImg from '../../assets/products/product06.jpg';
+import FashionHero from '../../assets/products/product07.jpg';
+import ElectronicsHero from '../../assets/products/product08.jpg';
+import MakeupHero from '../../assets/products/product09.jpg';
+import FashionTabProduct from '../../assets/products/product10.jpg';
+import ForYouProduct from '../../assets/products/product11.webp';
+import BeautyTab from '../../assets/products/product12.jpg';
+import ToysTab from '../../assets/products/product13.jpg';
+import StationeryTab from '../../assets/products/product14.jpg';
+import ClothesImg from '../../assets/products/product15.webp';
+import LipstickDeal from '../../assets/products/product01.jpg';
+import Suitcase from '../../assets/products/product02.jpg';
+import CardImg from '../../assets/products/product03.jpg';
+import FashionTabImg from '../../assets/products/product04.jpg';
+
+// Banner Assets
+import ImageBanner1 from '../../assets/TopBanner/ImageBanner1.jpg';
+import ImageBanner2 from '../../assets/TopBanner/ImageBanner2.jpg';
+import ImageBanner3 from '../../assets/TopBanner/ImageBanner3.webp';
+import ImageBanner4 from '../../assets/TopBanner/ImageBanner4.jpg';
 
 import useVendorStore from '../../store/useVendorStore';
 
@@ -45,38 +50,24 @@ const Home = () => {
   const navigate = useNavigate();
   const { selectedCategory, homeSections } = useVendorStore();
 
-  const categoryBanners = useMemo(() => ({
-    'Home': [
-      { id: 1, image: BannerImg, title: 'Summer Sale' },
-      { id: 2, image: FashionTabImg, title: 'New Arrivals' },
-      { id: 3, image: CardImg, title: 'Electronics Deal' },
-      { id: 4, image: BannerImg, title: 'Grocery Offers' }
-    ],
-    'Toys': [
-      { id: 1, image: BannerImg, title: 'Toy World' },
-      { id: 2, image: FashionTabImg, title: 'LEGO Sale' }
-    ],
-    'Beauty': [
-      { id: 1, image: BannerImg, title: 'Skin Care' },
-      { id: 2, image: FashionTabImg, title: 'Makeup Kits' }
-    ],
-    'Art. Jewellery': [
-      { id: 1, image: FashionTabImg, title: 'Designer Sets' },
-      { id: 2, image: BannerImg, title: 'Modern Jewellery' }
-    ],
-    '1g Gold': [
-      { id: 1, image: BannerImg, title: '1g Gold Coins' },
-      { id: 2, image: FashionTabImg, title: 'Gold Chains' }
-    ],
-    'Cosmetics': [
-      { id: 1, image: FashionTabImg, title: 'Premium Cosmetics' },
-      { id: 2, image: BannerImg, title: 'Glow Up Sale' }
-    ],
-    'Fashion': [
-      { id: 1, image: BannerImg, title: 'Premium Fashion' },
-      { id: 2, image: FashionTabImg, title: 'Summer Collection' }
-    ]
-  }), []);
+  const categoryBanners = useMemo(() => {
+    const homeBanners = [
+      { id: 1, image: ImageBanner1, title: 'Summer Sale' },
+      { id: 2, image: ImageBanner2, title: 'New Arrivals' },
+      { id: 3, image: ImageBanner3, title: 'Electronics Deal' },
+      { id: 4, image: ImageBanner4, title: 'Grocery Offers' }
+    ];
+
+    return {
+      'Home': homeBanners,
+      'Toys': homeBanners,
+      'Beauty': homeBanners,
+      'Art. Jewellery': homeBanners,
+      '1g Gold': homeBanners,
+      'Cosmetics': homeBanners,
+      'Fashion': homeBanners
+    };
+  }, []);
 
   const data = useMemo(() => ({
     ratings: [
@@ -101,9 +92,9 @@ const Home = () => {
   }, [navigate]);
 
   return (
-    <div 
+    <div
       className="bg-[var(--card-bg)] min-h-screen pb-4 overflow-x-hidden"
-      style={{ 
+      style={{
         WebkitBackfaceVisibility: 'hidden',
         backfaceVisibility: 'hidden',
         transform: 'translate3d(0,0,0)',
@@ -158,10 +149,10 @@ const Home = () => {
           </LazySection>
 
           <LazySection height="150px">
-            <CategoryTabs 
-              tabs={data.tabs} 
-              activeTab={activeTab} 
-              onTabClick={handleTabClick} 
+            <CategoryTabs
+              tabs={data.tabs}
+              activeTab={activeTab}
+              onTabClick={handleTabClick}
             />
           </LazySection>
 

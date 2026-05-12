@@ -2,12 +2,12 @@ import React from 'react';
 import ProductCard from '../../components/common/ProductCard';
 
 // Import local assets
-import SamsungImg from '../../assets/Cards/samsung_s24.png';
-import EarbudsImg from '../../assets/Cards/earbuds_deal.png';
-import ElectronicsImg from '../../assets/Cards/electronics_deal.png';
-import LaptopImg from '../../assets/Cards/asus_laptop.png';
-import ShoesImg from '../../assets/products/flip_flops.png';
-import JewelleryImg from '../../assets/products/jewellery.png';
+import SamsungImg from '../../assets/products/product01.jpg';
+import EarbudsImg from '../../assets/products/product03.jpg';
+import ElectronicsImg from '../../assets/products/product04.jpg';
+import LaptopImg from '../../assets/products/product02.jpg';
+import ShoesImg from '../../assets/products/product07.jpg';
+import JewelleryImg from '../../assets/products/product12.jpg';
 
 const Products = () => {
   const dummyProducts = [

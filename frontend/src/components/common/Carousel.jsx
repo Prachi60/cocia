@@ -65,13 +65,13 @@ const Carousel = () => {
   return (
     <div className={`relative w-full h-[300px] md:h-[450px] transition-colors duration-500 ${slides[currentIndex].bgColor}`}>
       {/* Navigation Buttons */}
-      <button 
+      <button
         onClick={prevSlide}
         className="absolute left-0 top-1/2 -translate-y-1/2 z-20 p-4 text-gray-800 hover:ring-2 hover:ring-black/10 transition-all"
       >
         <ChevronLeft size={48} strokeWidth={1} />
       </button>
-      <button 
+      <button
         onClick={nextSlide}
         className="absolute right-0 top-1/2 -translate-y-1/2 z-20 p-4 text-gray-800 hover:ring-2 hover:ring-black/10 transition-all"
       >
@@ -90,23 +90,23 @@ const Carousel = () => {
                 <span key={i} className={i > 0 ? "border-l border-gray-400 pl-4" : ""}>{tag.trim()}</span>
               ))}
             </div>
-            
+
             {/* Promo Tag */}
             <div className="bg-white p-3 shadow-sm rounded-sm flex items-center gap-3 w-fit border border-gray-100">
-               <img src="https://m.media-amazon.com/images/G/31/marketing/fba/fba-badge_18._CB485935210_.png" alt="Amazon Pay" className="h-6" />
-               <div className="text-[12px] leading-tight font-bold">
-                 Unlimited 5% cashback
-                 <div className="text-gray-500 font-normal">with Amazon Pay ICICI Bank credit card</div>
-               </div>
+              <img src="https://m.media-amazon.com/images/G/31/marketing/fba/fba-badge_18._CB485935210_.png" alt="Amazon Pay" className="h-6" />
+              <div className="text-[12px] leading-tight font-bold">
+                Unlimited 5% cashback
+                <div className="text-gray-500 font-normal">with Amazon Pay ICICI Bank credit card</div>
+              </div>
             </div>
           </div>
 
           {/* Image Content */}
           <div className="hidden md:block flex-1 h-full relative max-w-lg">
-            <img 
+            <img
               key={currentIndex}
-              src={slides[currentIndex].image} 
-              alt={slides[currentIndex].title} 
+              src={slides[currentIndex].image}
+              alt={slides[currentIndex].title}
               className="w-full h-full object-contain object-left animate-in fade-in zoom-in duration-700"
             />
           </div>

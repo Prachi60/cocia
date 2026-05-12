@@ -7,13 +7,21 @@ import {
 import { useNavigate } from 'react-router-dom';
 
 // Import local assets
-import ToysBanner from '../../assets/products/toys_banner.png';
-import ElectricRideon from '../../assets/products/electric_rideon.png';
-import BabyBlanket from '../../assets/products/baby_blanket.png';
-import LearningTablet from '../../assets/products/learning_tablet.png';
-import ToysTab from '../../assets/products/toys_tab.png';
-import BeautyTab from '../../assets/products/beauty_tab.png';
-import Balloons from '../../assets/products/balloons.png';
+import ToysBanner from '../../assets/TopBanner/ImageBanner1.jpg';
+import ElectricRideon from '../../assets/products/product13.jpg';
+import BabyBlanket from '../../assets/products/product12.jpg';
+import LearningTablet from '../../assets/products/product11.webp';
+import ToysTab from '../../assets/products/product13.jpg';
+import BeautyTab from '../../assets/products/product12.jpg';
+import Balloons from '../../assets/products/product11.webp';
+
+// Banner Assets
+import ImageBanner1 from '../../assets/TopBanner/ImageBanner1.jpg';
+import ImageBanner2 from '../../assets/TopBanner/ImageBanner2.jpg';
+import ImageBanner3 from '../../assets/TopBanner/ImageBanner3.webp';
+import ImageBanner4 from '../../assets/TopBanner/ImageBanner4.jpg';
+
+import BannerCarousel from '../../components/vendor/BannerCarousel';
 
 const ToysLanding = () => {
   const navigate = useNavigate();
@@ -52,70 +60,15 @@ const ToysLanding = () => {
 
   return (
     <div className="bg-white min-h-screen pb-24 font-sans text-slate-900">
-      {/* Dynamic App-Like Header */}
-      <div className="bg-[#2874f0] text-white pt-2">
-        {/* Location / Supercoin Bar */}
-        <div className="px-4 py-2 flex items-center justify-between">
-           <div className="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-sm flex-1 mr-4">
-              <MapPin size={14} className="text-white" />
-              <div className="flex flex-col">
-                 <span className="text-[10px] font-bold uppercase tracking-tight leading-none">Home</span>
-                 <span className="text-[10px] opacity-80 truncate max-w-[150px]">83 kishan pura mataji mandir, sector no. 5...</span>
-              </div>
-              <ChevronDown size={14} className="ml-auto" />
-           </div>
-           <div className="flex items-center gap-1.5 bg-white/10 px-3 py-1.5 rounded-sm">
-              <div className="w-4 h-4 bg-yellow-400 rounded-full flex items-center justify-center text-blue-900 font-black text-[10px]">P</div>
-              <span className="text-[12px] font-black">0</span>
-           </div>
-        </div>
 
-        {/* Search Bar */}
-        <div className="px-4 pb-4 flex items-center gap-4">
-           <div className="flex-1 bg-white rounded-md p-2.5 flex items-center gap-3 shadow-inner">
-              <Search size={20} className="text-gray-400" />
-              <input 
-                type="text" 
-                placeholder="Search for toys, baby..." 
-                className="bg-transparent border-none outline-none text-[14px] text-slate-800 placeholder:text-gray-400 font-medium w-full"
-              />
-              <Camera size={20} className="text-gray-400" />
-           </div>
-           <Scan size={24} className="text-white" />
-        </div>
-
-        {/* Category Sub-Nav */}
-        <div className="flex overflow-x-auto no-scrollbar bg-[#2874f0] border-t border-white/10">
-           {subNav.map((item, idx) => (
-             <div 
-              key={idx}
-              onClick={() => setActiveSubTab(item.label)}
-              className={`flex-shrink-0 px-4 py-3 flex flex-col items-center gap-1.5 relative ${
-                activeSubTab === item.label ? 'opacity-100' : 'opacity-60'
-              }`}
-             >
-                <div className={`p-1 rounded-md transition-all ${activeSubTab === item.label ? 'bg-white/20 scale-110' : ''}`}>
-                   {item.icon}
-                </div>
-                <span className="text-[10px] font-bold whitespace-nowrap">{item.label}</span>
-                {activeSubTab === item.label && (
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-1 bg-white rounded-t-full" />
-                )}
-             </div>
-           ))}
-        </div>
-      </div>
-
-      {/* Main Promo Banner */}
-      <div className="relative w-full aspect-[16/8] bg-blue-50 overflow-hidden">
-         <img src={ToysBanner} className="w-full h-full object-cover" alt="toys sale" />
-         <div className="absolute inset-0 bg-gradient-to-r from-blue-900/40 to-transparent flex flex-col justify-center px-6">
-            <h2 className="text-white text-[22px] font-black leading-tight drop-shadow-md">
-               Turn up your savings<br/>
-               <span className="text-yellow-400 text-[28px]">Up to 80% Off</span>
-            </h2>
-            <p className="text-white/90 text-[12px] font-bold mt-2 tracking-wide uppercase">Wishlist now</p>
-         </div>
+      {/* Banner Carousel */}
+      <div className="bg-white pb-2">
+        <BannerCarousel banners={[
+          { id: 1, image: ImageBanner1, title: 'Summer Sale' },
+          { id: 2, image: ImageBanner2, title: 'New Arrivals' },
+          { id: 3, image: ImageBanner3, title: 'Electronics Deal' },
+          { id: 4, image: ImageBanner4, title: 'Grocery Offers' }
+        ]} />
       </div>
 
       {/* Section: Great Savings Start Here */}

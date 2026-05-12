@@ -22,97 +22,55 @@ const SearchBar = ({ selectedAddress }) => {
     : '83 kishan pura mataji mandir, sector no...';
 
   return (
-    <div className="px-3 pb-2.5 flex flex-col gap-2">
+    <div className="px-3 pb-2 flex flex-col gap-1.5">
 
-      {/* ── Delivery Address Field ── */}
+      {/* ── Delivery Address Field (Compact) ── */}
       <motion.div whileTap={{ scale: 0.98 }} className="w-full">
         <Link
           to="/vendor/profile/addresses"
-          aria-label="Change delivery address"
-          className="flex items-center gap-2.5 bg-[#2874F0] rounded-2xl px-4 py-3 w-full"
+          className="flex items-center gap-2 bg-[#2874F0] rounded-xl px-3 py-1.5 w-full"
         >
-          <div className="p-1.5 bg-white rounded-full flex-shrink-0">
-            <MapPin size={16} strokeWidth={2} className="text-[#2874F0]" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <span className="text-[11px] font-bold text-white uppercase tracking-wide block">HOME</span>
-            <span className="text-[13px] text-white leading-tight block truncate">
+          <MapPin size={14} strokeWidth={2.5} className="text-white flex-shrink-0" />
+          <div className="flex-1 min-w-0 flex items-center gap-2">
+            <span className="text-[10px] font-black text-white uppercase tracking-tighter">HOME</span>
+            <span className="text-[12px] text-white font-medium truncate opacity-90">
               {shortAddress}
             </span>
           </div>
-          <ChevronDown size={18} strokeWidth={2.5} className="text-white flex-shrink-0" />
+          <ChevronDown size={14} strokeWidth={3} className="text-white flex-shrink-0" />
         </Link>
       </motion.div>
 
-      {/* ── Search Field ── */}
+      {/* ── Search + Scan Field ── */}
       <div className="flex items-center gap-2">
         <motion.form
           onSubmit={handleSubmit}
-          animate={{ scale: searchFocused ? 1.005 : 1 }}
-          transition={{ type: 'spring', stiffness: 300, damping: 28 }}
-          className="flex-1 flex items-center gap-2.5 bg-white rounded-2xl px-4 py-3 border"
+          animate={{ scale: searchFocused ? 1.002 : 1 }}
+          className="flex-1 flex items-center gap-2 bg-gray-50 rounded-xl px-3 py-2 border border-gray-200"
           style={{
             borderColor: searchFocused ? '#2874F0' : '#e5e7eb',
-            boxShadow:   searchFocused ? '0 0 0 2px rgba(40,116,240,0.15)' : 'none',
           }}
         >
-          <Search size={18} strokeWidth={2} className="text-gray-500 flex-shrink-0" />
-
+          <Search size={16} strokeWidth={2.5} className="text-gray-400 flex-shrink-0" />
           <input
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onFocus={() => setSearchFocused(true)}
             onBlur={() => setSearchFocused(false)}
-            onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
-            placeholder="shoes"
-            className="flex-1 bg-transparent outline-none text-[14px] placeholder:text-gray-400 text-gray-800 font-normal min-w-0"
-            autoComplete="off"
-            autoCorrect="off"
-            spellCheck={false}
+            placeholder="Search products..."
+            className="flex-1 bg-transparent outline-none text-[13px] placeholder:text-gray-400 text-gray-800 font-medium min-w-0"
           />
-
-          <AnimatePresence>
-            {query.length > 0 && (
-              <motion.button
-                type="button"
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.5 }}
-                transition={{ duration: 0.15 }}
-                onClick={() => setQuery('')}
-                className="p-0.5 rounded-full bg-gray-300 flex-shrink-0"
-                aria-label="Clear"
-              >
-                <X size={12} strokeWidth={2.5} className="text-gray-600" />
-              </motion.button>
-            )}
-          </AnimatePresence>
-
-          {/* Camera */}
-          <motion.button
-            type="button"
-            whileTap={{ scale: 0.82 }}
-            whileHover={{ scale: 1.15 }}
-            className="flex-shrink-0"
-            aria-label="Search by image"
-          >
-            <Camera size={20} strokeWidth={1.8} className="text-gray-500" />
-          </motion.button>
+          <Camera size={18} strokeWidth={2} className="text-gray-400" />
         </motion.form>
 
-        {/* QR Scan Button (separate) */}
         <motion.button
-          type="button"
-          whileTap={{ scale: 0.9 }}
-          whileHover={{ scale: 1.05 }}
-          className="p-3 bg-white rounded-xl border border-gray-200 flex-shrink-0"
-          aria-label="Scan QR code"
+          whileTap={{ scale: 0.92 }}
+          className="p-2.5 bg-white rounded-xl border border-gray-200 flex-shrink-0"
         >
-          <ScanLine size={22} strokeWidth={1.8} className="text-[#2874F0]" />
+          <ScanLine size={18} strokeWidth={2} className="text-[#2874F0]" />
         </motion.button>
       </div>
-
     </div>
   );
 };

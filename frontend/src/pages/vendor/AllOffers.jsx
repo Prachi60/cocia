@@ -3,14 +3,15 @@ import { ArrowLeft, Search, ShoppingCart, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 // Assets
-import FlipFlops from '../../assets/products/flip_flops.png';
-import Tshirt from '../../assets/products/tshirt.png';
-import Suitcase from '../../assets/products/suitcase.png';
-import Balloons from '../../assets/products/balloons.png';
-import SplitAC from '../../assets/products/split_ac.png';
-import TowerFan from '../../assets/products/tower_fan.png';
-import CookwareHero from '../../assets/Cards/cookware_hero.png';
-import FashionHero from '../../assets/Cards/fashion_hero.png';
+import FlipFlops from '../../assets/products/product07.jpg';
+import Tshirt from '../../assets/products/product05.jpg';
+import Suitcase from '../../assets/products/product09.jpg';
+import Balloons from '../../assets/products/product10.jpg';
+import SplitAC from '../../assets/products/product08.jpg';
+import TowerFan from '../../assets/products/product09.jpg';
+import CookwareHero from '../../assets/products/product04.jpg';
+import FashionHero from '../../assets/products/product06.jpg';
+import TopSection2 from '../../assets/TopSection/TopSection2.jpg';
 
 const AllOffers = () => {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ const AllOffers = () => {
 
   const offers = [
     { img: FlipFlops, title: 'Women Casual Shoes', desc: 'New Collection' },
-    { img: Tshirt, title: 'Men Shirts', desc: 'Special offer' },
+    { img: TopSection2, title: 'Men Shirts', desc: 'Special offer' },
     { img: Suitcase, title: 'Travel Suitcase', desc: 'New Collection' },
     { img: Balloons, title: 'Party Supplies', desc: 'New Collection' },
     { img: FashionHero, title: 'Designer Dresses', desc: 'Best Selling Products' },
@@ -117,19 +118,19 @@ const AllOffers = () => {
         {offers.map((offer, idx) => (
           <div 
             key={idx} 
-            className={`flex flex-col items-center py-10 px-6 border-b border-[#f0f0f0] ${idx % 2 === 0 ? 'border-r' : ''} active:bg-gray-50 transition-colors cursor-pointer group`}
+            className={`flex flex-col items-center py-4 px-3 border-b border-[#f0f0f0] ${idx % 2 === 0 ? 'border-r' : ''} active:bg-gray-50 transition-colors cursor-pointer group`}
             onClick={() => navigate('/vendor/product-detail', { state: { product: { id: idx, name: offer.title, image: offer.img, price: '499', oldPrice: '999', discount: '50% off', brand: 'Top Selection' } } })}
           >
-            <div className="h-[150px] mb-8 flex items-center justify-center w-full">
+            <div className="h-[120px] mb-3 flex items-center justify-center w-full">
               <img 
                 src={offer.img} 
                 alt={offer.title} 
-                className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-500" 
+                className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500" 
               />
             </div>
-            <div className="text-center space-y-1">
-              <h3 className="text-[14px] text-[#212121] font-medium leading-tight">{offer.title}</h3>
-              <p className="text-[14px] font-bold text-[#388e3c] tracking-tight">{offer.desc}</p>
+            <div className="text-center space-y-0.5">
+              <h3 className="text-[12px] text-[#212121] font-medium leading-tight">{offer.title}</h3>
+              <p className="text-[11px] font-medium text-[#388e3c] tracking-tight">{offer.desc}</p>
             </div>
           </div>
         ))}

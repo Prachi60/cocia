@@ -17,10 +17,21 @@
   font-size: 26px !important;
 }
 
-.font-montserrat { font-family: 'Montserrat', sans-serif; }
-.font-nunito { font-family: 'Nunito', sans-serif; }
-.font-raleway { font-family: 'Raleway', sans-serif; }
-.font-roboto { font-family: 'Roboto', sans-serif; }
+.font-montserrat {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.font-nunito {
+  font-family: 'Nunito', sans-serif;
+}
+
+.font-raleway {
+  font-family: 'Raleway', sans-serif;
+}
+
+.font-roboto {
+  font-family: 'Roboto', sans-serif;
+}
 
 @media (min-width: 640px) {
   .section-heading {

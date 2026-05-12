@@ -5,8 +5,8 @@ const ProductCard = ({ product }) => {
   return (
     <div className="bg-white rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 group cursor-pointer border border-slate-100 flex flex-col h-full">
       <div className="relative aspect-square overflow-hidden bg-white p-4">
-        <img 
-          src={product.image || "https://via.placeholder.com/300x300"} 
+        <img
+          src={product.image || "https://via.placeholder.com/300x300"}
           alt={product.title}
           className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
         />
@@ -18,7 +18,7 @@ const ProductCard = ({ product }) => {
         <h3 className="text-sm font-medium text-slate-800 line-clamp-2 leading-snug min-h-[40px]" title={product.title}>
           {product.title}
         </h3>
-        
+
         <div className="mt-2 flex items-center gap-2">
           <div className="bg-[#e47911] text-white text-[10px] px-1.5 py-0.5 rounded flex items-center font-bold">
             {product.rating || "4.2"} ★
