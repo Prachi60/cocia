@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Phone, ShieldCheck, ArrowRight, ChevronLeft } from 'lucide-react';
+import { Phone, ShieldCheck, ArrowRight, ChevronLeft, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const DeliveryAuth = () => {
@@ -10,6 +10,8 @@ const DeliveryAuth = () => {
   const [otp, setOtp] = useState(['', '', '', '']);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  const [showPolicy, setShowPolicy] = useState(null); // null | 'terms' | 'privacy'
 
   const handleSendOTP = () => {
     if (phone.length < 10) {
@@ -48,17 +50,66 @@ const DeliveryAuth = () => {
     }, 1500);
   };
 
+  const PolicyModal = ({ type, onClose }) => (
+    <motion.div 
+      initial={{ opacity: 0 }} 
+      animate={{ opacity: 1 }} 
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[100] flex items-end justify-center px-4 pb-4 sm:p-6"
+    >
+      <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm" onClick={onClose} />
+      <motion.div 
+        initial={{ y: '100%' }} 
+        animate={{ y: 0 }} 
+        exit={{ y: '100%' }}
+        transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+        className="relative w-full max-w-md bg-white rounded-[32px] overflow-hidden shadow-2xl"
+      >
+        <div className="p-6 border-b border-slate-50 flex items-center justify-between">
+          <h3 className="text-xl font-black text-slate-900 tracking-tight">
+            {type === 'terms' ? 'Terms & Conditions' : 'Privacy Policy'}
+          </h3>
+          <button onClick={onClose} className="p-2 bg-slate-50 rounded-xl text-slate-400"><X size={20} /></button>
+        </div>
+        <div className="p-6 max-h-[60vh] overflow-y-auto space-y-4 text-sm text-slate-600 font-medium leading-relaxed">
+          {type === 'terms' ? (
+            <>
+              <p>Welcome to Cocio Delivery Partner Network. By joining our platform, you agree to the following terms:</p>
+              <h4 className="font-black text-slate-900 uppercase text-[10px] tracking-widest pt-2">1. Role & Responsibility</h4>
+              <p>As a delivery partner, you are an independent contractor. You are responsible for safe delivery of items and maintaining professional conduct.</p>
+              <h4 className="font-black text-slate-900 uppercase text-[10px] tracking-widest pt-2">2. Earnings & Payouts</h4>
+              <p>Payouts are processed weekly. Any disputes regarding earnings must be reported within 48 hours of the transaction.</p>
+              <h4 className="font-black text-slate-900 uppercase text-[10px] tracking-widest pt-2">3. Termination</h4>
+              <p>Cocio reserves the right to terminate partnership in case of multiple negative feedbacks, safety violations, or fraudulent activity.</p>
+            </>
+          ) : (
+            <>
+              <p>Your privacy is important to us. Here is how we handle your data:</p>
+              <h4 className="font-black text-slate-900 uppercase text-[10px] tracking-widest pt-2">1. Data Collection</h4>
+              <p>We collect your location data while you are "Online" to assign orders and track delivery progress for customers.</p>
+              <h4 className="font-black text-slate-900 uppercase text-[10px] tracking-widest pt-2">2. Document Safety</h4>
+              <p>Your identity documents (License, PAN, Aadhaar) are stored securely and only used for verification purposes.</p>
+              <h4 className="font-black text-slate-900 uppercase text-[10px] tracking-widest pt-2">3. Third-Party Sharing</h4>
+              <p>We do not sell your data. We only share necessary info (Name, Phone) with the customer you are delivering to.</p>
+            </>
+          )}
+        </div>
+        <div className="p-6 pt-2">
+          <button onClick={onClose} className="w-full bg-slate-900 text-white py-4 rounded-2xl font-black text-sm uppercase tracking-widest">I Understand</button>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+
   return (
     <div className="min-h-screen bg-white flex flex-col font-nunito max-w-md mx-auto">
-      {/* Header */}
-      <div className="px-6 pt-16 pb-8">
-        <div className="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center mb-6 shadow-xl shadow-blue-100">
-          <ShieldCheck size={28} className="text-white" />
-        </div>
-        <h1 className="text-3xl font-black text-slate-900 tracking-tight font-montserrat">
-          Cocio<span className="text-blue-600">.</span>
-        </h1>
-        <p className="text-lg font-bold text-slate-400 mt-1 tracking-tight">Delivery Partner Portal</p>
+      <AnimatePresence>
+        {showPolicy && <PolicyModal type={showPolicy} onClose={() => setShowPolicy(null)} />}
+      </AnimatePresence>
+
+      {/* Header - Centered Logo */}
+      <div className="px-6 pt-16 pb-12 flex flex-col items-center">
+        <img src="/Logo (4).png" alt="Cocio Logo" className="h-20 object-contain" />
       </div>
 
       {/* Form Area */}
@@ -74,7 +125,6 @@ const DeliveryAuth = () => {
             >
               <div>
                 <h2 className="text-xl font-black text-slate-900 tracking-tight">Enter your mobile number</h2>
-                <p className="text-sm text-slate-400 font-medium mt-1">We'll send a 4-digit OTP to verify your identity</p>
               </div>
 
               <div className="space-y-2">
@@ -107,6 +157,10 @@ const DeliveryAuth = () => {
                   <>Send OTP <ArrowRight size={18} /></>
                 )}
               </button>
+
+              <p className="text-center text-sm font-bold text-slate-400">
+                New partner? <button onClick={() => navigate('/delivery/signup')} className="text-blue-600">Register here</button>
+              </p>
             </motion.div>
           ) : (
             <motion.div
@@ -163,11 +217,19 @@ const DeliveryAuth = () => {
             </motion.div>
           )}
         </AnimatePresence>
+
+        <div className="mt-12 flex items-center justify-center gap-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+          <button onClick={() => setShowPolicy('terms')} className="hover:text-blue-600">Terms & Conditions</button>
+          <div className="w-1 h-1 bg-slate-200 rounded-full" />
+          <button onClick={() => setShowPolicy('privacy')} className="hover:text-blue-600">Privacy Policy</button>
+        </div>
       </div>
 
-      <p className="text-center text-[10px] text-slate-300 font-bold uppercase tracking-widest p-8">
-        Cocio Partner Network • Secure Login
-      </p>
+      <div className="pb-8">
+        <p className="text-center text-[10px] text-slate-300 font-bold uppercase tracking-widest">
+          Cocio Partner Network • Secure Login
+        </p>
+      </div>
     </div>
   );
 };

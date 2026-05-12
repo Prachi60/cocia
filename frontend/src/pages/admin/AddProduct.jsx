@@ -133,6 +133,71 @@ const AddProduct = () => {
                </div>
             </div>
           </section>
+
+          {/* Detailed Highlights & Specifications */}
+          <section className="bg-white rounded-3xl border border-slate-100 shadow-sm p-8 space-y-6">
+            <div className="flex items-center gap-2 mb-2">
+               <Info size={18} className="text-indigo-500" />
+               <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest font-montserrat">Highlights & Specs</h3>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+               {/* Highlights */}
+               <div className="space-y-4">
+                  <h4 className="text-[10px] font-black text-indigo-500 uppercase tracking-widest">Key Highlights</h4>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1.5">Pack of</label>
+                      <input type="text" placeholder="e.g. 1" className="w-full bg-slate-50 border border-slate-100 rounded-lg py-2.5 px-4 text-xs font-bold outline-none" />
+                    </div>
+                    <div>
+                      <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1.5">Fabric</label>
+                      <input type="text" placeholder="e.g. Cotton" className="w-full bg-slate-50 border border-slate-100 rounded-lg py-2.5 px-4 text-xs font-bold outline-none" />
+                    </div>
+                    <div>
+                      <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1.5">Sleeve</label>
+                      <input type="text" placeholder="e.g. Full Sleeve" className="w-full bg-slate-50 border border-slate-100 rounded-lg py-2.5 px-4 text-xs font-bold outline-none" />
+                    </div>
+                    <div>
+                      <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1.5">Pattern</label>
+                      <input type="text" placeholder="e.g. Solid" className="w-full bg-slate-50 border border-slate-100 rounded-lg py-2.5 px-4 text-xs font-bold outline-none" />
+                    </div>
+                    <div>
+                      <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1.5">Collar</label>
+                      <input type="text" placeholder="e.g. Spread" className="w-full bg-slate-50 border border-slate-100 rounded-lg py-2.5 px-4 text-xs font-bold outline-none" />
+                    </div>
+                    <div>
+                      <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1.5">Color</label>
+                      <input type="text" placeholder="e.g. Navy Blue" className="w-full bg-slate-50 border border-slate-100 rounded-lg py-2.5 px-4 text-xs font-bold outline-none" />
+                    </div>
+                  </div>
+               </div>
+
+               {/* Technical Specs */}
+               <div className="space-y-4">
+                  <h4 className="text-[10px] font-black text-indigo-500 uppercase tracking-widest">Technical Specs</h4>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1.5">Fit</label>
+                      <input type="text" placeholder="e.g. Regular Fit" className="w-full bg-slate-50 border border-slate-100 rounded-lg py-2.5 px-4 text-xs font-bold outline-none" />
+                    </div>
+                    <div>
+                      <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1.5">Fabric Care</label>
+                      <input type="text" placeholder="e.g. Machine Wash" className="w-full bg-slate-50 border border-slate-100 rounded-lg py-2.5 px-4 text-xs font-bold outline-none" />
+                    </div>
+                    <div>
+                      <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1.5">Suitable For</label>
+                      <input type="text" placeholder="e.g. Western Wear" className="w-full bg-slate-50 border border-slate-100 rounded-lg py-2.5 px-4 text-xs font-bold outline-none" />
+                    </div>
+                    <div>
+                      <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1.5">Hem</label>
+                      <input type="text" placeholder="e.g. Curved" className="w-full bg-slate-50 border border-slate-100 rounded-lg py-2.5 px-4 text-xs font-bold outline-none" />
+                    </div>
+                  </div>
+               </div>
+            </div>
+          </section>
+
           {/* Variations Section */}
           <section className="bg-white rounded-3xl border border-slate-100 shadow-sm p-8 space-y-6">
             <div className="flex justify-between items-center mb-2">
@@ -271,22 +336,30 @@ const AddProduct = () => {
               </div>
               
               <div className="space-y-4">
-                 <div>
-                    <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1.5">Brand Name</label>
-                    <input 
-                      type="text" 
-                      placeholder="Generic"
-                      className="w-full bg-slate-50 border border-slate-100 rounded-xl py-2.5 px-4 text-xs font-bold focus:ring-2 focus:ring-blue-50 transition-all outline-none text-slate-900"
-                    />
-                 </div>
-                 <div>
-                    <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1.5">Tags (Comma Separated)</label>
-                    <input 
-                      type="text" 
-                      placeholder="new, trending, summer"
-                      className="w-full bg-slate-50 border border-slate-100 rounded-xl py-2.5 px-4 text-xs font-bold focus:ring-2 focus:ring-blue-50 transition-all outline-none text-slate-900"
-                    />
-                 </div>
+                <div>
+                  <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1.5">Brand Name</label>
+                  <input 
+                    type="text" 
+                    placeholder="Generic"
+                    className="w-full bg-slate-50 border border-slate-100 rounded-xl py-2.5 px-4 text-xs font-bold focus:ring-2 focus:ring-blue-50 transition-all outline-none text-slate-900"
+                  />
+                </div>
+                <div>
+                  <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1.5">Tags (Comma Separated)</label>
+                  <input 
+                    type="text" 
+                    placeholder="new, trending, summer"
+                    className="w-full bg-slate-50 border border-slate-100 rounded-xl py-2.5 px-4 text-xs font-bold focus:ring-2 focus:ring-blue-50 transition-all outline-none text-slate-900"
+                  />
+                </div>
+                <div>
+                  <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1.5">Manufacturer Info</label>
+                  <textarea 
+                    rows={3}
+                    placeholder="Manufacturer details, origin, etc."
+                    className="w-full bg-slate-50 border border-slate-100 rounded-xl py-2.5 px-4 text-xs font-bold focus:ring-2 focus:ring-blue-50 transition-all outline-none text-slate-900 resize-none"
+                  />
+                </div>
               </div>
            </section>
 
