@@ -18,30 +18,39 @@ const DeliveryLayout = () => {
 
   const isActive = (path) => location.pathname === path;
 
+  const showHeader = [
+    '/delivery/dashboard',
+    '/delivery/orders',
+    '/delivery/earnings',
+    '/delivery/profile'
+  ].includes(location.pathname);
+
   return (
     <div className="min-h-screen bg-[#f4f6f9] font-nunito flex flex-col max-w-md mx-auto relative">
       {/* Top Status Bar */}
-      <div className="sticky top-0 z-40 bg-white border-b border-slate-100 px-5 py-3 flex items-center justify-between shadow-sm">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-blue-600 rounded-xl flex items-center justify-center">
-            <Package size={16} className="text-white" />
+      {showHeader && (
+        <div className="sticky top-0 z-40 bg-white border-b border-slate-100 px-5 py-3 flex items-center justify-between shadow-sm animate-in slide-in-from-top duration-300">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-blue-600 rounded-xl flex items-center justify-center">
+              <Package size={16} className="text-white" />
+            </div>
+            <span className="text-[15px] font-black text-slate-900 tracking-tight font-montserrat">Cocio<span className="text-blue-600">.</span> Delivery</span>
           </div>
-          <span className="text-[15px] font-black text-slate-900 tracking-tight font-montserrat">Cocio<span className="text-blue-600">.</span> Delivery</span>
-        </div>
 
-        {/* Online / Offline Toggle */}
-        <button
-          onClick={() => setIsOnline(!isOnline)}
-          className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-black uppercase tracking-widest transition-all ${
-            isOnline
-              ? 'bg-green-50 text-green-600 border border-green-200'
-              : 'bg-slate-100 text-slate-400 border border-slate-200'
-          }`}
-        >
-          {isOnline ? <Wifi size={13} /> : <WifiOff size={13} />}
-          {isOnline ? 'Online' : 'Offline'}
-        </button>
-      </div>
+          {/* Online / Offline Toggle */}
+          <button
+            onClick={() => setIsOnline(!isOnline)}
+            className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-black uppercase tracking-widest transition-all ${
+              isOnline
+                ? 'bg-green-50 text-green-600 border border-green-200'
+                : 'bg-slate-100 text-slate-400 border border-slate-200'
+            }`}
+          >
+            {isOnline ? <Wifi size={13} /> : <WifiOff size={13} />}
+            {isOnline ? 'Online' : 'Offline'}
+          </button>
+        </div>
+      )}
 
       {/* Page Content */}
       <main className="flex-1 overflow-y-auto pb-24">
@@ -67,9 +76,9 @@ const DeliveryLayout = () => {
                 )}
                 <item.icon
                   size={22}
-                  className={`transition-colors ${active ? 'text-blue-600' : 'text-slate-300'}`}
+                  className={`transition-colors ${active ? 'text-blue-600' : 'text-slate-500'}`}
                 />
-                <span className={`text-[9px] font-black uppercase tracking-wider transition-colors ${active ? 'text-blue-600' : 'text-slate-400'}`}>
+                <span className={`text-[9px] font-black uppercase tracking-wider transition-colors ${active ? 'text-blue-600' : 'text-slate-600'}`}>
                   {item.label}
                 </span>
               </button>
